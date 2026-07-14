@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingliz tili resurslari — MyHarvardPath</title>
+<meta name="description" content="FLEX va Harvard uchun ingliz tilini bepul rivojlantirish: ilovalar, tinglash, o'qish-yozish va gapirish bo'yicha eng yaxshi resurslar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html">FLEX</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group active-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html" class="active">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html">Lug'at</a>
+            <a href="kitoblar.html">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Ingliz tili</div>
+    <span class="eyebrow">Til tayyorgarligi</span>
+    <h1 class="subhero-title">Ingliz tilingizni <em>bepul</em> rivojlantiring</h1>
+    <p class="subhero-sub">FLEX intervyu va testida, Harvard insholarida va SAT/ACT'da ingliz tili muhim rol o'ynaydi. Mana sizga yordam beradigan 65+ bepul manba — o'nta yo'nalish bo'yicha guruhlangan.</p>
+    <figure class="img-block" style="max-width:100%;">
+      <div class="img-placeholder ph-wide">
+        <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+        <img src="images/english.jpg" alt="">
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="resources">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Manbalar</span>
+      <h2 class="section-title">10 yo'nalish, 65+ ta manba</h2>
+      <p class="section-desc">Har birini birdaniga boshlash shart emas — bittasidan boshlab, asta-sekin qo'shib boring.</p>
+    </div>
+    <div class="res-tools reveal">
+      <div class="res-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="resSearch" placeholder="Manba yoki so'z bo'yicha qidiring…" aria-label="Manbalarni qidirish">
+      </div>
+      <div class="res-chips" id="resChips">
+        <button class="chip active" data-cat="all">Barchasi</button>
+        <button class="chip" data-cat="apps">Ilovalar</button>
+        <button class="chip" data-cat="listening">Tinglash</button>
+        <button class="chip" data-cat="grammar">Grammatika</button>
+        <button class="chip" data-cat="vocab">So'z boyligi</button>
+        <button class="chip" data-cat="reading">O'qish va yozish</button>
+        <button class="chip" data-cat="speaking">Gapirish</button>
+        <button class="chip" data-cat="tests">Test tayyorgarligi</button>
+        <button class="chip" data-cat="podcasts">Podkastlar</button>
+        <button class="chip" data-cat="youtube">YouTube</button>
+        <button class="chip" data-cat="courses">Kurslar</button>
+      </div>
+      <p class="res-empty" id="resEmpty" hidden>Hech narsa topilmadi — boshqa so'z yoki kategoriya bilan urinib ko'ring.</p>
+    </div>
+    <div class="cards cols-4" id="resGrid">
+      <div class="card reveal" data-cat="apps">
+        <span class="leg">Kundalik mashq</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <h3>Ilovalar</h3>
+        <ul class="reslist">
+          <li><a href="https://www.duolingo.com" target="_blank" rel="noopener">Duolingo</a> — kundalik mashq</li>
+          <li><a href="https://www.memrise.com" target="_blank" rel="noopener">Memrise</a> — so'z va iboralarni video orqali o'rganish</li>
+          <li><a href="https://www.babbel.com" target="_blank" rel="noopener">Babbel</a> — qisqa amaliy darslar</li>
+          <li><a href="https://www.busuu.com" target="_blank" rel="noopener">Busuu</a> — daraja bo'yicha mashqlar</li>
+          <li><a href="https://apps.ankiweb.net" target="_blank" rel="noopener">Anki</a> — flashcard usulida takrorlash</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="listening">
+        <span class="leg">Quloq o'rgatish</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2" y="13" width="4" height="7" rx="1"/><rect x="18" y="13" width="4" height="7" rx="1"/></svg></div>
+        <h3>Tinglash</h3>
+        <ul class="reslist">
+          <li><a href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener">BBC Learning English</a> — tinglab tushunish va grammatika</li>
+          <li><a href="https://learningenglish.voanews.com" target="_blank" rel="noopener">VOA Learning English</a> — sekin va aniq talaffuz</li>
+          <li><a href="https://ed.ted.com" target="_blank" rel="noopener">TED-Ed</a> va <a href="https://www.ted.com" target="_blank" rel="noopener">TED Talks</a> — qisqa video darslar</li>
+          <li><a href="https://www.teacherluke.co.uk" target="_blank" rel="noopener">Luke's English Podcast</a> — tabiiy suhbatlashuv uslubi</li>
+          <li><a href="https://www.eslpod.com" target="_blank" rel="noopener">ESLPod</a> — sekin tempda tushuntirish bilan</li>
+          <li><a href="https://shadowing.tech" target="_blank" rel="noopener">Shadowing.tech</a> — mashhur insonlarning nutqini shadowing qilib mashq qilish</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="grammar">
+        <span class="leg">Qoidalar</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+        <h3>Grammatika</h3>
+        <ul class="reslist">
+          <li><a href="https://learnenglish.britishcouncil.org" target="_blank" rel="noopener">British Council LearnEnglish</a> — bepul darslar va mashqlar</li>
+          <li><a href="https://dictionary.cambridge.org/grammar/british-grammar/" target="_blank" rel="noopener">Cambridge Grammar</a> — qoidalar va misollar</li>
+          <li><a href="https://www.perfect-english-grammar.com" target="_blank" rel="noopener">Perfect English Grammar</a> — sodda tushuntirishlar</li>
+          <li><a href="https://www.englishclub.com" target="_blank" rel="noopener">EnglishClub</a> — mavzu bo'yicha mashqlar</li>
+          <li><a href="https://owl.purdue.edu" target="_blank" rel="noopener">Purdue OWL</a> — akademik yozuv qoidalari</li>
+          <li><a href="https://www.grammar.com" target="_blank" rel="noopener">Grammar.com</a> — matndagi grammatik va imlo xatolarini avtomatik topadi</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="vocab">
+        <span class="leg">Yodlash</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="1"/><rect x="3" y="4" width="14" height="10" rx="1"/></svg></div>
+        <h3>So'z boyligi</h3>
+        <ul class="reslist">
+          <li><a href="https://quizlet.com" target="_blank" rel="noopener">Quizlet</a> — flashcard to'plamlari</li>
+          <li><a href="https://www.vocabulary.com" target="_blank" rel="noopener">Vocabulary.com</a> — moslashuvchan testlar</li>
+          <li><a href="https://www.merriam-webster.com/word-of-the-day" target="_blank" rel="noopener">Merriam-Webster</a> — kunlik yangi so'z</li>
+          <li><a href="https://www.oxfordlearnersdictionaries.com" target="_blank" rel="noopener">Oxford Learner's Dictionaries</a> — misollar bilan izoh</li>
+          <li><a href="https://www.ldoceonline.com" target="_blank" rel="noopener">Longman Dictionary</a> — sodda izohlar</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="reading">
+        <span class="leg">Yozma nutq</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M2 5c3-1.5 6-1.5 9 0v14c-3-1.5-6-1.5-9 0Z"/><path d="M22 5c-3-1.5-6-1.5-9 0v14c3-1.5 6-1.5 9 0Z"/></svg></div>
+        <h3>O'qish va yozish</h3>
+        <ul class="reslist">
+          <li><a href="https://www.grammarly.com" target="_blank" rel="noopener">Grammarly</a> — yozganingizni tekshirish</li>
+          <li><a href="https://www.hemingwayapp.com" target="_blank" rel="noopener">Hemingway Editor</a> — jumlalarni soddalashtirish</li>
+          <li><a href="https://writeandimprove.com" target="_blank" rel="noopener">Write & Improve</a> (British Council) — insho yozib, AI baholovi olish</li>
+          <li><a href="https://www.reddit.com/r/EnglishLearning" target="_blank" rel="noopener">Reddit — r/EnglishLearning</a> — jonli muloqot amaliyoti</li>
+          <li><a href="https://www.collinsdictionary.com" target="_blank" rel="noopener">Collins Dictionary</a> — sinonim va izohlar</li>
+          <li><a href="https://www.readworks.org" target="_blank" rel="noopener">ReadWorks</a> — daraja bo'yicha matnlar va tushunish savollari</li>
+          <li><a href="https://newsela.com" target="_blank" rel="noopener">Newsela</a> — bir xil yangilikning oson/qiyin versiyalari</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="speaking">
+        <span class="leg">Jonli suhbat</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.4 8.5 8.5 0 0 1-4-1L3 20l1.1-5.5A8.38 8.38 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5Z"/></svg></div>
+        <h3>Gapirish</h3>
+        <ul class="reslist">
+          <li><a href="https://www.tandem.net" target="_blank" rel="noopener">Tandem</a> — ona tili ingliz bo'lgan odamlar bilan bepul suhbat</li>
+          <li><a href="https://www.hellotalk.com" target="_blank" rel="noopener">HelloTalk</a> — til almashish ilovasi</li>
+          <li><a href="https://www.italki.com" target="_blank" rel="noopener">italki</a> — til bo'yicha til hamrohi va repetitorlar</li>
+          <li><a href="https://www.cambly.com" target="_blank" rel="noopener">Cambly</a> — ona tili ingliz bo'lgan suhbatdoshlar bilan mashq</li>
+          <li><a href="https://elsaspeak.com" target="_blank" rel="noopener">ELSA Speak</a> — talaffuzni AI orqali baholash</li>
+          <li><a href="https://engnovate.com" target="_blank" rel="noopener">Engnovate</a> — sun'iy intellekt bilan speaking va writing mashqlari</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="tests">
+        <span class="leg">SAT · ACT · TOEFL · IELTS</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="var(--gold)"/></svg></div>
+        <h3>Test tayyorgarligi</h3>
+        <ul class="reslist">
+          <li><a href="https://www.khanacademy.org/prep/sat" target="_blank" rel="noopener">Khan Academy SAT</a> — bepul rasmiy tayyorgarlik</li>
+          <li><a href="https://ieltsliz.com" target="_blank" rel="noopener">IELTS Liz</a> — IELTS uchun bepul maslahatlar</li>
+          <li><a href="https://magoosh.com" target="_blank" rel="noopener">Magoosh</a> — video darslar va testlar</li>
+          <li><a href="https://www.ets.org/toefl.html" target="_blank" rel="noopener">ETS TOEFL</a> — rasmiy namuna testlar</li>
+          <li><a href="https://www.prepscholar.com" target="_blank" rel="noopener">PrepScholar</a> — strategiya va maqolalar</li>
+          <li><a href="https://jumpinto.com" target="_blank" rel="noopener">Jumpinto</a> — Cambridge kitoblaridagi testlar CDI formatda</li>
+          <li><a href="https://practicepteonline.com" target="_blank" rel="noopener">PracticePTEOnline</a> — 4 bo'lim bo'yicha IELTS testlari va bepul cue card darslari</li>
+          <li><a href="https://ieltsonlinetests.com" target="_blank" rel="noopener">IELTS Online Tests</a> — real imtihon formatidagi testlar</li>
+          <li><a href="https://ieltsmaterial.com/ielts-practice-tests" target="_blank" rel="noopener">IELTS Material</a> — 4 bo'lim bo'yicha bepul qo'llanmalar</li>
+          <li><a href="https://mini-ielts.com" target="_blank" rel="noopener">Mini-IELTS</a> — listening va reading testlari</li>
+          <li><a href="https://ieltsadvantage.com" target="_blank" rel="noopener">IELTS Advantage</a> — writing/speaking strategiyalari va namuna insholar</li>
+          <li><a href="https://examy.me" target="_blank" rel="noopener">Examy</a> — AI yordamida IELTS mock testlari</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="podcasts">
+        <span class="leg">Har kuni 6–15 daqiqa</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v4"/><path d="M8 22h8"/></svg></div>
+        <h3>Podkastlar</h3>
+        <ul class="reslist">
+          <li><a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener">6 Minute English</a> (BBC) — qisqa mavzuli suhbatlar</li>
+          <li><a href="https://www.allearsenglish.com" target="_blank" rel="noopener">All Ears English</a> — jonli, tabiiy nutq</li>
+          <li><a href="https://www.espressoenglish.net" target="_blank" rel="noopener">Espresso English</a> — kundalik mini-darslar</li>
+          <li><a href="https://www.betteratenglish.com" target="_blank" rel="noopener">Better at English</a> — haqiqiy suhbatlar</li>
+          <li><a href="https://www.teacherluke.co.uk" target="_blank" rel="noopener">Luke's English Podcast</a> — chuqurroq mavzular</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="youtube">
+        <span class="leg">Ko'rib, eshitib o'rganish</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3Z" fill="var(--gold)" stroke="none"/></svg></div>
+        <h3>YouTube kanallari</h3>
+        <ul class="reslist">
+          <li><a href="https://www.engvid.com" target="_blank" rel="noopener">engVid</a> — turli o'qituvchilardan bepul video darslar</li>
+          <li><a href="https://rachelsenglish.com" target="_blank" rel="noopener">Rachel's English</a> — amerikacha talaffuz</li>
+          <li><a href="https://www.englishwithlucy.co.uk" target="_blank" rel="noopener">English with Lucy</a> — britancha talaffuz va grammatika</li>
+          <li><a href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener">BBC Learning English</a> — video darslar to'plami</li>
+          <li><a href="https://ed.ted.com" target="_blank" rel="noopener">TED-Ed</a> — animatsiyali qisqa darslar</li>
+        </ul>
+      </div>
+      <div class="card reveal" data-cat="courses">
+        <span class="leg">Chuqurroq bilim uchun</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5Z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg></div>
+        <h3>Bepul onlayn kurslar</h3>
+        <ul class="reslist">
+          <li><a href="https://www.edx.org" target="_blank" rel="noopener">edX</a> — universitetlar kurslari (auditor rejimida bepul)</li>
+          <li><a href="https://www.coursera.org" target="_blank" rel="noopener">Coursera</a> — til va akademik ko'nikma kurslari</li>
+          <li><a href="https://www.futurelearn.com" target="_blank" rel="noopener">FutureLearn</a> — qisqa onlayn kurslar</li>
+          <li><a href="https://www.open.edu/openlearn" target="_blank" rel="noopener">OpenLearn</a> (Open University) — bepul o'quv materiallari</li>
+          <li><a href="https://www.khanacademy.org" target="_blank" rel="noopener">Khan Academy</a> — grammatika va o'qish tushunish</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Kundalik reja</span>
+      <h2 class="section-title">Barqarorlik natijadan muhimroq</h2>
+      <p class="section-desc">Haftada bir marta 3 soat emas — har kuni 20–30 daqiqa samaraliroq.</p>
+    </div>
+    <div class="plan-strip reveal">
+      <div class="plan-day"><span class="d">10 daqiqa</span><span class="t">Tinglash (podkast/video)</span></div>
+      <div class="plan-day"><span class="d">10 daqiqa</span><span class="t">So'z boyligi (Anki)</span></div>
+      <div class="plan-day"><span class="d">10 daqiqa</span><span class="t">Yozish yoki gapirish amaliyoti</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="usullar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Kanaldan</span>
+      <h2 class="section-title">Amaliy usullar: Reading, Listening, Speaking</h2>
+      <p class="section-desc">Faqat manba ro'yxati yetarli emas — qanday mashq qilishni bilish ham muhim. Mana kanalda ilgari chiqqan uchta amaliy qo'llanma.</p>
+    </div>
+    <div class="cards cols-3">
+      <div class="card reveal">
+        <span class="leg">5 qadam</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M2 5c3-1.5 6-1.5 9 0v14c-3-1.5-6-1.5-9 0Z"/><path d="M22 5c-3-1.5-6-1.5-9 0v14c3-1.5 6-1.5 9 0Z"/></svg></div>
+        <h3>Reading oshirish usullari</h3>
+        <ul class="rule-list">
+          <li><span class="num">01</span><span><strong>O'z darajangizga mos matn tanlang.</strong> Ideal daraja — matnning 90–95% ini tushunishingiz kerak.</span></li>
+          <li><span class="num">02</span><span><strong>Extensive reading — ko'p va tez o'qing.</strong> Har bir so'zni lug'atdan qidirmay, kuniga 10–20 daqiqa umumiy ma'noni tushunish uchun o'qing.</span></li>
+          <li><span class="num">03</span><span><strong>Intensive reading — chuqur tahlil qiling.</strong> Qisqa matnni gap tuzilmasi va so'z ma'nosigacha ehtiyotkorlik bilan o'rganing.</span></li>
+          <li><span class="num">04</span><span><strong>Chunking — bloklab o'qing.</strong> Har bir so'zga emas, bir nechta so'zdan iborat bloklarga qarang — bu tezlikni oshiradi.</span></li>
+          <li><span class="num">05</span><span><strong>O'qiganingizni yozib/gapirib mustahkamlang.</strong> Matn haqida 3–5 jumla yozing yoki ovoz chiqarib gapirib bering.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="leg">5 qadam</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2" y="13" width="4" height="7" rx="1"/><rect x="18" y="13" width="4" height="7" rx="1"/></svg></div>
+        <h3>Listening oshirish usullari</h3>
+        <ul class="rule-list">
+          <li><span class="num">01</span><span><strong>Qiziqarli videolarni tomosha qiling.</strong> O'zingizga qiziq mavzuni tanlang va kuniga 10–15 daqiqa ajrating — shunda miyangiz "dars qilyapman" deb zerikmaydi.</span></li>
+          <li><span class="num">02</span><span><strong>So'zning ma'nosi va talaffuziga birdek e'tibor bering.</strong> Faqat tarjima qilish yetarli emas.</span></li>
+          <li><span class="num">03</span><span><strong>Uch bosqichli tinglash.</strong> Bir xil audioni: 1) subtitrsiz, 2) subtitr bilan, 3) tezlikni 1.5x–1.75x gacha oshirib tinglang.</span></li>
+          <li><span class="num">04</span><span><strong>Yangi so'zlarni darhol yozib oling.</strong> Eshitgan zahotingiz yozib qo'yish so'zni xotirada mustahkamlaydi.</span></li>
+          <li><span class="num">05</span><span><strong>Shadowing usulini qo'llang.</strong> Tinglaganingizni bir vaqtning o'zida ovoz chiqarib takrorlang — bu talaffuz va ritmni yaxshilaydi.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <span class="leg">Hayajonni yengish</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.4 8.5 8.5 0 0 1-4-1L3 20l1.1-5.5A8.38 8.38 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5Z"/></svg></div>
+        <h3>Speaking'da baland ball</h3>
+        <p>Ko'pchilik Speaking'da past ball oladi — sabab til bilmaslik emas, hayajon. Bu his "imtihon" deb fikrlashdan kelib chiqadi.</p>
+        <div class="tip-row">
+          <span class="tip-chip">Kunlik 1 daqiqalik ovozli mashq</span>
+          <span class="tip-chip">"Bu suhbat, imtihon emas"</span>
+          <span class="tip-chip">"Let me think about that"</span>
+          <span class="tip-chip">Ovozingizni yozib qayta tinglang</span>
+        </div>
+      </div>
+    </div>
+    <p class="section-desc" style="margin-top:22px">📚 <strong>Bonus:</strong> Beginner darajada o'qishni boshlash uchun "graded readers" (soddalashtirilgan darajali kitoblar) juda yordam beradi — masalan Macmillan Readers yoki Penguin Readers seriyasidagi <em>The Elephant Man</em>, <em>Sherlock Holmes</em> hikoyalari, <em>Rich Man, Poor Man</em> kabi nomlar. Bunday kitoblarni onlayn kutubxonalardan yoki rasmiy nashriyot ilovalaridan qidiring; tavsiyalar uchun Telegram kanalga yozing.</p>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="next">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Keyingi qadam</span>
+      <h2 class="section-title">Ingliz tilingizni qayerda qo'llaysiz?</h2>
+    </div>
+    <div class="cards">
+      <a href="flex.html" class="card reveal">
+        <span class="leg">Test va intervyu</span>
+        <h3>FLEX dasturi</h3>
+        <p>Ingliz tili testi va intervyu bosqichlariga qanday tayyorlanish haqida to'liq qo'llanma.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="harvard-yoli.html" class="card reveal">
+        <span class="leg">Insho va test</span>
+        <h3>Harvard yo'li</h3>
+        <p>SAT/ACT va insholarda kuchli ingliz tilining ahamiyati haqida.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="blog.html" class="card reveal">
+        <span class="leg">Ko'proq maslahat</span>
+        <h3>Blog</h3>
+        <p>Kanaldagi qo'shimcha maslahatlar va tajriba yozuvlari.</p>
+        <span class="read">O'qish →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+        <p>FLEX dasturi, Harvard yo'li va akademik tayyorgarlik haqida amaliy kontent. Rasmiy ma'lumot uchun tegishli rasmiy saytlarga murojaat qiling.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <a href="harvard-yoli.html">Harvard yo'li</a>
+          <a href="flex.html">FLEX dasturi</a>
+          <a href="ingliz-tili.html">Ingliz tili</a>
+          <a href="lugat-va-iboralar.html">Lug'at va iboralar</a>
+          <a href="kitoblar.html">Kitoblar</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Boshqa</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="about.html">Kanal haqida</a>
+          <a href="ota-onalar.html">Ota-onalar uchun</a>
+          <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanal</a>
+        </div>
+      </div>
+      <div class="footer-cta">
+        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>t.me/MyHarvardPath &nbsp;||&nbsp; Muallif: Ilyos Ruzibekov &nbsp;||&nbsp; <a href="https://t.me/Ilyos_Ruzibekov" target="_blank" rel="noopener">t.me/Ilyos_Ruzibekov</a> &nbsp;||&nbsp; <a href="mailto:ilyosruzibekov@gmail.com">ilyosruzibekov@gmail.com</a></p>
+      <p>© 2026 MyHarvardPath</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

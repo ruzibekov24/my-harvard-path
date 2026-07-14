@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lug'at va iboralar — MyHarvardPath</title>
+<meta name="description" content="Kanaldan to'plangan phrasal verbs, idiomalar, mavzuviy lug'at, keng tarqalgan xatolar va IELTS uchun foydali shablonlar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html">FLEX</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group active-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html" class="active">Lug'at</a>
+            <a href="kitoblar.html">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Lug'at va iboralar</div>
+    <span class="eyebrow">Kanaldan to'plangan</span>
+    <h1 class="subhero-title">Lug'at, iboralar va <em>tayyor</em> shablonlar</h1>
+    <p class="subhero-sub">Telegram kanalida ilgari chiqqan phrasal verbs, idiomalar, mavzuviy lug'at, keng tarqalgan xatolar va IELTS insho shabloni — bir joyda.</p>
+    <figure class="img-block" style="max-width:100%;">
+      <div class="img-placeholder ph-wide">
+        <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+       <img src="images/lugat.jpg" alt="">
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="word-of-day">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Har kuni yangilanadi</span>
+      <h2 class="section-title">Kunning so'zi</h2>
+      <p class="section-desc">Har kuni avtomatik ravishda yangi so'z — sahifani ochgan kuningizga qarab.</p>
+    </div>
+    <div class="wod-card reveal">
+      <div class="wod-top">
+        <span class="wod-date" id="wodDate"></span>
+        <span class="wod-tag" id="wodCat"></span>
+      </div>
+      <div class="wod-word" id="wodWord"></div>
+      <div class="wod-pos" id="wodPos"></div>
+      <p class="wod-uz" id="wodUz"></p>
+      <p class="wod-ex" id="wodEx"></p>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="flashcards">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Flashcard va test orqali o'rganish</span>
+      <h2 class="section-title">90 ta so'zni yodlang</h2>
+      <p class="section-desc">Progressingiz brauzeringizda avtomatik saqlanadi — keyingi safar shu yerdan davom etasiz.</p>
+    </div>
+
+    <div class="checklist-progress reveal" style="max-width:480px; margin-left:auto; margin-right:auto; margin-bottom:22px;">
+      <div class="checklist-progress-bar"><div class="checklist-progress-fill" id="vpFill"></div></div>
+      <span class="checklist-progress-label" id="vpLabel">0 / 90 so'zni bilasiz</span>
+    </div>
+
+    <div class="mode-tabs reveal">
+      <button class="mode-tab active" data-mode="flash">🗂️ Flashcard</button>
+      <button class="mode-tab" data-mode="test">📝 Test rejimi</button>
+    </div>
+
+    <!-- FLASHCARD PANE -->
+    <div class="vocab-pane" id="flashPane">
+      <div class="res-chips reveal" id="flashChips">
+        <button class="chip active" data-cat="all">Barchasi (90)</button>
+        <button class="chip" data-cat="insho">Insho (30)</button>
+        <button class="chip" data-cat="ielts">IELTS (30)</button>
+        <button class="chip" data-cat="suhbat">Suhbat (30)</button>
+        <button class="chip chip-alt" id="onlyUnknownChip">Faqat bilmaganlarim</button>
+      </div>
+      <div class="flash-wrap reveal">
+        <div class="flashcard" id="flashcard">
+          <div class="flashcard-inner">
+            <div class="flashcard-face flashcard-front">
+              <span class="flash-cat" id="flashFrontCat"></span>
+              <div class="flash-word" id="flashFrontWord"></div>
+              <div class="flash-pos" id="flashFrontPos"></div>
+              <span class="flash-hint">Javobni ko'rish uchun bosing</span>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <p class="flash-back-uz" id="flashBackUz"></p>
+              <p class="flash-back-ex" id="flashBackEx"></p>
+              <div class="flash-mark-row">
+                <button class="flash-mark know" id="flashKnow" type="button">✓ Bilaman</button>
+                <button class="flash-mark unknown" id="flashUnknown" type="button">↻ Yana ko'raman</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flash-controls">
+          <button class="btn-ghost-dark" id="flashPrev">← Oldingi</button>
+          <span class="flash-progress" id="flashProgress"></span>
+          <button class="btn-ghost-dark" id="flashShuffle">Aralashtirish</button>
+          <button class="btn-ghost-dark" id="flashNext">Keyingi →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEST PANE -->
+    <div class="vocab-pane" id="testPane" hidden>
+      <div class="res-chips reveal" id="testChips">
+        <button class="chip active" data-cat="all">Barchasi</button>
+        <button class="chip" data-cat="insho">Insho</button>
+        <button class="chip" data-cat="ielts">IELTS</button>
+        <button class="chip" data-cat="suhbat">Suhbat</button>
+      </div>
+      <div class="test-wrap reveal">
+        <div class="test-top">
+          <span class="test-count" id="testCount">Savol 1 / 10</span>
+          <span class="test-best" id="testBest"></span>
+        </div>
+        <div class="test-card">
+          <span class="test-q-label">Bu so'zning ma'nosi qaysi?</span>
+          <div class="test-word" id="testWord"></div>
+          <div class="test-options" id="testOptions"></div>
+        </div>
+        <div class="test-bottom">
+          <button class="btn-ghost-dark" id="testRestart">🔁 Qaytadan boshlash</button>
+          <button class="btn-primary" id="testNext" style="display:none;" type="button">Keyingi savol →</button>
+        </div>
+        <div class="test-result" id="testResult" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="phrases">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Har kuni ishlatiladigan</span>
+      <h2 class="section-title">10 ta asosiy ibora</h2>
+      <p class="section-desc">Kundalik suhbatda tez-tez kerak bo'ladigan qisqa jumlalar.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <span class="leg">Iboralar 1–5</span>
+        <ul class="reslist">
+          <li><strong>I'm running late</strong> — Men kechikayapman.</li>
+          <li><strong>I'd appreciate it if…</strong> — Agar ... qilsangiz, minnatdor bo'lardim.</li>
+          <li><strong>That's a good point</strong> — Bu yaxshi fikr.</li>
+          <li><strong>I'm not entirely convinced</strong> — Men to'liq ishonganim yo'q.</li>
+          <li><strong>It's up to you</strong> — Bu senga bog'liq.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Iboralar 6–10</span>
+        <ul class="reslist">
+          <li><strong>I've changed my mind</strong> — Fikrimni o'zgartirdim.</li>
+          <li><strong>I can't make it</strong> — Men yetib bora olmayman.</li>
+          <li><strong>Let me get this straight</strong> — Keling, aniqlashtirib olamiz.</li>
+          <li><strong>That's not necessarily true</strong> — Bu doim ham to'g'ri emas.</li>
+          <li><strong>It's a win-win situation</strong> — Bu barcha uchun foydali holat.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Sinonimlar</span>
+        <h3 style="font-size:1rem">10 xil usulda "How are you?"</h3>
+        <ul class="reslist">
+          <li>How's everything? · How's it going? · How are things?</li>
+          <li>What's up? · How are you doing? · What's new?</li>
+          <li>You all right? · How have you been?</li>
+          <li>How are things going? · Are you well?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="phrasal">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Phrasal verbs</span>
+      <h2 class="section-title">"GET" bilan yasaladigan iboralar</h2>
+      <p class="section-desc">Speaking va Writing'da tabiiy eshitilish uchun eng foydali "get" iboralaridan biri.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <ul class="reslist">
+          <li><strong>Get out (of)</strong> — chiqmoq, tark etmoq<br><em>He quickly got out of the car and ran inside.</em></li>
+          <li><strong>Get along (with)</strong> — yaxshi chiqishmoq<br><em>I get along well with my colleagues.</em></li>
+          <li><strong>Get over</strong> — qiyinchilikni yengib o'tmoq<br><em>It took him a while to get over the flu.</em></li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul class="reslist">
+          <li><strong>Get by</strong> — arang eplamoq<br><em>Many people get by on a small salary.</em></li>
+          <li><strong>Get across</strong> — fikrni yetkazmoq<br><em>He found it hard to get his ideas across to the team.</em></li>
+          <li><strong>Get rid of</strong> — qutulmoq<br><em>I need to get rid of these old clothes.</em></li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Idiomalar</span>
+        <ul class="reslist">
+          <li><strong>Once in a blue moon</strong> — juda kam hollarda</li>
+          <li><strong>Bite the bullet</strong> — qiyin vaziyatga jasorat bilan chidamoq</li>
+          <li><strong>The core of…</strong> — asosiy mazmuni / mohiyati (IELTS essayda foydali)</li>
+          <li><strong>To show off</strong> — ko'z-ko'z qilish, maqtanib ko'rsatish</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="topical">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Topical vocabulary · C1</span>
+      <h2 class="section-title">Mavzu bo'yicha lug'at</h2>
+      <p class="section-desc">IELTS va akademik matnlarda tez-tez uchraydigan so'zlar, misol jumla bilan.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <span class="leg">Health</span>
+        <ul class="reslist">
+          <li><strong>Nutrition</strong> — ovqatlanish</li>
+          <li><strong>Diagnosis</strong> — tashxis</li>
+          <li><strong>Prescription</strong> — retsept</li>
+          <li><strong>Symptom</strong> — simptom</li>
+          <li><strong>Vaccine</strong> — vaksina</li>
+          <li><strong>Rehabilitation</strong> — reabilitatsiya</li>
+          <li><strong>Epidemic</strong> — epidemik holat</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Crime</span>
+        <ul class="reslist">
+          <li><strong>Prosecutor</strong> — prokuror</li>
+          <li><strong>Conviction</strong> — ayblov</li>
+          <li><strong>Eyewitness</strong> — jonli guvoh</li>
+          <li><strong>Forensic</strong> — ilmiy dalillarga asoslangan</li>
+          <li><strong>Perpetrator</strong> — jinoyatchi</li>
+          <li><strong>Penalty</strong> — jazo</li>
+          <li><strong>Criminal record</strong> — sudlanganlik qaydi</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Sport / Activities</span>
+        <ul class="reslist">
+          <li><strong>Hit the gym</strong> — shug'ullanish uchun zalga chiqmoq</li>
+          <li><strong>Push yourself</strong> — o'zini undamoq, itarmoq</li>
+          <li><strong>Lose weight</strong> — vazn yo'qotmoq</li>
+          <li><strong>Be on a diet</strong> — parhezda bo'lmoq</li>
+          <li><strong>Get fit</strong> — sog'lom bo'lish uchun shug'ullanmoq</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="upgrade">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Bir zumda yuqoriroq darajaga</span>
+      <h2 class="section-title">Basic → Advanced so'z almashtirish</h2>
+      <p class="section-desc">Speaking va Writing'da bir xil oddiy so'zlarni takrorlash o'rniga, shu almashtirishlardan foydalaning.</p>
+    </div>
+    <div class="cards cols-4 reveal">
+      <div class="card"><span class="leg">Basic → Advanced</span><p>Focus → <strong>Keep your eye (on)</strong></p></div>
+      <div class="card"><span class="leg">Basic → Advanced</span><p>Not sure → <strong>On the fence</strong></p></div>
+      <div class="card"><span class="leg">Basic → Advanced</span><p>Lazy → <strong>Couch potato</strong></p></div>
+      <div class="card"><span class="leg">Basic → Advanced</span><p>Keep quiet → <strong>Zip your lips</strong></p></div>
+      <div class="card"><span class="leg">Basic → Advanced</span><p>Time to sleep → <strong>Hit the bed</strong></p></div>
+      <div class="card"><span class="leg">Basic → Advanced</span><p>Very kind → <strong>Heart of gold</strong></p></div>
+      <div class="card"><span class="leg">Basic → Advanced</span><p>Scared → <strong>Cold feet</strong></p></div>
+      <div class="card"><span class="leg">IELTS Reading uchun</span><p>Enhance, Justify, Hypothesis, Evaluate, Interpret, Indicate, Emphasize, Assume, Inevitable, Fluctuate — matnlarda tez-tez uchraydigan 20+ so'zdan namuna.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="mistakes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Common mistakes</span>
+      <h2 class="section-title">Ko'p uchraydigan xatolar</h2>
+      <p class="section-desc">O'zbek tilidan so'zma-so'z tarjima qilinganda paydo bo'ladigan odatiy xatolar.</p>
+    </div>
+    <div class="cards cols-4 reveal">
+      <div class="card"><span class="leg">Juda mazali</span><p>❌ Very delicious<br>✅ <strong>Very tasty</strong></p></div>
+      <div class="card"><span class="leg">Xato qilmoq</span><p>❌ Do a mistake<br>✅ <strong>Make a mistake</strong></p></div>
+      <div class="card"><span class="leg">Avtobusda sayohat</span><p>❌ Travel in a bus<br>✅ <strong>Travel by bus</strong></p></div>
+      <div class="card"><span class="leg">Kutubxonada o'qish</span><p>❌ Study on a library<br>✅ <strong>Study at a library</strong></p></div>
+      <div class="card"><span class="leg">Zerikmoq</span><p>❌ Feel boring<br>✅ <strong>Feel bored</strong></p></div>
+      <div class="card"><span class="leg">Loyiha ustida ishlash</span><p>❌ Work a project<br>✅ <strong>Work on a project</strong></p></div>
+      <div class="card"><span class="leg">Piyoda yurish</span><p>❌ Have a walk<br>✅ <strong>Take a walk</strong></p></div>
+      <div class="card"><span class="leg">Passiv shakl · IELTS</span><p><strong>It is widely believed that…</strong> — umumiy fikrlarni bildirish uchun rasmiy shakl. Masalan: <em>It is generally accepted that exercise benefits mental health.</em></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="template">
+  <div class="wrap">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <span class="section-eyebrow">IELTS Writing Task 2</span>
+        <p class="lead">Tayyor "Totally Agree" shablon (220+ so'z)</p>
+        <p><strong>Kirish:</strong> It is widely debated whether [savolni parafraz qiling]. I completely agree that [fikringiz] is the most sensible approach, primarily because [sabab 1] and [sabab 2].</p>
+        <p><strong>Asosiy qism 1:</strong> eng kuchli argumentingizni misol bilan yoying (65–70 so'z).</p>
+        <p><strong>Asosiy qism 2:</strong> ikkinchi argumentni qo'llab-quvvatlovchi misol bilan yoying (65–70 so'z).</p>
+        <p><strong>Xulosa:</strong> In conclusion, although some might argue that [qarama-qarshi fikr], the advantages of [fikringiz] are far more compelling and practical.</p>
+      </div>
+      <div class="ticket-stats">
+        <div class="ticket-stat"><span class="k">Kirish</span><span class="v">40–45 so'z</span></div>
+        <div class="ticket-stat"><span class="k">Asosiy qism</span><span class="v">2 × 65–70 so'z</span></div>
+        <div class="ticket-stat"><span class="k">Xulosa</span><span class="v">50–55 so'z</span></div>
+        <div class="ticket-stat"><span class="k">Jami</span><span class="v">220+ so'z</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="speaking-confidence">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Speaking</span>
+      <h2 class="section-title">Speaking'da hayajonni yengish</h2>
+      <p class="section-desc">Ko'pchilik Speaking'da past ball oladi, lekin sabab ko'pincha til bilmaslik emas — hayajon. Buni yengishning 4 ta amaliy usuli.</p>
+    </div>
+    <div class="cards cols-2 reveal">
+      <div class="card">
+        <span class="leg">1 — Kundalik mashq</span>
+        <p>Har kuni 1 daqiqalik ovozli mashq qiling. Telefoningizga oddiy mavzuda ("your hobby", "your hometown") gapirib yozib oling. Maqsad — mukammal emas, to'xtamasdan davom ettirish.</p>
+      </div>
+      <div class="card">
+        <span class="leg">2 — Fikrlashni o'zgartiring</span>
+        <p>"Bu suhbat, imtihon emas" deb fikrlang. Examiner sizdan mukammallik emas, tabiiy gapirishni kutadi — bu fikr hayajonni sezilarli kamaytiradi.</p>
+      </div>
+      <div class="card">
+        <span class="leg">3 — Jim qolmang</span>
+        <p>To'xtab qolsangiz, "Let me think about that" yoki "That's an interesting question" kabi gaplar bilan vaqt oling — bu tabiiy, examiner buni salbiy baholamaydi.</p>
+      </div>
+      <div class="card">
+        <span class="leg">4 — O'zingizni tinglang</span>
+        <p>Ovozingizni yozib, qayta tinglang. Bu hayajon va xatolarni tashqaridan ko'rish imkonini beradi — dastlab noqulay, lekin eng tez rivojlanish usuli shu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="more-phrases">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">So'zlashuv</span>
+      <h2 class="section-title">Yana foydali ibora va idiomalar</h2>
+      <p class="section-desc">Speaking'da tabiiyroq eshitilish uchun ko'proq tayyor ibora va idiomalar.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <span class="leg">Kundalik nutq</span>
+        <ul class="reslist">
+          <li><strong>Hold your horses</strong> — tinchlaning</li>
+          <li><strong>What are you up to?</strong> — nima qilyapsiz?</li>
+          <li><strong>I'm stuffed</strong> — qornim to'q</li>
+          <li><strong>Dark horse</strong> — yashirin qobiliyati bor odam</li>
+          <li><strong>Chatterbox</strong> — ko'p gapiradigan odam</li>
+          <li><strong>Wet blanket</strong> — doim noliydigan odam</li>
+          <li><strong>Laid-back</strong> — beg'am, xotirjam odam</li>
+          <li><strong>Cheapskate</strong> — pulga ziqna odam</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Foydali iboralar</span>
+        <ul class="reslist">
+          <li><strong>Sooner or later</strong> — ertami-kechmi</li>
+          <li><strong>As far as I know</strong> — bilishimcha</li>
+          <li><strong>That being said</strong> — shunday bo'lsa-da</li>
+          <li><strong>In the meantime</strong> — shu orada</li>
+          <li><strong>Believe it or not</strong> — ishonasizmi yo'qmi</li>
+          <li><strong>Come to think of it</strong> — o'ylab qarasam</li>
+          <li><strong>Cut it out</strong> — gapni qisqartir, maqsadga o't</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Ko'proq idiomalar</span>
+        <ul class="reslist">
+          <li><strong>A blessing in disguise</strong> — avval yomon ko'ringan, keyin foydali bo'lgan narsa</li>
+          <li><strong>Hit the books</strong> — qattiq o'qimoq</li>
+          <li><strong>Costs an arm and a leg</strong> — juda qimmat</li>
+          <li><strong>The ball is in your court</strong> — endi qaror sizga bog'liq</li>
+          <li><strong>As free as a bird</strong> — ozod, bo'sh</li>
+          <li><strong>Have difficulty (V-ing)</strong> — qiyinchilikka uchramoq</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="describing-pictures">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Speaking · Describing pictures</span>
+      <h2 class="section-title">Rasm tasvirlash uchun tayyor iboralar</h2>
+      <p class="section-desc">Ikki rasmni taqqoslash vazifasida ball oshiradigan durdona birikmalar va 45 soniyalik universal shablon.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <span class="leg">Durdona birikmalar</span>
+        <ul class="reslist">
+          <li><strong>Catches my attention</strong> — diqqatimni tortdi</li>
+          <li><strong>It seems to me that…</strong> — menga shunday tuyuladiki</li>
+          <li><strong>Gives the impression of…</strong> — taassurot beradi</li>
+          <li><strong>Judging by the expression on her/his face</strong> — yuzidagi ifodadan xulosa qilsak</li>
+          <li><strong>In contrast to / Unlike the first photo…</strong> — birinchi suratdan farqli ravishda</li>
+          <li><strong>Must be…</strong> — bo'lsa kerak</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">45 soniyalik shablon · 1/2</span>
+        <ul class="reslist">
+          <li><strong>Kirish (5s):</strong> "There are two pictures, and I'm going to describe and compare them."</li>
+          <li><strong>1-rasm (12s):</strong> "In the first picture, I can see [odamlar soni] who are [faoliyat]. They look [his-tuyg'u], and the place seems to be [joy]."</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">45 soniyalik shablon · 2/2</span>
+        <ul class="reslist">
+          <li><strong>2-rasm (12s):</strong> "In the second picture, there are [odamlar soni], and they are [faoliyat]. The setting looks like [joy]."</li>
+          <li><strong>O'xshashlik (8s):</strong> "Both pictures show people engaged in everyday activities."</li>
+          <li><strong>Farq (8s):</strong> "The main difference is the setting and the number of people."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="speaking-formulas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Speaking</span>
+      <h2 class="section-title">Gap tuzish formulalari va why-why-how texnikasi</h2>
+      <p class="section-desc">Speaking savoliga to'liq va tuzilgan javob berish uchun 5 ta tayyor formula, hamda javobni chuqurlashtirish texnikasi.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <span class="leg">5 ta formula</span>
+        <ul class="reslist">
+          <li><strong>Fikr:</strong> I think/believe/guess that + S + V</li>
+          <li><strong>Sabab:</strong> This is mainly because + S + V</li>
+          <li><strong>Misol:</strong> For example, + S + V</li>
+          <li><strong>Taqqoslash:</strong> Compared to A, B is + sifatlovchi</li>
+          <li><strong>Tajriba:</strong> I remember (V-ing) / I once (V2)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Why-why-how texnikasi</span>
+        <p>Savolga javob berganingizdan so'ng, 2 ta sabab ("why") ayting, keyin ular qanday amalga oshganini ("how") tushuntiring.</p>
+        <p style="margin-top:10px;"><em>"I love spring because it's warm. Warm weather makes me feel happy. My birthday is also in spring. I usually go for walks in the park."</em></p>
+      </div>
+      <div class="card">
+        <span class="leg">Formal xat xulosalari</span>
+        <ul class="reslist">
+          <li><strong>Shikoyat:</strong> "I trust you will treat this matter with the urgency it deserves."</li>
+          <li><strong>So'rov:</strong> "I would be grateful if you could consider my request."</li>
+          <li><strong>Uzr:</strong> "Please accept my sincere apologies for the inconvenience caused."</li>
+          <li><strong>Taklif:</strong> "I hope you find my suggestions helpful."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="vocab-extra">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">So'z boyligi · qo'shimcha</span>
+      <h2 class="section-title">A1 → C1, sinonimlar va yuqori ball so'zlar</h2>
+      <p class="section-desc">Reading va Listening'da savol-javoblar sinonim holida keladi — shu so'zlarni bilish katta farq qiladi.</p>
+    </div>
+    <div class="cards cols-4 reveal">
+      <div class="card"><span class="leg">A1 → C1</span><p>eat → <strong>consume</strong><br>sleep → <strong>slumber</strong><br>talk → <strong>communicate</strong><br>give → <strong>grant</strong></p></div>
+      <div class="card"><span class="leg">A1 → C1</span><p>get → <strong>obtain</strong><br>build → <strong>construct</strong><br>buy → <strong>purchase</strong><br>read → <strong>peruse</strong></p></div>
+      <div class="card"><span class="leg">A1 → C1</span><p>learn → <strong>master</strong><br>clean → <strong>sanitize</strong><br>continue → <strong>proceed</strong><br>help → <strong>assist</strong></p></div>
+      <div class="card"><span class="leg">Yuqori ball so'zlar</span><p><strong>Exacerbate</strong> — yanada kuchaytirmoq<br><strong>Albeit</strong> — garchi, bo'lsa-da<br><strong>Ubiquitous</strong> — hamma joyda uchraydigan</p></div>
+      <div class="card"><span class="leg">Sinonimlar</span><p><strong>Increase</strong> — rise, grow, expand, boost</p></div>
+      <div class="card"><span class="leg">Sinonimlar</span><p><strong>Decrease</strong> — reduce, decline, drop, fall</p></div>
+      <div class="card"><span class="leg">Sinonimlar</span><p><strong>Reason / Result</strong> — cause, factor / outcome, consequence</p></div>
+      <div class="card"><span class="leg">Sinonimlar</span><p><strong>Improve / Damage</strong> — develop, upgrade / harm, destroy</p></div>
+      <div class="card"><span class="leg">Sinonimlar</span><p><strong>Choose / Refuse</strong> — select, opt for / reject, turn down</p></div>
+      <div class="card"><span class="leg">Sinonimlar</span><p><strong>Allow / Ban</strong> — permit, enable / prohibit, restrict</p></div>
+      <div class="card"><span class="leg">Reading uchun 20 so'z · 1/2</span><p>Enhance, Justify, Hypothesis, Evaluate, Interpret, Indicate, Address, Emphasize, Illustrate, Assume</p></div>
+      <div class="card"><span class="leg">Reading uchun 20 so'z · 2/2</span><p>Highlight, Investigate, Inevitable, Sustain, Range (from…to), Fluctuate, Maintain, Derive (from), Embrace, Perceive</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="informal-english">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Norasmiy ingliz tili</span>
+      <h2 class="section-title">Native speaker'lar qanday gapiradi</h2>
+      <p class="section-desc">Filmlarda, qo'shiqlarda va jonli suhbatda ko'p uchraydigan qisqartma va norasmiy shakllar.</p>
+    </div>
+    <div class="cards cols-4 reveal">
+      <div class="card"><span class="leg">Talaffuz qisqartmalari</span><p>Cuz — because<br>Dunno — don't know<br>Gimme — give me<br>Gonna — going to<br>Wanna — want to<br>Lemme — let me</p></div>
+      <div class="card"><span class="leg">"I don't know" o'rniga</span><p>I have no idea · Beats me · Dunno · Who knows? · My best guess is… · I'm not too sure</p></div>
+      <div class="card"><span class="leg">"Good night" o'rniga</span><p>Sleep tight · Sweet dreams · Have a peaceful night · Off to bed · Lights out!</p></div>
+      <div class="card"><span class="leg">Noto'g'ri ko'pliklar</span><p>Person → People · Foot → Feet · Tooth → Teeth · Child → Children · Mouse → Mice · Goose → Geese</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="topic-extra">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Mavzuviy lug'at · qo'shimcha</span>
+      <h2 class="section-title">Yo'nalish, bayram va boshqa mavzular</h2>
+      <p class="section-desc">Speaking va Listening'da uchraydigan qo'shimcha mavzuviy lug'at to'plamlari.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <span class="leg">Yo'nalish (Map vocabulary)</span>
+        <ul class="reslist">
+          <li>Facing — ro'parasida · Behind — orqasida · Between — o'rtasida</li>
+          <li>Next to / By — yonida · In front of — oldida · Beyond — narigi tomonda</li>
+          <li>Turn right / left — o'ngga/chapga buriling · Go straight — to'g'riga boring</li>
+          <li>North / South / East / West — shimol / janub / sharq / g'arb</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Ramadan lug'ati</span>
+        <ul class="reslist">
+          <li>Fasting — ro'za tutish · Suhoor — saharlik</li>
+          <li>Breaking a fast — iftorlik · Taraweeh — taroveh</li>
+          <li>Obligatory charity — zakot · Call to prayer — azon</li>
+          <li>Laylat al-Qadr — Qadr kechasi</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">"I am rich" — 10 usul</span>
+        <ul class="reslist">
+          <li>I'm wealthy / well-off / affluent</li>
+          <li>I'm loaded / rolling in money (so'zlashuv)</li>
+          <li>I'm financially comfortable / independent</li>
+          <li>I'm doing well financially</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="reading-technique">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Reading strategiyasi</span>
+      <h2 class="section-title">Reading Part 3: heading matching texnikasi</h2>
+      <p class="section-desc">Paragraflarga sarlavha moslashtirish vazifasida vaqtni tejaydigan 5 qadamli usul.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card"><span class="leg">1</span><p>Avval barcha sarlavhalarni o'qib, har birining asosiy g'oyasini aniqlang (masalan, "Environmental problems in cities" ≈ "Urban pollution issues").</p></div>
+      <div class="card"><span class="leg">2</span><p>Paragrafni to'liq emas, strategik o'qing — har birining birinchi va oxirgi gapiga e'tibor bering, asosiy g'oya odatda shu yerda bo'ladi.</p></div>
+      <div class="card"><span class="leg">3</span><p>Tafsilotga aldanmang — heading har doim asosiy fikrga mos keladi, alohida misol yoki detalga emas.</p></div>
+      <div class="card"><span class="leg">4</span><p>Sinonim va parafrazga tayyor bo'ling — test so'zlari matndagi so'zlar bilan aynan mos kelmaydi, ma'no bo'yicha qidiring.</p></div>
+      <div class="card"><span class="leg">5</span><p>Shubhali paragraflarni keyinga qoldiring, avval aniq mos keladiganlarni belgilang — shunda tanlov qisqaradi.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="vocab-resources">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Tavsiya etiladi</span>
+      <h2 class="section-title">So'z boyligini oshirish uchun ishonchli manbalar</h2>
+      <p class="section-desc">Yuqoridagi flashcardlardan tashqari, bu saytlar va ilovalar so'z boyligini muntazam oshirishga yordam beradi.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <div class="card">
+        <span class="leg">Kunlik odat</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+        <h3>Word of the Day</h3>
+        <ul class="reslist">
+          <li><a href="https://www.merriam-webster.com/word-of-the-day" target="_blank" rel="noopener">Merriam-Webster</a> — har kuni yangi so'z, talaffuzi bilan</li>
+          <li><a href="https://www.dictionary.com/e/word-of-the-day/" target="_blank" rel="noopener">Dictionary.com</a> — misollar va kelib chiqishi bilan</li>
+          <li><a href="https://www.oxfordlearnersdictionaries.com" target="_blank" rel="noopener">Oxford Learner's Dictionaries</a> — o'quvchilar uchun sodda izohlar</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Flashcard va spaced repetition</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="1"/><rect x="3" y="4" width="14" height="10" rx="1"/></svg></div>
+        <h3>Flashcard ilovalari</h3>
+        <ul class="reslist">
+          <li><a href="https://quizlet.com" target="_blank" rel="noopener">Quizlet</a> — tayyor so'z to'plamlari yoki o'zingiznikini yarating</li>
+          <li><a href="https://apps.ankiweb.net" target="_blank" rel="noopener">Anki</a> — spaced repetition asosida uzoq muddatli yodlash</li>
+          <li><a href="https://www.vocabulary.com" target="_blank" rel="noopener">Vocabulary.com</a> — moslashuvchan testlar, so'z darajangizni kuzatadi</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="leg">Test tayyorgarligi uchun</span>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5Z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg></div>
+        <h3>IELTS / akademik so'zlar</h3>
+        <ul class="reslist">
+          <li><a href="https://magoosh.com/vocabulary-builder/" target="_blank" rel="noopener">Magoosh Vocabulary Builder</a> — akademik va test so'zlari, bepul</li>
+          <li><a href="https://freerice.com" target="_blank" rel="noopener">Freerice</a> — o'ynab so'z boyligini oshiring, har to'g'ri javob ochlarga guruch sovg'a qiladi</li>
+          <li><a href="https://www.ldoceonline.com" target="_blank" rel="noopener">Longman Dictionary</a> — sodda va aniq izohlar, misollar ko'p</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="next">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Keyingi qadam</span>
+      <h2 class="section-title">Yana ko'proq lug'at va iboralar kanalda</h2>
+      <p class="section-desc">Bu sahifadagi barcha materiallar Telegram kanalidan olindi — yangi postlarni birinchi bo'lib o'qish uchun qo'shiling.</p>
+    </div>
+    <div class="cards cols-3 reveal">
+      <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener" class="card">
+        <span class="leg">Telegram</span>
+        <h3>Kanalga qo'shiling</h3>
+        <p>Yangi so'z, ibora va grammatika postlarini birinchi bo'lib ko'ring.</p>
+        <span class="read">Qo'shilish →</span>
+      </a>
+      <a href="ingliz-tili.html" class="card">
+        <span class="leg">Manbalar</span>
+        <h3>Ingliz tili sahifasi</h3>
+        <p>65+ bepul sayt, ilova va o'quv usuli — daraja bo'yicha guruhlangan.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="blog.html" class="card">
+        <span class="leg">Blog</span>
+        <h3>Boshqa postlar</h3>
+        <p>Kanaldagi boshqa maslahat va tajriba yozuvlari to'plami.</p>
+        <span class="read">O'qish →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+        <p>FLEX dasturi, Harvard yo'li va akademik tayyorgarlik haqida amaliy kontent. Rasmiy ma'lumot uchun tegishli rasmiy saytlarga murojaat qiling.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <a href="harvard-yoli.html">Harvard yo'li</a>
+          <a href="flex.html">FLEX dasturi</a>
+          <a href="ingliz-tili.html">Ingliz tili</a>
+          <a href="lugat-va-iboralar.html">Lug'at va iboralar</a>
+          <a href="kitoblar.html">Kitoblar</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Boshqa</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="about.html">Kanal haqida</a>
+          <a href="ota-onalar.html">Ota-onalar uchun</a>
+          <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanal</a>
+        </div>
+      </div>
+      <div class="footer-cta">
+        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>t.me/MyHarvardPath &nbsp;||&nbsp; Muallif: Ilyos Ruzibekov &nbsp;||&nbsp; <a href="https://t.me/Ilyos_Ruzibekov" target="_blank" rel="noopener">t.me/Ilyos_Ruzibekov</a> &nbsp;||&nbsp; <a href="mailto:ilyosruzibekov@gmail.com">ilyosruzibekov@gmail.com</a></p>
+      <p>© 2026 MyHarvardPath</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="vocab.js"></script>
+</body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitoblar — MyHarvardPath</title>
+<meta name="description" content="Insho yozish, ingliz tilini rivojlantirish va Harvardga tayyorgarlik uchun tavsiya etilgan kitoblar to'plami.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html">FLEX</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group active-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html">Lug'at</a>
+            <a href="kitoblar.html" class="active">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Kitoblar</div>
+    <span class="eyebrow">O'qish ro'yxati</span>
+    <h1 class="subhero-title">Yozish, til va <em>fikrlashni</em> boyitadigan kitoblar</h1>
+    <p class="subhero-sub">Insho yozish, akademik ingliz tili va o'z yo'lingizni topish uchun foydali bo'lgan kitoblar to'plami. Bu ro'yxat vaqt o'tishi bilan kengaytiriladi — muqova rasmlari va batafsil sharhlar tez orada qo'shiladi.</p>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="book-folders">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">MyHarvardPath nashri</span>
+      <h2 class="section-title">Bepul PDF kitoblar</h2>
+      <p class="section-desc">Kanal muallifi tomonidan topilgan kitoblar — papkani oching, kitob nomini qidiring, o'qigan kitoblaringizni belgilab boring.</p>
+    </div>
+    <div class="folder-grid">
+      <button type="button" class="folder-card reveal" data-open-modal="beginnerModal">
+        <div class="folder-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></div>
+        <h3>Beginner kitoblar</h3>
+        <p>Boshlang'ich darajadagi o'quvchilar uchun 10 ta bepul kitob</p>
+        <span class="folder-count" data-progress-label="beginner">0 / 10 o'qildi</span>
+      </button>
+      <button type="button" class="folder-card reveal" data-open-modal="lugatModal">
+        <div class="folder-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></div>
+        <h3>Lug'at kitoblar</h3>
+        <p>So'z boyligini oshiruvchi 9 ta bepul kitob</p>
+        <span class="folder-count" data-progress-label="lugat">0 / 9 o'qildi</span>
+      </button>
+      <button type="button" class="folder-card folder-card-soon reveal" data-open-modal="kelajakModal">
+        <span class="folder-soon-badge">Tez orada</span>
+        <div class="folder-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v3H9V7Z"/></svg></div>
+        <h3>Kelajak uchun</h3>
+        <p>Tez orada qo'shiladigan yangi 10 ta kitob uchun joy tayyorlandi</p>
+        <span class="folder-count">0 / 10 tayyor</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<div class="book-modal" id="beginnerModal" data-book-modal="beginner">
+  <div class="book-modal-backdrop" data-close-modal></div>
+  <div class="book-modal-inner">
+    <div class="book-modal-head">
+      <h2>Beginner kitoblar</h2>
+      <button type="button" class="book-modal-close" data-close-modal aria-label="Yopish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="book-modal-tools">
+      <input type="search" class="book-search" placeholder="Kitob nomi bo'yicha qidirish…" data-book-search="beginner">
+      <div class="checklist-progress">
+        <div class="checklist-progress-bar"><div class="checklist-progress-fill" data-progress-fill="beginner"></div></div>
+        <span class="checklist-progress-label" data-progress-text="beginner">0 / 10 o'qildi</span>
+      </div>
+    </div>
+    <div class="cards cols-3 book-modal-grid" data-book-grid="beginner">
+      <div class="card reveal book-card" data-book-name="beginner kitob #1 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+        <img src="images/beginner01.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>A ghost in love</h3>
+       <p class="book-author">
+  <strong>Muallif:</strong> Michael Dean
+</p>
+
+<p class="book-description">
+  Sevgi, do'stlik va sirli voqealar haqida qiziqarli hikoya. Sodda ingliz tilida yozilgani sababli beginner o'quvchilar uchun o'qishga qulay. Kitob yangi so'zlarni o'rganish va o'qish ko'nikmasini rivojlantirishga yordam beradi.
+</p>
+<label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner01">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner01.pdf" data-pdf-name="Beginner kitob #1 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner01.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #2 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner02.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>Rich man, Poor man</h3>
+        <p class="book-description">
+          Kambag'al qariya Adamning hayoti va o'g'lidan kelgan maktub atrofida rivojlanadigan ta'sirli hikoya. Kitob halollik, mehr va insoniy qadriyatlarni sodda tilda yoritadi. Beginner darajadagi o'quvchilar uchun o'qish tezligi va lug'at boyligini oshirishga yordam beradi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner02">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner02.pdf" data-pdf-name="Beginner kitob #2 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner02.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #3 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner03.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>Sherlock Holmes and the Duke's Son</h3>
+<p class="book-author"><strong>Muallif:</strong> Sir Arthur Conan Doyle</p>
+        <p class="book-description">
+          Mashhur detektiv Sherlock Holmes g'oyib bo'lgan yosh yigit sirini hal qilishga harakat qiladi. Hikoya mantiqiy fikrlash va kuzatuvchanlikni rivojlantiradi. Sodda ingliz tili sababli beginner o'quvchilar uchun juda mos.
+        </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner03">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner03.pdf" data-pdf-name="Beginner kitob #3 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner03.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #4 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner04.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>London</h3>
+<p class="book-author"><strong>Muallif:</strong> John Escott</p>
+        <p class="book-description">
+          Ushbu kitob London shahrining tarixi, diqqatga sazovor joylari va madaniyati bilan tanishtiradi. O'quvchi shahar haqida qiziqarli ma'lumotlarga ega bo'lish bilan birga yangi inglizcha so'zlarni ham o'rganadi. Sayohat mavzusiga qiziquvchilar uchun yaxshi tanlov.
+        </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner04">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner04.pdf" data-pdf-name="Beginner kitob #4 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner04.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #5 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner05.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>Goodbye, Mr Hollywood</h3>
+<p class="book-author"><strong>Muallif:</strong> John Escott</p>
+       <p class="book-description">
+        Nik ismli yigit mashhur aktyor bilan bog'liq kutilmagan voqealarga duch keladi. Hikoya sarguzasht va hazilni uyg'unlashtirib, o'qishni yanada qiziqarli qiladi. Beginner darajadagi o'quvchilar uchun sodda va tushunarli tilda yozilgan.
+       </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner05">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner05.pdf" data-pdf-name="Beginner kitob #5 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner05.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #6 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner06.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>The Elephant Man</h3>
+<p class="book-author"><strong>Muallif:</strong> Tim Vicary</p>
+       <p class="book-description">
+        Bu kitob hayotda chinakam insoniylik va mehrning qanchalik muhimligini ko'rsatadigan ta'sirli voqeaga asoslangan. Hikoya boshqalardan farq qiladigan insonning hayoti haqida so'zlaydi. Sodda til sababli beginner o'quvchilar uchun bemalol o'qish mumkin.
+       </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner06">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner06.pdf" data-pdf-name="Beginner kitob #6 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner06.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #7 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner07.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>Sherlock Holmes and the Sport of Kings stage</h3>
+<p class="book-author"><strong>Muallif:</strong> Sir Arthur Conan Doyle</p>
+        <p class="book-description">
+          Sherlock Holmes yana bir murakkab sirni yechishga kirishadi. Hikoya davomida o'quvchi detektiv fikrlash va voqealarni tahlil qilishni kuzatadi. Beginner darajadagi ingliz tili o'rganuvchilari uchun moslashtirilgan.
+        </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner07">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner07.pdf" data-pdf-name="Beginner kitob #7 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner07.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #8 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+         <img src="images/beginner08.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>Phantom of the Opera</h3>
+<p class="book-author"><strong>Muallif:</strong> Jennifer Bassett</p>
+        <p class="book-description">
+          Sirli niqobli odam va opera teatrida sodir bo'ladigan g'aroyib voqealar haqida mashhur hikoya. Kitob romantika va sirni birlashtirib, o'quvchini oxirigacha qiziqtirib turadi. Beginner o'quvchilar uchun soddalashtirilgan ingliz tilida yozilgan.
+        </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner08">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner08.pdf" data-pdf-name="Beginner kitob #8 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner08.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #9 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner09.jpg" alt="">
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>Girl Meets Boy</h3>
+<p class="book-author"><strong>Muallif:</strong> Derek Strange</p>
+       <p class="book-description">
+        Ikki yoshning tanishuvi va ular boshdan kechirgan voqealar haqida iliq hikoya. Kitob do'stlik, ishonch va kundalik hayot mavzularini yoritadi. Beginner darajasida ingliz tilini o'rganayotganlar uchun o'qishga qulay.
+       </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner09">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner09.pdf" data-pdf-name="Beginner kitob #9 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner09.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="beginner kitob #10 — nomi shu yerga">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/beginner10.jpg" alt="">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-beginner">Beginner daraja</span>
+        <h3>Last chance</h3>
+        <p class="book-author"><strong>Muallif:</strong> Phillip Burrows va Mark Foster</p>
+       <p class="book-description">
+        Hayotni o'zgartirib yuborishi mumkin bo'lgan so'nggi imkoniyat haqida qiziqarli hikoya. Voqealar tez rivojlanadi va o'quvchini oxirigacha qiziqtirib turadi. Sodda ingliz tili tufayli beginner darajadagi o'quvchilar uchun juda mos.
+       </p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="beginner10">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/beginner10.pdf" data-pdf-name="Beginner kitob #10 — nomi shu yerga"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/beginner10.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="book-empty" data-book-empty="beginner" hidden>Hech narsa topilmadi.</p>
+  </div>
+</div>
+
+<div class="book-modal" id="lugatModal" data-book-modal="lugat">
+  <div class="book-modal-backdrop" data-close-modal></div>
+  <div class="book-modal-inner">
+    <div class="book-modal-head">
+      <h2>Lug'at kitoblar</h2>
+      <button type="button" class="book-modal-close" data-close-modal aria-label="Yopish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="book-modal-tools">
+      <input type="search" class="book-search" placeholder="Kitob nomi bo'yicha qidirish…" data-book-search="lugat">
+      <div class="checklist-progress">
+        <div class="checklist-progress-bar"><div class="checklist-progress-fill" data-progress-fill="lugat"></div></div>
+        <span class="checklist-progress-label" data-progress-text="lugat">0 / 9 o'qildi</span>
+      </div>
+    </div>
+    <div class="cards cols-3 book-modal-grid" data-book-grid="lugat">
+      <div class="card reveal book-card" data-book-name="Destination A1">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat01.jpg" alt="">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>Destination A1</h3>
+        <p class="book-description">Grammatika va lug'at mavzulari daraja bo'yicha tuzilgan mashqlar to'plami. A1 darajasidagi o'quvchilarga asosiy grammatik qoidalarni tushunish va mustahkamlashda yordam beradi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat01">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-01.pdf" data-pdf-name="Destination A1"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-01.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="Destination A2">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat02.jpg" alt="">
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>Destination A2</h3>
+        <p class="book-description">A1 darajasidan keyingi bosqich — grammatik tuzilmalar va lug'at hajmi kengaytiriladi. Mashqlar orqali bilimlarni amaliyotda qo'llash ko'nikmasi shakllantiriladi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-02">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-02.pdf" data-pdf-name="Destination A2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-02.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="Destination B1">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat03.jpg" alt="Destination B1">
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>Destination B1</h3>
+        <p class="book-description">O'rta darajadagi grammatika va lug'at mavzularini chuqurroq o'zlashtirish uchun mo'ljallangan qo'llanma. IELTS va boshqa xalqaro imtihonlarga tayyorgarlik uchun foydali.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-03">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-03.pdf" data-pdf-name="Destination B1"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-03.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="4000 Essential Words 1">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat04.jpg" alt="4000 Essential Words 1">
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>4000 Essential Words 1</h3>
+        <p class="book-description">Eng ko'p ishlatiladigan inglizcha so'zlar to'plamining birinchi kitobi. Har bir so'z misollar va mashqlar bilan berilgan bo'lib, so'z boyligini bosqichma-bosqich oshirishga yordam beradi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-04">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-04.pdf" data-pdf-name="4000 Essential Words 1"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-04.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="4000 Essential Words 2">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat05.jpg" alt="">
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>4000 Essential Words 2</h3>
+        <p class="book-description">Seriyaning ikkinchi kitobi — oldingi bosqichda o'rganilgan so'zlar asosida yangi va murakkabroq so'zlar taqdim etiladi. Har kungi va akademik nutqda tez-tez uchraydigan lug'at qamrab olingan.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-05">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-05.pdf" data-pdf-name="4000 Essential Words 2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-05.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="4000 Essential Words 3">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+         <img src="images/lugat06.jpg" alt="">
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>4000 Essential Words 3</h3>
+        <p class="book-description">Seriyaning uchinchi kitobi o'rta darajadagi so'z boyligini kengaytirishga qaratilgan. Har bir bo'lim so'zlarni kontekst ichida qo'llashni o'rgatuvchi mashqlar bilan yakunlanadi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-06">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-06.pdf" data-pdf-name="4000 Essential Words 3"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-06.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="4000 Essential Words 4">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat07.jpg" alt="4000 Essential Words 4">
+          
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>4000 Essential Words 4</h3>
+        <p class="book-description">Yuqori-o'rta darajadagi so'zlar bilan tanishtiruvchi to'rtinchi kitob. Murakkabroq matnlarni tushunish va so'zlashuvda erkin foydalanish uchun zarur lug'atni taqdim etadi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-07">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-07.pdf" data-pdf-name="4000 Essential Words 4"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-07.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="4000 Essential Words 5">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat08.jpg" alt="4000 Essential Words 5">
+          
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>4000 Essential Words 5</h3>
+        <p class="book-description">Seriyaning beshinchi kitobi ilg'or darajadagi o'quvchilarga mo'ljallangan. Akademik va rasmiy nutqda ishlatiladigan so'zlar ustida ishlashga yordam beradi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-08">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-08.pdf" data-pdf-name="4000 Essential Words 5"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-08.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+      <div class="card reveal book-card" data-book-name="4000 Essential Words 6">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/lugat09.jpg" alt="4000 Essential Words 6">
+          
+        </div>
+        <span class="leg leg-lugat">Lug'at</span>
+        <h3>4000 Essential Words 6</h3>
+        <p class="book-description">Seriyaning yakuniy, oltinchi kitobi. Eng murakkab va kamdan-kam uchraydigan, ammo yuqori darajadagi matnlarda muhim o'rin tutuvchi so'zlarni o'z ichiga oladi.</p>
+        <label class="book-read-toggle">
+          <input type="checkbox" data-book-id="lugat-09">
+          <span>O'qidim deb belgilash</span>
+        </label>
+        <div class="book-actions">
+          <button type="button" class="btn-ghost-dark book-read-online" data-pdf-src="books/lugat-09.pdf" data-pdf-name="4000 Essential Words 6"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H11v16H4.5A1.5 1.5 0 0 1 3 18.5v-13Z"/><path d="M21 5.5c0-.8-.7-1.5-1.5-1.5H13v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg> Onlayn o'qish</button>
+          <a class="btn-ghost-dark book-download" href="books/lugat-09.pdf" download title="Yuklab olish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="book-empty" data-book-empty="lugat" hidden>Hech narsa topilmadi.</p>
+  </div>
+</div>
+
+<div class="book-modal" id="kelajakModal" data-book-modal="kelajak">
+  <div class="book-modal-backdrop" data-close-modal></div>
+  <div class="book-modal-inner">
+    <div class="book-modal-head">
+      <h2>Kelajak uchun</h2>
+      <button type="button" class="book-modal-close" data-close-modal aria-label="Yopish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <p class="section-desc" style="margin-bottom:22px">Bu bo'lim uchun 10 ta joy tayyorlab qo'yilgan — yangi kitoblar qo'shilishi bilan ular shu yerda paydo bo'ladi.</p>
+    <div class="cards cols-3 book-modal-grid">
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-01.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #1</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-02.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #2</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-03.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #3</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-04.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #4</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-05.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #5</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-06.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #6</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-07.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #7</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-08.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #8</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-09.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #9</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+      <div class="card reveal book-card book-card-soon">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-kelajak-10.jpg" alt="Yangi kitob tez orada">
+          <span class="ph-hint">400×600px, kitob muqovasi</span>
+        </div>
+        <span class="leg leg-soon">Joy #10</span>
+        <h3>Yangi kitob tez orada</h3>
+        <p>Bu joyga keyinchalik yangi kitob nomi, muqovasi va tavsifi qo'shiladi.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pdf-modal" id="pdfModal" data-pdf-modal>
+  <div class="book-modal-backdrop" data-close-pdf></div>
+  <div class="pdf-modal-inner">
+    <div class="book-modal-head">
+      <h2 data-pdf-title>Kitob</h2>
+      <div class="pdf-modal-actions">
+        <a class="btn-ghost-dark" data-pdf-download download><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> Yuklab olish</a>
+        <button type="button" class="book-modal-close" data-close-pdf aria-label="Yopish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+    </div>
+    <iframe data-pdf-frame src="" title="PDF o'quvchi" loading="lazy"></iframe>
+  </div>
+</div>
+
+<div class="perforation"></div>
+
+<section id="essay-books">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Yozish mahorati</span>
+      <h2 class="section-title">Insho va akademik yozuv uchun</h2>
+      <p class="section-desc">College essay va IELTS/TOEFL writing uchun eng ko'p tavsiya etiladigan kitoblar.</p>
+    </div>
+    <div class="cards cols-3">
+      <div class="card reveal">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/on-writing-well.jpg" alt="On Writing Well">
+        </div>
+        <span class="leg">Yozish uslubi</span>
+        <h3>On Writing Well</h3>
+        <p>William Zinsser. Aniq, ortiqcha so'zlarsiz yozishni o'rgatuvchi klassik qo'llanma — har qanday insho uchun foydali.</p>
+      </div>
+      <div class="card reveal">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+         <img src="images/they-say-i-say.jpg" alt="They Say / I Say">
+        </div>
+        <span class="leg">Argumentativ yozuv</span>
+        <h3>They Say / I Say</h3>
+        <p>Gerald Graff, Cathy Birkenstein. Akademik insholarda fikringizni tuzilgan tarzda bildirish uchun tayyor jumla qoliplari beradi.</p>
+      </div>
+      <div class="card reveal">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/50-successful-harvard-application-essays.jpg" alt="50 Successful Harvard Application Essays">
+        </div>
+        <span class="leg">Real namunalar</span>
+        <h3>50 Successful Harvard Application Essays</h3>
+        <p>Harvard Crimson tahririyati. Qabul qilingan talabalarning haqiqiy insholari — ohang va tuzilishni his qilish uchun.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="language-books">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Til boyligi</span>
+      <h2 class="section-title">Ingliz tilini rivojlantirish uchun</h2>
+      <p class="section-desc">So'z boyligi va o'qish tezligini oshiradigan kitoblar.</p>
+    </div>
+    <div class="cards cols-3">
+      <div class="card reveal">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/kitob-word-power.jpg" alt="">
+        </div>
+        <span class="leg">So'z boyligi</span>
+        <h3>Word Power Made Easy</h3>
+        <p>Norman Lewis. So'zlarni ildiz va kontekst orqali yodlash usuli — SAT/IELTS so'z boyligi uchun mashhur.</p>
+      </div>
+      <div class="card reveal">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+         <img src="images/atomic-habits.jpg" alt="">
+        </div>
+        <span class="leg">Odat va intizom</span>
+        <h3>Atomic Habits</h3>
+        <p>James Clear. Sodda ingliz tilida yozilgan, kundalik o'qish odatini shakllantirish uchun ham yaxshi mashq matni.</p>
+      </div>
+      <div class="card reveal">
+        <div class="img-placeholder ph-portrait">
+          <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+          <img src="images/grit.jpg" alt="">
+        </div>
+        <span class="leg">Sabot</span>
+        <h3>Grit</h3>
+        <p>Angela Duckworth. Uzoq muddatli maqsad sari intizom bilan borish haqida — insho mavzulariga ilhom uchun ham foydali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="cta-row">
+  <div class="wrap">
+    <div class="cards cols-3">
+      <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener" class="card">
+        <span class="leg">Telegram</span>
+        <h3>Kanalga qo'shiling</h3>
+        <p>Yangi kitob tavsiyalari va sharhlarni birinchi bo'lib ko'ring.</p>
+        <span class="read">Qo'shilish →</span>
+      </a>
+      <a href="lugat-va-iboralar.html" class="card">
+        <span class="leg">So'z boyligi</span>
+        <h3>Lug'at va iboralar</h3>
+        <p>Phrasal verbs, idiomalar va mavzuviy lug'at to'plami.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="ingliz-tili.html" class="card">
+        <span class="leg">Manbalar</span>
+        <h3>Ingliz tili sahifasi</h3>
+        <p>65+ bepul sayt, ilova va o'quv usuli — daraja bo'yicha guruhlangan.</p>
+        <span class="read">O'qish →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+        <p>FLEX dasturi, Harvard yo'li va akademik tayyorgarlik haqida amaliy kontent. Rasmiy ma'lumot uchun tegishli rasmiy saytlarga murojaat qiling.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <a href="harvard-yoli.html">Harvard yo'li</a>
+          <a href="flex.html">FLEX dasturi</a>
+          <a href="ingliz-tili.html">Ingliz tili</a>
+          <a href="lugat-va-iboralar.html">Lug'at va iboralar</a>
+          <a href="kitoblar.html">Kitoblar</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Boshqa</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="about.html">Kanal haqida</a>
+          <a href="ota-onalar.html">Ota-onalar uchun</a>
+          <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanal</a>
+        </div>
+      </div>
+      <div class="footer-cta">
+        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>t.me/MyHarvardPath &nbsp;||&nbsp; Muallif: Ilyos Ruzibekov &nbsp;||&nbsp; <a href="https://t.me/Ilyos_Ruzibekov" target="_blank" rel="noopener">t.me/Ilyos_Ruzibekov</a> &nbsp;||&nbsp; <a href="mailto:ilyosruzibekov@gmail.com">ilyosruzibekov@gmail.com</a></p>
+      <p>© 2026 MyHarvardPath</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mening profilim — MyHarvardPath</title>
+<meta name="description" content="Telegram orqali kiring va o'qigan kitoblaringiz, to'plangan XP va darajangizni kuzating.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html">FLEX</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html">Lug'at</a>
+            <a href="kitoblar.html">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html" class="active">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <span class="eyebrow">Shaxsiy kabinet</span>
+    <h1 class="subhero-title">Mening <em>profilim</em></h1>
+    <p class="subhero-sub">Telegram orqali kiring — o'qigan kitoblaringiz, XP va darajangiz shu yerda saqlanadi.</p>
+  </div>
+</section>
+
+<section id="profile-area">
+  <div class="wrap">
+
+    <div id="profileLoggedOut" class="profile-empty reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="profile-empty-icon"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+      <h2>Hali tizimga kirmadingiz</h2>
+      <p>Profilingizni ko'rish uchun Telegram orqali kiring. Yuqoridagi navigatsiyada Telegram tugmasi chiqadi — bosing va tasdiqlang.</p>
+      <div id="profileLoginWidget" class="profile-login-widget"></div>
+    </div>
+
+    <div id="profileLoggedIn" class="profile-card reveal" hidden>
+      <div class="profile-head">
+        <img id="pAvatar" class="profile-avatar" src="" alt="" hidden>
+        <div>
+          <h2 id="pName">—</h2>
+          <span class="profile-level-badge" id="pLevel">—</span>
+        </div>
+      </div>
+
+      <div class="profile-xp-block">
+        <div class="profile-xp-row">
+          <span id="pXpLabel">0 XP</span>
+          <span id="pNextLevel" class="muted-small"></span>
+        </div>
+        <div class="checklist-progress-bar"><div class="checklist-progress-fill" id="pXpFill"></div></div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <span class="profile-stat-num" id="pBooksRead">0</span>
+          <span class="profile-stat-lbl">Kitob o'qildi</span>
+        </div>
+        <div class="profile-stat">
+          <span class="profile-stat-num" id="pChecklistDone">0 / 8</span>
+          <span class="profile-stat-lbl">Ariza bosqichi</span>
+        </div>
+        <div class="profile-stat">
+          <span class="profile-stat-num" id="pJoined">—</span>
+          <span class="profile-stat-lbl">A'zo bo'lgan sana</span>
+        </div>
+      </div>
+
+      <p class="profile-note">Checklist progressi hozircha shu qurilmaning brauzerida (localStorage) saqlanadi. Kitoblar va XP esa Telegram hisobingizga bog'liq — qaysi qurilmadan kirsangiz ham ko'rinaveradi.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+        <p>FLEX dasturi, Harvard yo'li va akademik tayyorgarlik haqida amaliy kontent. Rasmiy ma'lumot uchun tegishli rasmiy saytlarga murojaat qiling.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <a href="harvard-yoli.html">Harvard yo'li</a>
+          <a href="flex.html">FLEX dasturi</a>
+          <a href="ingliz-tili.html">Ingliz tili</a>
+          <a href="lugat-va-iboralar.html">Lug'at va iboralar</a>
+          <a href="kitoblar.html">Kitoblar</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Boshqa</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="about.html">Kanal haqida</a>
+          <a href="ota-onalar.html">Ota-onalar uchun</a>
+          <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanal</a>
+        </div>
+      </div>
+      <div class="footer-cta">
+        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>t.me/MyHarvardPath &nbsp;||&nbsp; Muallif: Ilyos Ruzibekov &nbsp;||&nbsp; <a href="https://t.me/Ilyos_Ruzibekov" target="_blank" rel="noopener">t.me/Ilyos_Ruzibekov</a> &nbsp;||&nbsp; <a href="mailto:ilyosruzibekov@gmail.com">ilyosruzibekov@gmail.com</a></p>
+      <p>© 2026 MyHarvardPath</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+(function () {
+  const LEVELS = [
+    { min: 0,   name: "Yangi boshlovchi" },
+    { min: 20,  name: "Faol o'quvchi" },
+    { min: 60,  name: "Bilimdon" },
+    { min: 100, name: "Yulduz" },
+    { min: 150, name: "Harvard nomzodi" },
+  ];
+
+  function levelFor(xp) {
+    let current = LEVELS[0];
+    let next = null;
+    for (let i = 0; i < LEVELS.length; i++) {
+      if (xp >= LEVELS[i].min) current = LEVELS[i];
+      else { next = LEVELS[i]; break; }
+    }
+    return { current, next };
+  }
+
+  function checklistDone() {
+    try {
+      const state = JSON.parse(localStorage.getItem('myharvardpath-checklist') || '{}');
+      const total = document.querySelectorAll('#checklistItems input').length || 8;
+      const done = Object.values(state).filter(Boolean).length;
+      return { done, total };
+    } catch { return { done: 0, total: 8 }; }
+  }
+
+  function renderProfile(user) {
+    const loggedOut = document.getElementById('profileLoggedOut');
+    const loggedIn = document.getElementById('profileLoggedIn');
+
+    if (!user) {
+      loggedOut.hidden = false;
+      loggedIn.hidden = true;
+      return;
+    }
+    loggedOut.hidden = true;
+    loggedIn.hidden = false;
+
+    document.getElementById('pName').textContent = user.firstName || user.username || 'Foydalanuvchi';
+
+    const avatar = document.getElementById('pAvatar');
+    if (user.photoUrl) { avatar.src = user.photoUrl; avatar.hidden = false; }
+
+    const { current, next } = levelFor(user.xp);
+    document.getElementById('pLevel').textContent = current.name;
+    document.getElementById('pXpLabel').textContent = `${user.xp} XP`;
+
+    const fill = document.getElementById('pXpFill');
+    const nextLabel = document.getElementById('pNextLevel');
+    if (next) {
+      const span = next.min - current.min;
+      const progressed = user.xp - current.min;
+      fill.style.width = Math.min(100, Math.round((progressed / span) * 100)) + '%';
+      nextLabel.textContent = `Keyingi daraja: ${next.name} (${next.min} XP)`;
+    } else {
+      fill.style.width = '100%';
+      nextLabel.textContent = "Eng yuqori daraja!";
+    }
+
+    document.getElementById('pBooksRead').textContent = (user.readBooks || []).length;
+
+    const cl = checklistDone();
+    document.getElementById('pChecklistDone').textContent = `${cl.done} / ${cl.total}`;
+
+    if (user.joinedAt) {
+      const d = new Date(user.joinedAt);
+      document.getElementById('pJoined').textContent = d.toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+  }
+
+  document.addEventListener('mhp:user', (e) => renderProfile(e.detail.user));
+  if (window.currentUser !== undefined) renderProfile(window.currentUser);
+})();
+</script>
+</body>
+</html>

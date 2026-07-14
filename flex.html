@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLEX dasturi — MyHarvardPath</title>
+<meta name="description" content="FLEX dasturi: kimlar uchun, qanday bosqichlardan iborat, essay, ingliz tili testi va intervyuga qanday tayyorlanish kerak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group active-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html" class="active">FLEX</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html">Lug'at</a>
+            <a href="kitoblar.html">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / FLEX</div>
+    <span class="eyebrow">AQSh Davlat departamenti dasturi</span>
+    <h1 class="subhero-title">Garvardga yo'l <em>FLEX</em>'dan boshlanishi mumkin</h1>
+    <p class="subhero-sub">FLEX — hali maktabda o'qiyotgan o'quvchilar uchun AQShda bir yillik almashinuv dasturi. Bu Harvardga bevosita yo'l emas, lekin ingliz tili, mustaqillik va Amerika ta'lim tizimi bilan tanishish uchun kuchli poydevor.</p>
+  </div>
+</section>
+
+<section id="flex-countdown-section">
+  <div class="wrap">
+    <div class="flex-countdown" id="flexCountdown" data-deadline="TBD">
+      <span class="flex-countdown-label">Ariza muddati</span>
+      <div class="flex-countdown-nums"></div>
+    </div>
+  </div>
+</section>
+
+<section id="about-flex">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="lead">FLEX — bepul, to'liq grant asosidagi dastur bo'lib, 9–10-sinf o'quvchilarini bir yilga AQShga, host family (mezbon oila) yoniga yuboradi.</p>
+        <p>Dastur uchta asosiy bosqichdan iborat: onlayn ariza va essaylar, ingliz tili testi, va yakuniy intervyu bilan yarim final. Har bir bosqich avvalgisidan qiyinroq, lekin tayyorgarlik bilan yengib bo'ladi.</p>
+        <figure class="img-block" style="max-width:340px;">
+          <div class="img-placeholder ph-4x3" style="max-width:340px;">
+            <svg class="ph-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
+            <img src="images/flex-ishtirokchilari.jpg" alt="">
+          </div>
+        </figure>
+      </div>
+      <div class="ticket-stats reveal">
+        <div class="ticket-stat"><span class="k">Dastur davomiyligi</span><span class="v">1 yil</span></div>
+        <div class="ticket-stat"><span class="k">Tanlov bosqichlari</span><span class="v">3 ta</span></div>
+        <div class="ticket-stat"><span class="k">Essay savollari</span><span class="v">3 ta</span></div>
+        <div class="ticket-stat"><span class="k">Xarajat qoplanadi</span><span class="v">Deyarli 100%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="articles">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Yo'l xaritasi</span>
+      <h2 class="section-title">Tayyorgarlikning 3 bosqichi</h2>
+      <p class="section-desc">FLEX tanlovi qanday tartibda o'tishini va har bir bosqichga qanday tayyorlanishni ko'rsatib beramiz.</p>
+    </div>
+    <div class="cards">
+      <a href="#leg-1" class="card reveal">
+        <span class="leg">Leg 1 / 3</span>
+        <h3>Essay yozish</h3>
+        <p>Fikrlash va shaxsiy tajribangizni kuchli essayga aylantirish uchun 5 ta qoida va namuna parcha.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="#leg-2" class="card reveal">
+        <span class="leg">Leg 2 / 3</span>
+        <h3>Ingliz tili</h3>
+        <p>FLEX testiga tayyorgarlik uchun asosiy yo'nalishlar — to'liq resurs ro'yxati alohida sahifada.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="#leg-3" class="card reveal">
+        <span class="leg">Leg 3 / 3</span>
+        <h3>Intervyu</h3>
+        <p>Eng ko'p so'raladigan 4 ta savol va ularga qanday ishonchli javob berish kerakligi.</p>
+        <span class="read">O'qish →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="article-detail">
+
+  <div class="article-block" id="leg-1">
+    <div class="wrap">
+      <div class="article-head reveal">
+        <span class="leg-tag">Leg 1 / 3</span>
+        <h3>Essay yozish bo'yicha maslahatlar</h3>
+      </div>
+      <div class="article-body reveal">
+        <p>Ko'pchilik FLEX arizasida eng qiyin qism — essaylar deb o'ylaydi. Aslida bu yerda mukammal ingliz tili emas, siz kim ekanligingiz muhim.</p>
+        <ul class="rule-list">
+          <li><span class="num">01</span><span><strong>Aniq voqea tanlang.</strong> "Men mehnatsevarman" deyish o'rniga, buni isbotlaydigan bitta real voqeani hikoya qiling.</span></li>
+          <li><span class="num">02</span><span><strong>"Men" bilan boshlang, natija bilan tugating.</strong> Nima qildingiz, nima o'rgandingiz, bugun buni qanday qo'llayapsiz.</span></li>
+          <li><span class="num">03</span><span><strong>Muammo → Harakat → Natija</strong> formulasidan foydalaning.</span></li>
+          <li><span class="num">04</span><span><strong>Kichik detallar katta ta'sir qiladi.</strong> Aniq raqamlar va o'rinlarni ayting.</span></li>
+          <li><span class="num">05</span><span><strong>Qayta o'qing va qisqartiring.</strong> Har bir gap kerak bo'lsin.</span></li>
+        </ul>
+        <div class="quote-block">
+          "Birinchi marta robot yig'ganimda, u ishlamadi. Ikkinchi marta ham. Uchinchi marta motorni teskari ulaganimni tushundim — va aynan shu xato menga muhandislik nima ekanini o'rgatdi."
+        </div>
+        <p>Bunday parcha nima uchun ishlaydi? Chunki u his-tuyg'u, aniq voqea va xulosani birlashtiradi.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-block" id="leg-2">
+    <div class="wrap">
+      <div class="article-head reveal">
+        <span class="leg-tag">Leg 2 / 3</span>
+        <h3>Ingliz tili tayyorgarligi</h3>
+      </div>
+      <div class="article-body reveal">
+        <p>FLEX intervyu va testida ingliz tili muhim rol o'ynaydi. Asosiy yo'nalishlar to'rtta: tinglash, gapirish, o'qish va yozish — har birini muntazam mashq qilish kerak.</p>
+        <div class="tip-row">
+          <span class="tip-chip">Kundalik 20–30 daqiqa</span>
+          <span class="tip-chip">Ona tili bo'lgan odam bilan suhbat</span>
+          <span class="tip-chip">Subtitr bilan tinglash</span>
+        </div>
+        <p style="margin-top:18px"><strong>To'liq bepul resurslar ro'yxati</strong> (ilovalar, podkastlar, o'qish va gapirish uchun saytlar) alohida sahifada joylashtirilgan:</p>
+        <p><a href="ingliz-tili.html" class="btn-primary" style="display:inline-flex">Ingliz tili resurslarini ko'rish →</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-block" id="leg-3">
+    <div class="wrap">
+      <div class="article-head reveal">
+        <span class="leg-tag">Leg 3 / 3</span>
+        <h3>Intervyu savollariga tayyorgarlik</h3>
+      </div>
+      <div class="article-body reveal">
+        <p>Intervyu — oddiy suhbat. Ular mukammal ingliz tilini emas, fikrlash tarzingiz va moslashuvchanligingizni ko'rishni xohlashadi.</p>
+        <div class="qa-item">
+          <div class="q">Tell me about yourself.</div>
+          <div class="a">Qisqa, aniq va o'ziga xos javob bering — 2–3 ta muhim jihatni ayting.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">Why do you want to join FLEX?</div>
+          <div class="a">Umumiy javoblardan qoching. Shaxsiy sababingizni ayting.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">What will be difficult for you in America?</div>
+          <div class="a">Halol javob bering, lekin qanday yengishni ham qo'shing.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">How do you solve conflicts?</div>
+          <div class="a">Aniq bir misol bilan tushuntiring — muammoni qanday tahlil qilganingiz va yechim topganingiz.</div>
+        </div>
+        <div class="tip-row">
+          <span class="tip-chip">Javoblarni yodlab olmang</span>
+          <span class="tip-chip">Tabiiy gapiring</span>
+          <span class="tip-chip">"Bilmayman" deyishdan qo'rqmang</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="perforation"></div>
+
+<section id="next">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Keyingi qadam</span>
+      <h2 class="section-title">FLEX'dan keyin nima?</h2>
+    </div>
+    <div class="cards">
+      <a href="harvard-yoli.html" class="card reveal">
+        <span class="leg">To'liq yo'l</span>
+        <h3>Harvard yo'li</h3>
+        <p>FLEX tugagach yoki undan mustaqil ravishda — Harvardga bevosita ariza topshirish yo'l xaritasi.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="ingliz-tili.html" class="card reveal">
+        <span class="leg">Resurslar</span>
+        <h3>Ingliz tili</h3>
+        <p>Test va intervyu uchun ingliz tilingizni bepul resurslar orqali mustahkamlang.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="faq.html" class="card reveal">
+        <span class="leg">Savollar</span>
+        <h3>FAQ</h3>
+        <p>FLEX bo'yicha eng ko'p beriladigan savollarga javoblar.</p>
+        <span class="read">O'qish →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+        <p>FLEX dasturi, Harvard yo'li va akademik tayyorgarlik haqida amaliy kontent. Rasmiy ma'lumot uchun discoverflex.org saytiga murojaat qiling.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <a href="harvard-yoli.html">Harvard yo'li</a>
+          <a href="flex.html">FLEX dasturi</a>
+          <a href="ingliz-tili.html">Ingliz tili</a>
+          <a href="lugat-va-iboralar.html">Lug'at va iboralar</a>
+          <a href="kitoblar.html">Kitoblar</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Boshqa</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="about.html">Kanal haqida</a>
+          <a href="ota-onalar.html">Ota-onalar uchun</a>
+          <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanal</a>
+        </div>
+      </div>
+      <div class="footer-cta">
+        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>t.me/MyHarvardPath &nbsp;||&nbsp; Muallif: Ilyos Ruzibekov &nbsp;||&nbsp; <a href="https://t.me/Ilyos_Ruzibekov" target="_blank" rel="noopener">t.me/Ilyos_Ruzibekov</a> &nbsp;||&nbsp; <a href="mailto:ilyosruzibekov@gmail.com">ilyosruzibekov@gmail.com</a></p>
+      <p>© 2026 MyHarvardPath</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
