@@ -49,7 +49,24 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
-// Scroll reveal
+// Scroll reveal — panjara (grid) ichidagi kartalarga ustuniga qarab turli
+// yo'nalish beriladi (chap/o'ng/ichdan), panjaradan tashqarisi pastdan chiqadi.
+document.querySelectorAll('.cards').forEach(grid => {
+  const colsClass = [...grid.classList].find(c => /^cols-\d+$/.test(c));
+  const numCols = colsClass ? parseInt(colsClass.split('-')[1], 10) : 3;
+  const items = grid.querySelectorAll(':scope > .reveal');
+  items.forEach((el, i) => {
+    const col = i % numCols;
+    if (numCols >= 3) {
+      if (col === 0) el.classList.add('reveal-left');
+      else if (col === numCols - 1) el.classList.add('reveal-right');
+      else el.classList.add('reveal-scale');
+    } else if (numCols === 2) {
+      el.classList.add(col === 0 ? 'reveal-left' : 'reveal-right');
+    }
+  });
+});
+
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
