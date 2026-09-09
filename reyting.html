@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reyting — MyHarvardPath</title>
+<meta name="description" content="Telegram botdagi viktorinalarga javob berib ball to'plagan eng faol o'quvchilar reytingi — jonli yangilanadi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .lb-list { display: flex; flex-direction: column; gap: 10px; max-width: 640px; }
+  .lb-row {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--surface); border: 1px solid rgba(27,42,74,0.08);
+    border-radius: 16px; padding: 16px 20px;
+    box-shadow: 0 1px 2px rgba(27,42,74,0.04), 0 6px 16px rgba(27,42,74,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .lb-row:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(27,42,74,0.06), 0 20px 36px rgba(27,42,74,0.12); }
+  .lb-rank {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
+    background: rgba(27,42,74,0.06); color: var(--ink);
+  }
+  .lb-rank.gold { background: #C89B3C; color: #fff; }
+  .lb-rank.silver { background: #9AA0A6; color: #fff; }
+  .lb-rank.bronze { background: #B06A3A; color: #fff; }
+  .lb-avatar {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+    background: rgba(165,28,48,0.1); color: var(--stamp-red);
+  }
+  .lb-name { flex: 1; font-weight: 600; font-size: 1.02rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lb-points { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--teal); white-space: nowrap; }
+  .lb-status { color: var(--muted); padding: 40px 0; text-align: center; }
+  .lb-cta {
+    margin-top: 40px; padding: 32px; border-radius: 20px;
+    background: var(--navy); color: var(--cream-text);
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .lb-cta h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 6px; }
+  .lb-cta p { color: rgba(243,239,227,0.75); max-width: 380px; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html">FLEX</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html">Lug'at</a>
+            <a href="kitoblar.html">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group active-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="reyting.html" class="active">Reyting</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Reyting</div>
+    <span class="eyebrow">Jonli reyting · Telegram bot orqali</span>
+    <h1 class="subhero-title">Kim ko'proq <em>ball</em> to'plagan?</h1>
+    <p class="subhero-sub">Kanaldagi kunlik viktorinalarga to'g'ri javob bering, ball to'plang va shu yerda — jonli reytingda — o'z o'rningizni ko'ring.</p>
+  </div>
+</section>
+
+<section id="leaderboard">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">TOP 20</span>
+      <h2 class="section-title">Eng faol o'quvchilar</h2>
+      <p class="section-desc">Ro'yxat @MHP_adminbot orqali to'plangan real ballar asosida, avtomatik yangilanadi.</p>
+    </div>
+
+    <div id="lbStatus" class="lb-status">Yuklanmoqda...</div>
+    <div id="lbList" class="lb-list reveal"></div>
+
+    <div class="lb-cta reveal">
+      <div>
+        <h3>Siz ham reytingga qo'shiling</h3>
+        <p>Botga o'ting, /fact yozib fakt oling yoki kanaldagi viktorinaga javob bering — har to'g'ri javob ball beradi.</p>
+      </div>
+      <a class="btn-primary" href="https://t.me/MHP_adminbot" target="_blank" rel="noopener">Botni ochish →</a>
+    </div>
+  </div>
+</section>
+
+<script src="main.js"></script>
+<script>
+(function loadLeaderboard() {
+  const statusEl = document.getElementById('lbStatus');
+  const listEl = document.getElementById('lbList');
+  const API_URL = 'https://harvard-path-admin-bot.ilyosbek41624.workers.dev/api/leaderboard';
+
+  fetch(API_URL)
+    .then((res) => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then((data) => {
+      const rows = data.leaderboard || [];
+      if (rows.length === 0) {
+        statusEl.textContent = "Hali hech kim ball to'plamagan. Birinchi bo'ling!";
+        return;
+      }
+      statusEl.style.display = 'none';
+      const rankClass = ['gold', 'silver', 'bronze'];
+      listEl.innerHTML = rows.map((u, i) => {
+        const name = u.username ? '@' + u.username : (u.first_name || 'Foydalanuvchi');
+        const initial = (u.first_name || u.username || '?').trim().charAt(0).toUpperCase();
+        const rc = rankClass[i] || '';
+        return '<div class="lb-row">' +
+          '<span class="lb-rank ' + rc + '">' + (i + 1) + '</span>' +
+          '<span class="lb-avatar">' + initial + '</span>' +
+          '<span class="lb-name">' + escapeHtml(name) + '</span>' +
+          '<span class="lb-points">' + u.points + ' ball</span></div>';
+      }).join('');
+    })
+    .catch(() => {
+      statusEl.textContent = "Reytingni yuklab bo'lmadi. Birozdan so'ng qayta urinib ko'ring.";
+    });
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+})();
+</script>
+
+</body>
+</html>
