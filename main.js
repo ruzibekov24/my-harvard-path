@@ -64,6 +64,8 @@ document.querySelectorAll('.cards').forEach(grid => {
     } else if (numCols === 2) {
       el.classList.add(col === 0 ? 'reveal-left' : 'reveal-right');
     }
+    // Ketma-ket (stagger) kechikish — kartalar birma-bir, kinematik chiqadi
+    el.style.transitionDelay = `${col * 90}ms`;
   });
 });
 
