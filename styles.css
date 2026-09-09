@@ -17,7 +17,7 @@
   --surface: #ffffff;
   --surface-border: rgba(27,42,74,0.1);
   --nav-bg: rgba(239, 234, 216, 0.9);
-  --font-display: 'Fraunces', serif;
+  --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 }
@@ -164,7 +164,7 @@ h1.subhero-title {
   letter-spacing: -0.025em;
   margin-bottom: 18px;
 }
-h1.subhero-title em { font-style: italic; font-weight: 500; color: var(--gold); }
+h1.subhero-title em { font-style: normal; font-weight: 700; color: var(--gold); }
 .subhero-sub { font-size: 1.12rem; line-height: 1.6; color: rgba(243,239,227,0.78); max-width: 580px; }
 
 /* ---------- HERO (home page) ---------- */
@@ -213,7 +213,7 @@ h1.hero-title {
   letter-spacing: -0.03em;
   margin-bottom: 26px;
 }
-h1.hero-title em { font-style: italic; font-weight: 500; color: var(--gold); }
+h1.hero-title em { font-style: normal; font-weight: 700; color: var(--gold); }
 .hero-sub { font-size: 1.18rem; line-height: 1.6; color: rgba(243,239,227,0.78); max-width: 480px; margin-bottom: 38px; }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 .btn-primary {
@@ -504,11 +504,12 @@ h2.section-title {
 .rule-list li { list-style: none; display: flex; gap: 14px; align-items: flex-start; }
 .rule-list .num { font-family: var(--font-mono); color: var(--gold); font-size: 0.85rem; min-width: 22px; }
 .quote-block {
-  border-left: 2px solid var(--gold);
+  border-left: 3px solid var(--gold);
   padding: 6px 0 6px 22px;
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.08rem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.12rem;
   color: var(--cream-text);
   margin: 24px 0;
   max-width: 640px;
