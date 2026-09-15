@@ -44,8 +44,27 @@
     if (running) requestAnimationFrame(frame);
   }
 
+  /* Ichida o'z scroll'i bor element (modal, uzun ro'yxat, dropdown) ustida
+     turgan bo'lsak — sahifani emas, o'sha elementni aylantirish kerak.
+     Kursor tagidagi zanjirni tekshiramiz: shu yo'nalishda joyi qolgan
+     birinchi scrollable topilsa, brauzerga o'zi bajarsin deb qo'yib beramiz. */
+  function scrollableUnder(node, dy) {
+    for (let el = node; el && el !== document.body && el !== document.documentElement; el = el.parentElement) {
+      if (!(el instanceof Element)) continue;
+      const room = el.scrollHeight - el.clientHeight;
+      if (room <= 1) continue;
+      const oy = getComputedStyle(el).overflowY;
+      if (oy !== 'auto' && oy !== 'scroll') continue;
+      const atTop = el.scrollTop <= 0;
+      const atBottom = el.scrollTop >= room - 1;
+      if ((dy < 0 && !atTop) || (dy > 0 && !atBottom)) return true;
+    }
+    return false;
+  }
+
   window.addEventListener('wheel', (e) => {
     if (e.ctrlKey) return; // zoom — tegmaymiz
+    if (scrollableUnder(e.target, e.deltaY)) return;
     e.preventDefault();
     target = Math.min(max(), Math.max(0, target + e.deltaY));
     if (!running) { running = true; requestAnimationFrame(frame); }

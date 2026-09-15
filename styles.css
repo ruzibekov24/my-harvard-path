@@ -13,7 +13,8 @@
   --ink: #16181D;           /* body text */
   --gold: #9A7B2F;          /* demoted: rare highlight only */
   --teal: #9A7B2F;          /* retired — aliased so old rules don't go stray */
-  --stamp-red: #A51C30;     /* THE accent (Harvard Crimson) */
+  --stamp-red: #A51C30;      /* THE accent (Harvard Crimson) */
+  --stamp-red-fill: #A51C30; /* to'ldirish uchun; qorong'u temada ajratiladi */
   --cream-text: #F2F0EA;
   --muted: #6E7075;         /* neutral grey, not warm brown */
   --surface: #FFFFFF;
@@ -66,7 +67,7 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 
-::selection { background: var(--stamp-red); color: #fff; }
+::selection { background: var(--stamp-red-fill); color: #fff; }
 
 :focus-visible { outline: 2px solid var(--stamp-red); outline-offset: 3px; }
 
@@ -111,7 +112,11 @@ header.nav {
   flex-shrink: 0;
 }
 .logo .dot { color: var(--stamp-red); }
-nav.links { display: flex; gap: 28px; align-items: center; flex-wrap: nowrap; }
+nav.links { display: flex; gap: 26px; align-items: center; flex-wrap: nowrap; }
+/* Menyu uch bo'lakdan iborat: bo'limlar → Profil → Telegram tugmasi.
+   Har bo'lak orasida kattaroq nafas joyi, aks holda hammasi bir tizmaday
+   qisilib turadi. */
+nav.links .nav-group + a { margin-left: 18px; }
 nav.links a {
   font-family: var(--font-mono);
   font-size: 0.74rem;
@@ -121,8 +126,8 @@ nav.links a {
   transition: color 0.2s;
   white-space: nowrap;
 }
-/* "Telegram →" tugmasi menyuning bir qismi emas — undan oldin nafas joyi */
-nav.links .nav-cta { margin-left: 8px; }
+/* "Telegram →" tugmasi menyuning bir qismi emas — undan oldin keng ajratish */
+nav.links .nav-cta { margin-left: 40px; }
 nav.links a:hover, nav.links a.active { color: var(--stamp-red); }
 .nav-cta {
   background: var(--navy);
@@ -132,7 +137,7 @@ nav.links a:hover, nav.links a.active { color: var(--stamp-red); }
   font-weight: 600 !important;
   transition: background 0.18s ease;
 }
-.nav-cta:hover { background: var(--stamp-red); }
+.nav-cta:hover { background: var(--stamp-red-fill); }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.3rem; }
 
 /* ---------- NAV dropdown groups ---------- */
@@ -224,9 +229,9 @@ h1.subhero-title em { font-style: normal; color: var(--stamp-red); }
   padding: 0 32px;
   position: relative;
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 56px;
-  align-items: start;   /* chipta pastga tushib ketmasin — matn bilan bir sathda boshlansin */
+  grid-template-columns: 1fr 0.92fr;   /* chiptaga kengroq ustun — rasm kattaroq chiqadi */
+  gap: 44px;
+  align-items: start;
 }
 .eyebrow {
   font-family: var(--font-mono);
@@ -264,7 +269,7 @@ h1.hero-title em { font-style: normal; color: var(--stamp-red); }
 
 /* Buttons: squared and quiet. No pills, no glow, no scale. */
 .btn-primary {
-  background: var(--stamp-red);
+  background: var(--stamp-red-fill);
   color: #fff;
   font-weight: 600;
   padding: 14px 26px;
@@ -305,13 +310,16 @@ h1.hero-title em { font-style: normal; color: var(--stamp-red); }
 /* Saytning imzo obyekti — faqat bosh sahifada, bir marta.
    Chiptaning o'zi (ramka, yozuvlar, gravyura) endi bitta rasm, shuning uchun
    bu yerda faqat joylashuv va yengil soya qoladi. */
-.pass { position: relative; display: block; }
+/* Chipta sarlavha bilan bir sathda emas, sal pastroqda — matn blokining
+   o'rtasiga to'g'ri kelsin. */
+.pass { position: relative; display: block; margin-top: clamp(24px, 4.5vw, 62px); }
 .pass img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 4px;
-  box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+  /* Burchaklari rasmning o'zida shaffof qilingan, shuning uchun box-shadow
+     emas — u to'rtburchakni chizadi; drop-shadow alfa konturga ergashadi. */
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.34));
 }
 .pass-main { flex: 1; padding: 26px 22px; }
 .pass-stub {
@@ -1017,7 +1025,7 @@ footer { background: var(--navy); color: var(--cream-text); padding: 70px 0 32px
 .mode-tab.active { background: var(--navy); color: var(--cream-text); border-color: var(--navy); }
 .vocab-pane[hidden] { display: none; }
 .chip-alt { border-style: dashed; }
-.chip-alt.active { background: var(--stamp-red); border-color: var(--stamp-red); color: #fff; }
+.chip-alt.active { background: var(--stamp-red-fill); border-color: var(--stamp-red-fill); color: #fff; }
 
 /* ---------- FLASHCARD MARK BUTTONS ---------- */
 .flash-mark-row { display: flex; gap: 10px; margin-top: 6px; }
@@ -1098,6 +1106,8 @@ footer { background: var(--navy); color: var(--cream-text); padding: 70px 0 32px
 @media (max-width: 900px) {
   nav.links { gap: 14px; }
   nav.links a:not(.nav-cta) { font-size: 0.68rem; }
+  nav.links .nav-group + a { margin-left: 8px; }
+  nav.links .nav-cta { margin-left: 16px; }
 }
 @media (max-width: 860px) {
   .hero-inner { grid-template-columns: 1fr; }
@@ -1195,7 +1205,7 @@ footer { background: var(--navy); color: var(--cream-text); padding: 70px 0 32px
   background: var(--surface); cursor: pointer; font-size: 1rem; color: var(--ink); flex-shrink: 0;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
-.book-modal-close:hover { background: var(--stamp-red); color: #fff; border-color: var(--stamp-red); }
+.book-modal-close:hover { background: var(--stamp-red-fill); color: #fff; border-color: var(--stamp-red-fill); }
 .book-modal-tools { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 22px; }
 .book-search {
   flex: 1 1 220px; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(27,42,74,0.18);
@@ -1251,7 +1261,13 @@ html[data-theme="dark"] {
   --nav-bg: rgba(18, 19, 22, 0.88);
   --gold: #C9A961;
   --teal: #C9A961;
-  --stamp-red: #E8616F;   /* qorong'u fonda o'qilishi uchun yorug'roq qirmizi */
+  /* Avvalgi #E8616F to'yinganligi past edi (0.58) — shuning uchun pushti
+     ko'rinardi. Bu rang yorqinroq, ammo qirmizi bo'lib qoladi (to'yinganlik
+     0.71, fonga nisbatan kontrast 4.7:1). */
+  --stamp-red: #E8434F;
+  /* To'ldirilgan tugma/nishonlar uchun quyuqroq qirmizi: yorug' rang katta
+     maydonda pushti dog'day ko'rinadi; oq matn bilan kontrast 5.8:1. */
+  --stamp-red-fill: #C42133;
 }
 html[data-theme="dark"] .uni-item:hover:not(:disabled) { background: rgba(237,235,230,0.05); }
 html[data-theme="dark"] ::selection { color: #14161C; }
@@ -1274,7 +1290,7 @@ html[data-theme="dark"] .book-search {
   border-color: var(--surface-border);
 }
 html[data-theme="dark"] .chip.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
-html[data-theme="dark"] .chip-alt.active { background: var(--stamp-red); color: var(--navy); border-color: var(--stamp-red); }
+html[data-theme="dark"] .chip-alt.active { background: var(--stamp-red-fill); color: #fff; border-color: var(--stamp-red-fill); }
 html[data-theme="dark"] .leg-lugat { color: var(--stamp-red) !important; }
 html[data-theme="dark"] .checklist-progress-bar { background: rgba(233,228,212,0.12); }
 html[data-theme="dark"] nav.links a { color: rgba(233,228,212,0.8); }
@@ -1639,15 +1655,17 @@ table.compare tbody th {
   transition: border-color 0.18s ease;
 }
 .qr-card:hover { border-color: var(--stamp-red); }
+/* Filtr qo'yilmaydi: brightness(0) QR'ning oq fonini ham qoraytirib,
+   butun kvadratni qop-qora qilib qo'yardi. QR kod skanerlanishi uchun
+   qora-oq qolishi ham eng ishonchlisi — ikkala temada ham oq fonda. */
 .qr-card img {
   width: 116px;
   height: 116px;
   flex: none;
-  /* QR qora emas, saytning siyoh rangida chiqsin */
-  filter: brightness(0) saturate(100%);
-  opacity: 0.9;
+  background: #fff;
+  padding: 6px;
+  border-radius: 2px;
 }
-html[data-theme="dark"] .qr-card img { filter: brightness(0) invert(1); }
 .qr-card-text { display: grid; gap: 4px; }
 .qr-card-label {
   font-family: var(--font-mono);
