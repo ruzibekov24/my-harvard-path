@@ -44,7 +44,14 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Havola bosilganda brauzerning o'z silliq scroll'i; g'ildirak bilan
+   aylantirishda esa main.js'dagi inertial scroll ishlaydi. */
 html { scroll-behavior: smooth; }
+
+/* O'ng chetdagi scroll chizig'i yashiriladi (sayt ko'rinishi uchun).
+   Scroll g'ildirak, klaviatura va sensor bilan odatdagidek ishlayveradi. */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar { width: 0; height: 0; display: none; }
 
 body {
   font-family: var(--font-body);
@@ -78,15 +85,20 @@ header.nav {
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(27,42,74,0.12);
 }
+/* Uch zona: logo | menyu | foydalanuvchi va sozlamalar.
+   Avval hammasi space-between bilan yoyilib, aralashib ketgan edi. */
 .nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px 28px;
-  max-width: 1180px;
+  justify-content: flex-start;
+  padding: 16px 32px;
+  max-width: 1280px;
   margin: 0 auto;
-  gap: 20px;
+  gap: 0;
 }
+.nav-inner > .logo { margin-right: 44px; }
+/* Menyudan keyingi hamma narsa (mavzu tugmasi, profil) o'ng chetga suriladi */
+.nav-inner > .theme-toggle { margin-left: auto; }
 .logo {
   font-family: var(--font-display);
   font-weight: 700;
@@ -99,16 +111,18 @@ header.nav {
   flex-shrink: 0;
 }
 .logo .dot { color: var(--stamp-red); }
-nav.links { display: flex; gap: 22px; align-items: center; flex-wrap: nowrap; }
+nav.links { display: flex; gap: 28px; align-items: center; flex-wrap: nowrap; }
 nav.links a {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.03em;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
   transition: color 0.2s;
   white-space: nowrap;
 }
+/* "Telegram →" tugmasi menyuning bir qismi emas — undan oldin nafas joyi */
+nav.links .nav-cta { margin-left: 8px; }
 nav.links a:hover, nav.links a.active { color: var(--stamp-red); }
 .nav-cta {
   background: var(--navy);
@@ -289,15 +303,15 @@ h1.hero-title em { font-style: normal; color: var(--stamp-red); }
 
 /* ---------- BOARDING PASS ---------- */
 /* Saytning imzo obyekti — faqat bosh sahifada, bir marta.
-   Uch qavatli soya va hover ko'tarilishi olib tashlandi: chipta interaktiv
-   emas, shuning uchun tekis va aniq turadi. */
-.pass {
-  background: var(--paper);
-  color: var(--ink);
-  border-radius: 6px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
-  position: relative;
-  display: flex;
+   Chiptaning o'zi (ramka, yozuvlar, gravyura) endi bitta rasm, shuning uchun
+   bu yerda faqat joylashuv va yengil soya qoladi. */
+.pass { position: relative; display: block; }
+.pass img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.3);
 }
 .pass-main { flex: 1; padding: 26px 22px; }
 .pass-stub {
@@ -1328,14 +1342,23 @@ html[data-theme="dark"] .theme-toggle:hover { color: var(--stamp-red); backgroun
 .wod-copy:hover { background: rgba(255,255,255,0.12); }
 
 /* ---------- Telegram login bloki ---------- */
-.tg-auth-wrap { display: flex; align-items: center; margin-left: 10px; }
-.tg-user-box {
-  display: flex; align-items: center; gap: 8px; background: rgba(27,42,74,0.06);
-  border-radius: 20px; padding: 4px 12px 4px 4px; font-family: var(--font-body); font-size: 0.85rem;
+/* Foydalanuvchi bloki — menyudan ingichka chiziq bilan ajratilgan alohida zona */
+.tg-auth-wrap {
+  display: flex; align-items: center;
+  margin-left: 6px; padding-left: 16px;
+  border-left: 1px solid var(--rule);
 }
-.tg-user-avatar { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+.tg-user-box {
+  display: flex; align-items: center; gap: 9px; background: none;
+  border-radius: 3px; padding: 3px 4px; font-family: var(--font-body); font-size: 0.85rem;
+}
+.tg-user-avatar { width: 26px; height: 26px; border-radius: 3px; object-fit: cover; }
 .tg-user-name { font-weight: 600; color: var(--ink); }
-.tg-user-xp { font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold); }
+.tg-user-xp {
+  font-family: var(--font-mono); font-size: var(--step-meta); letter-spacing: 0.06em;
+  color: var(--stamp-red); display: inline-flex; align-items: center; gap: 4px;
+}
+.tg-user-xp .icon { width: 12px; height: 12px; }
 .tg-logout {
   background: none; border: none; cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 2px 4px;
 }

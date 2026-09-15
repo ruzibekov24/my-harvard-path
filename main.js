@@ -1,3 +1,64 @@
+/* ---------- Silliq (inertial) scroll ----------
+   Brauzerning o'z scroll'i qattiq va sakrab tushadi. Bu yerda haqiqiy scroll
+   pozitsiyasiga har kadrda asta-sekin yaqinlashamiz (lerp), natijada tez
+   aylantirilganda ham sahifa yumshoq to'xtaydi.
+
+   Kutubxona ishlatilmadi — 30 qator kod kifoya. Klaviatura, sensor va
+   "reduced motion" sozlamasi hurmat qilinadi. */
+(function smoothScroll() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarse = window.matchMedia('(pointer: coarse)').matches; // telefon/planshet
+  if (reduced || coarse) return; // sensorli ekranda tizimning o'z inertiyasi bor
+
+  let target = window.scrollY;
+  let current = target;
+  let running = false;
+  let lastSet = current; // biz o'rnatgan oxirgi pozitsiya
+
+  function max() {
+    return document.documentElement.scrollHeight - window.innerHeight;
+  }
+
+  function frame() {
+    if (!running) return;
+
+    /* Tashqi scroll (havola, scrollTo, klaviatura, scrollIntoView) ustun:
+       o'tgan kadrda biz qo'ygan joydan siljigan bo'lsa, boshqa kimdir
+       ko'chirgan — animatsiyani to'xtatamiz. Tekshiruv kadr ichida, chunki
+       scroll hodisasi kechikib kelib yolg'on signal berardi. */
+    if (Math.abs(window.scrollY - lastSet) > 3) {
+      running = false;
+      current = target = lastSet = window.scrollY;
+      return;
+    }
+
+    current += (target - current) * 0.12;
+    if (Math.abs(target - current) < 0.4) {
+      current = target;
+      running = false;
+    }
+    // 'instant' shart: CSS'dagi scroll-behavior: smooth bo'lmasa, har bir
+    // qadamimizni brauzer yana qayta animatsiya qilib, harakat sudraladi
+    window.scrollTo({ top: current, behavior: 'instant' });
+    lastSet = window.scrollY;
+    if (running) requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) return; // zoom — tegmaymiz
+    e.preventDefault();
+    target = Math.min(max(), Math.max(0, target + e.deltaY));
+    if (!running) { running = true; requestAnimationFrame(frame); }
+  }, { passive: false });
+
+  // Animatsiya ishlamayotganda boshqa manbalar bilan sinxron turamiz
+  window.addEventListener('scroll', () => {
+    if (!running) { current = target = lastSet = window.scrollY; }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => { target = Math.min(target, max()); });
+})();
+
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
