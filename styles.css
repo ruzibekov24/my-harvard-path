@@ -341,12 +341,16 @@ h1.hero-title em { font-style: normal; color: var(--stamp-red); }
 .pass-line { flex: 1; height: 1px; background-image: linear-gradient(to right, var(--muted) 40%, transparent 0%); background-size: 8px 1px; background-repeat: repeat-x; position: relative; }
 /* Gravyura vinyetkasi — chipta ichidagi yagona tasvir */
 .pass-vignette {
-  color: var(--stamp-red);
-  margin: 4px 0 20px;
-  padding-bottom: 18px;
+  margin: 4px 0 18px;
+  padding-bottom: 16px;
   border-bottom: 1px dashed rgba(22,24,29,0.2);
 }
-.pass-vignette svg { width: 100%; height: auto; display: block; }
+.pass-vignette img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
 
 .pass-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .pass-field .label {
