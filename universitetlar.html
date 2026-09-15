@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universitetlarni taqqoslash — MyHarvardPath</title>
+<meta name="description" content="Harvard, boshqa AQSH universitetlari, Buyuk Britaniya, Yevropa va Singapur — qabul foizi, til talabi, test talabi va moliyaviy yordam bo'yicha taqqoslash.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .compare-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: var(--space-md); border-radius: 12px; border: 1px solid var(--surface-border); }
+  table.compare { width: 100%; border-collapse: collapse; min-width: 780px; background: var(--surface); font-size: 0.92rem; }
+  table.compare caption { text-align: left; padding: var(--space-sm); font-family: var(--font-mono); color: var(--muted); font-size: 0.8rem; }
+  table.compare th, table.compare td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--surface-border); vertical-align: top; }
+  table.compare thead th { font-family: var(--font-display); font-weight: 600; background: var(--navy); color: var(--cream-text); position: sticky; top: 0; }
+  table.compare thead th:first-child { border-top-left-radius: 12px; }
+  table.compare thead th:last-child { border-top-right-radius: 12px; }
+  table.compare tbody th { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); white-space: nowrap; }
+  table.compare tbody tr:last-child td, table.compare tbody tr:last-child th { border-bottom: none; }
+  table.compare tbody tr:nth-child(odd) { background: var(--paper-dark); }
+  .compare-legend { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-sm); font-size: 0.85rem; color: var(--muted); }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; }
+  .badge-yes { background: rgba(47,111,107,0.15); color: var(--teal); }
+  .badge-no { background: rgba(165,28,48,0.12); color: var(--stamp-red); }
+  .badge-partial { background: rgba(200,155,60,0.15); color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group active-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html">FLEX</a>
+            <a href="universitetlar.html" class="active">Universitetlarni taqqoslash</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html">Lug'at</a>
+            <a href="kitoblar.html">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="reyting.html">Reyting</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Universitetlarni taqqoslash</div>
+    <span class="eyebrow">Yo'nalishni tanlash</span>
+    <h1 class="subhero-title">Harvard — <em>yagona yo'l emas</em></h1>
+    <p class="subhero-sub">"Maqsadingizni kengaytiring" — kanalimizdagi asosiy fikrlardan biri shu. Harvard ajoyib, lekin yagona variant emas. Quyida real raqamlar asosida asosiy yo'nalishlarni solishtirib chiqdik — o'zingizga mosini tanlash uchun.</p>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Qisqacha taqqoslash</span>
+      <h2 class="section-title">5 ta asosiy yo'nalish</h2>
+      <p class="section-desc">Raqamlar taxminiy va yiliga o'zgarishi mumkin — har doim rasmiy universitet saytidan tekshiring.</p>
+    </div>
+
+    <div class="compare-scroll">
+      <table class="compare">
+        <caption>Manba: universitetlarning rasmiy qabul sahifalari, 2025–2026 o'quv yili ma'lumotlari asosida</caption>
+        <thead>
+          <tr>
+            <th scope="col">Mezon</th>
+            <th scope="col">Harvard / Ivy+ (AQSH)</th>
+            <th scope="col">AQSH davlat universiteti</th>
+            <th scope="col">Buyuk Britaniya (UCAS)</th>
+            <th scope="col">Yevropa (masalan Germaniya)</th>
+            <th scope="col">Singapur (NUS/NTU)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Qabul foizi</th>
+            <td>~3–5%</td>
+            <td>~40–70%</td>
+            <td>~10–20%</td>
+            <td>Ko'p dasturda ochiq/talab asosida</td>
+            <td>~5–15%</td>
+          </tr>
+          <tr>
+            <th scope="row">Til talabi</th>
+            <td>IELTS/TOEFL (tavsiya), majburiy emas</td>
+            <td>IELTS/TOEFL majburiy</td>
+            <td>IELTS majburiy (odatda 6.5–7.0)</td>
+            <td>IELTS yoki nemis tili (dasturga qarab)</td>
+            <td>IELTS/TOEFL majburiy</td>
+          </tr>
+          <tr>
+            <th scope="row">Standart test</th>
+            <td>SAT/ACT (ko'p dastur test-optional)</td>
+            <td>SAT/ACT, ba'zilarida ixtiyoriy</td>
+            <td><span class="badge badge-no">Kerak emas</span></td>
+            <td><span class="badge badge-no">Kerak emas</span></td>
+            <td>SAT ba'zi dasturlarda kerak</td>
+          </tr>
+          <tr>
+            <th scope="row">Xalqaro talabaga moliyaviy yordam</th>
+            <td><span class="badge badge-yes">Need-blind, to'liq qoplanadi</span></td>
+            <td><span class="badge badge-partial">Cheklangan, universitetga bog'liq</span></td>
+            <td><span class="badge badge-partial">Kam, asosan stipendiya orqali</span></td>
+            <td><span class="badge badge-yes">Ko'p davlat universiteti bepul/arzon</span></td>
+            <td><span class="badge badge-partial">Stipendiya mavjud, cheklangan</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Taxminiy yillik xarajat (yordamsiz)</th>
+            <td>$80,000+</td>
+            <td>$25,000–45,000</td>
+            <td>£20,000–38,000</td>
+            <td>€0–3,000 (ko'p davlat universitetida)</td>
+            <td>$25,000–40,000</td>
+          </tr>
+          <tr>
+            <th scope="row">Ariza murakkabligi</th>
+            <td>Yuqori — insho, tavsiyanoma, intervyu</td>
+            <td>O'rta</td>
+            <td>O'rta — bitta shaxsiy insho (UCAS)</td>
+            <td>O'rta-past, ko'p hujjat talab qilinmaydi</td>
+            <td>O'rta-yuqori</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="compare-legend">
+      <span><span class="badge badge-yes">Yashil</span> — talaba uchun eng qulay</span>
+      <span><span class="badge badge-partial">Sariq</span> — shartli/qisman</span>
+      <span><span class="badge badge-no">Qizil</span> — talab qilinmaydi yoki qattiq cheklov</span>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="notes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Xulosa</span>
+      <h2 class="section-title">Qaysi birini tanlash kerak?</h2>
+    </div>
+    <div class="cards cols-2">
+      <div class="card reveal">
+        <span class="leg">Agar moliyaviy yordam hal qiluvchi bo'lsa</span>
+        <h3>Harvard / Ivy+ yoki Yevropa</h3>
+        <p>Harvard va shunga o'xshash boy universitetlar xalqaro talabaga ham to'liq ehtiyojni qopdaydi (need-blind). Yevropaning ko'p davlat universiteti esa umuman deyarli bepul — lekin qabul mezonlari va dastur tili har xil bo'ladi.</p>
+      </div>
+      <div class="card reveal">
+        <span class="leg">Agar ariza jarayonini soddaroq xohlasangiz</span>
+        <h3>Buyuk Britaniya (UCAS)</h3>
+        <p>UCAS orqali bitta umumiy ariza va bitta shaxsiy insho bilan bir nechta universitetga murojaat qilish mumkin — AQSH tizimidan sezilarli soddaroq.</p>
+      </div>
+      <div class="card reveal">
+        <span class="leg">Agar SAT/ACT tayyorlashni xohlamasangiz</span>
+        <h3>Yevropa yoki Buyuk Britaniya</h3>
+        <p>Ikkalasida ham standart test odatda talab qilinmaydi — o'rniga akademik natijalar va motivatsion insho muhimroq.</p>
+      </div>
+      <div class="card reveal">
+        <span class="leg">Agar tajriba va tarmoq muhim bo'lsa</span>
+        <h3>FLEX dasturi (avval)</h3>
+        <p>Universitetga to'g'ridan-to'g'ri emas, lekin FLEX orqali AQShda bir yil o'qib, tajriba va ingliz tili darajasini oshirib, keyin istalgan yo'nalishga ariza topshirish mumkin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section id="next">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Keyingi qadam</span>
+      <h2 class="section-title">Batafsil o'qing</h2>
+    </div>
+    <div class="cards">
+      <a href="harvard-yoli.html" class="card reveal">
+        <span class="leg">To'liq yo'l xaritasi</span>
+        <h3>Harvard yo'li</h3>
+        <p>Agar Harvard/Ivy+ yo'nalishini tanlasangiz — bosqichma-bosqich reja shu yerda.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="flex.html" class="card reveal">
+        <span class="leg">Almashinuv dasturi</span>
+        <h3>FLEX dasturi</h3>
+        <p>Hali maktabda o'qiyotgan bo'lsangiz, FLEX orqali AQShda tajriba orttiring.</p>
+        <span class="read">O'qish →</span>
+      </a>
+      <a href="ingliz-tili.html" class="card reveal">
+        <span class="leg">Til tayyorgarligi</span>
+        <h3>Ingliz tili resurslari</h3>
+        <p>Qaysi yo'nalishni tanlasangiz ham, IELTS/TOEFL darajangiz muhim bo'ladi.</p>
+        <span class="read">O'qish →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+        <p>FLEX dasturi, Harvard yo'li va akademik tayyorgarlik haqida amaliy kontent. Rasmiy ma'lumot uchun tegishli rasmiy saytlarga murojaat qiling.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <a href="harvard-yoli.html">Harvard yo'li</a>
+          <a href="flex.html">FLEX dasturi</a>
+          <a href="universitetlar.html">Universitetlarni taqqoslash</a>
+          <a href="ingliz-tili.html">Ingliz tili</a>
+          <a href="lugat-va-iboralar.html">Lug'at va iboralar</a>
+          <a href="kitoblar.html">Kitoblar</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Boshqa</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="reyting.html">Reyting</a>
+          <a href="about.html">Kanal haqida</a>
+          <a href="ota-onalar.html">Ota-onalar uchun</a>
+          <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanal</a>
+        </div>
+      </div>
+      <div class="footer-cta">
+        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>t.me/MyHarvardPath &nbsp;||&nbsp; Muallif: Ilyos Ruzibekov &nbsp;||&nbsp; <a href="https://t.me/Ilyos_Ruzibekov" target="_blank" rel="noopener">t.me/Ilyos_Ruzibekov</a> &nbsp;||&nbsp; <a href="mailto:ilyosruzibekov@gmail.com">ilyosruzibekov@gmail.com</a></p>
+      <p>© 2026 MyHarvardPath</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
