@@ -106,12 +106,21 @@
           <span class="profile-stat-lbl">Ariza bosqichi</span>
         </div>
         <div class="profile-stat">
+          <span class="profile-stat-num" id="pStreak">0</span>
+          <span class="profile-stat-lbl">Ketma-ket kun</span>
+        </div>
+        <div class="profile-stat">
           <span class="profile-stat-num" id="pJoined">—</span>
           <span class="profile-stat-lbl">A'zo bo'lgan sana</span>
         </div>
       </div>
 
-      <p class="profile-note">Checklist progressi hozircha shu qurilmaning brauzerida (localStorage) saqlanadi. Kitoblar va XP esa Telegram hisobingizga bog'liq — qaysi qurilmadan kirsangiz ham ko'rinaveradi.</p>
+      <div class="xp-breakdown" id="pBreakdown">
+        <h3 class="xp-breakdown-title">XP qayerdan keldi</h3>
+        <ul class="xp-breakdown-list" id="pBreakdownList"></ul>
+      </div>
+
+      <p class="profile-note">Barcha progress Telegram hisobingizga bog'langan — qaysi qurilmadan kirsangiz ham saqlanadi. Telegram viktorinalaridan to'plangan ballar <a href="reyting.html">reyting sahifasida</a> shu XP bilan birga umumiy hisobga qo'shiladi.</p>
     </div>
 
   </div>
@@ -220,14 +229,46 @@
     }
 
     document.getElementById('pBooksRead').textContent = (user.readBooks || []).length;
+    document.getElementById('pStreak').textContent = user.streak?.count || 0;
 
+    // Checklist endi serverda ham saqlanadi — u ustun, localStorage zaxira
+    const serverChecklist = (user.checklist || []).length;
     const cl = checklistDone();
-    document.getElementById('pChecklistDone').textContent = `${cl.done} / ${cl.total}`;
+    const done = Math.max(serverChecklist, cl.done);
+    document.getElementById('pChecklistDone').textContent = `${done} / ${cl.total}`;
 
     if (user.joinedAt) {
       const d = new Date(user.joinedAt);
       document.getElementById('pJoined').textContent = d.toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' });
     }
+
+    renderBreakdown();
+  }
+
+  const BREAKDOWN_LABELS = {
+    book: "Kitob o'qish",
+    checklist: 'Ariza checklist',
+    vocab: "Lug'at to'plamlari",
+    streak: 'Kunlik kirish (streak)',
+  };
+
+  function renderBreakdown() {
+    fetch('/api/me')
+      .then((r) => r.json())
+      .then((data) => {
+        const b = data.breakdown;
+        const list = document.getElementById('pBreakdownList');
+        if (!b || !list) return;
+        const rows = Object.entries(b)
+          .filter(([, xp]) => xp > 0)
+          .sort((a, b2) => b2[1] - a[1]);
+        list.innerHTML = rows.length
+          ? rows.map(([k, xp]) =>
+              `<li><span>${BREAKDOWN_LABELS[k] || k}</span><span class="xp-breakdown-val">${xp} XP</span></li>`
+            ).join('')
+          : '<li><span>Hali XP yo\'q — kitob belgilang yoki checklist bosqichini bajaring.</span></li>';
+      })
+      .catch(() => {});
   }
 
   document.addEventListener('mhp:user', (e) => renderProfile(e.detail.user));

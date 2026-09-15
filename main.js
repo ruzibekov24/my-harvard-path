@@ -154,9 +154,35 @@ if (clItems) {
       s[key] = box.checked;
       saveState(s);
       updateProgress();
+      // Kirgan bo'lsa, serverga ham yozamiz — har bosqich 25 XP beradi.
+      // Kirmagan bo'lsa localStorage'da qolaveradi (401 e'tiborsiz qoldiriladi).
+      fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'checklist', itemId: key, done: box.checked }),
+      }).catch(() => {});
     });
   });
   updateProgress();
+
+  // Serverdagi holat localStorage'dan ustun: boshqa qurilmada belgilangan
+  // bosqichlar ham shu yerda ko'rinsin.
+  fetch('/api/me')
+    .then(r => r.json())
+    .then(data => {
+      const done = data?.user?.checklist;
+      if (!Array.isArray(done) || done.length === 0) return;
+      const s = loadState();
+      boxes.forEach(box => {
+        if (done.includes(box.dataset.cl) && !box.checked) {
+          box.checked = true;
+          s[box.dataset.cl] = true;
+        }
+      });
+      saveState(s);
+      updateProgress();
+    })
+    .catch(() => {});
 }
 
 /* ==========================================================================
@@ -370,6 +396,7 @@ if (clItems) {
       ${user.photoUrl ? `<img src="${user.photoUrl}" alt="" class="tg-user-avatar">` : ''}
       <a href="profil.html" class="tg-user-name">${user.firstName || user.username || 'Foydalanuvchi'}</a>
       <span class="tg-user-xp"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.3 6.6L12 16.9l-5.9 3.5 1.3-6.6-4.9-4.5 6.6-.7Z"/></svg> ${user.xp} XP</span>
+      ${user.streak?.count > 1 ? `<span class="tg-user-streak" title="Ketma-ket kunlar">${user.streak.count} kun</span>` : ''}
       <button type="button" class="tg-logout" title="Chiqish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>
     `;
     wrap.appendChild(box);

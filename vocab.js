@@ -111,6 +111,22 @@ function loadKnown() {
 }
 function saveKnown(state) {
   try { localStorage.setItem(KNOWN_KEY, JSON.stringify(state)); } catch {}
+  reportVocabMilestones(state);
+}
+
+/* Har bir so'z uchun XP berilsa, lug'at boshqa hamma manbani bosib ketardi —
+   shuning uchun XP har 10 ta o'zlashtirilgan so'z uchun bosqich sifatida beriladi.
+   Server takrorlanishni o'zi filtrlaydi (bir xil itemId ikki marta qo'shilmaydi). */
+const VOCAB_STEP = 10;
+function reportVocabMilestones(state) {
+  const count = Object.values(state).filter(Boolean).length;
+  const milestone = Math.floor(count / VOCAB_STEP);
+  if (milestone < 1) return;
+  fetch('/api/progress', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'vocab', itemId: 'words-' + milestone * VOCAB_STEP, done: true }),
+  }).catch(() => {});
 }
 function loadBest() {
   try { return JSON.parse(localStorage.getItem(BEST_KEY) || '{}'); }

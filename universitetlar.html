@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Universitetlarni taqqoslash — MyHarvardPath</title>
-<meta name="description" content="Harvard, boshqa AQSH universitetlari, Buyuk Britaniya, Yevropa va Singapur — qabul foizi, til talabi, test talabi va moliyaviy yordam bo'yicha taqqoslash.">
+<meta name="description" content="O'zingiz tanlagan universitetlarni yonma-yon taqqoslang: qabul foizi, o'qish puli, moliyaviy yordam, IELTS va test talablari.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,23 +15,6 @@
 <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
 <link rel="stylesheet" href="styles.css">
-<style>
-  .compare-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: var(--space-md); border-radius: 12px; border: 1px solid var(--surface-border); }
-  table.compare { width: 100%; border-collapse: collapse; min-width: 780px; background: var(--surface); font-size: 0.92rem; }
-  table.compare caption { text-align: left; padding: var(--space-sm); font-family: var(--font-mono); color: var(--muted); font-size: 0.8rem; }
-  table.compare th, table.compare td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--surface-border); vertical-align: top; }
-  table.compare thead th { font-family: var(--font-display); font-weight: 600; background: var(--navy); color: var(--cream-text); position: sticky; top: 0; }
-  table.compare thead th:first-child { border-top-left-radius: 12px; }
-  table.compare thead th:last-child { border-top-right-radius: 12px; }
-  table.compare tbody th { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); white-space: nowrap; }
-  table.compare tbody tr:last-child td, table.compare tbody tr:last-child th { border-bottom: none; }
-  table.compare tbody tr:nth-child(odd) { background: var(--paper-dark); }
-  .compare-legend { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-sm); font-size: 0.85rem; color: var(--muted); }
-  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; }
-  .badge-yes { background: rgba(47,111,107,0.15); color: var(--teal); }
-  .badge-no { background: rgba(165,28,48,0.12); color: var(--stamp-red); }
-  .badge-partial { background: rgba(200,155,60,0.15); color: var(--gold); }
-</style>
 </head>
 <body>
 
@@ -83,88 +66,47 @@
     <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Universitetlarni taqqoslash</div>
     <span class="eyebrow">Yo'nalishni tanlash</span>
     <h1 class="subhero-title">Harvard — <em>yagona yo'l emas</em></h1>
-    <p class="subhero-sub">"Maqsadingizni kengaytiring" — kanalimizdagi asosiy fikrlardan biri shu. Harvard ajoyib, lekin yagona variant emas. Quyida real raqamlar asosida asosiy yo'nalishlarni solishtirib chiqdik — o'zingizga mosini tanlash uchun.</p>
+    <p class="subhero-sub">O'zingizga qiziq universitetlarni tanlang — qabul foizi, o'qish puli, moliyaviy yordam va til talablari yonma-yon chiqadi. Ro'yxatda <span id="uniCount">—</span> ta universitet bor.</p>
   </div>
 </section>
+
+<section id="picker">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">1-qadam</span>
+      <h2 class="section-title">Taqqoslash uchun tanlang</h2>
+      <p class="section-desc">2 tadan 4 tagacha universitet tanlang. Tanlovingiz shu brauzerda saqlanadi — keyingi safar ochganingizda joyida turadi.</p>
+    </div>
+
+    <div class="uni-controls">
+      <input type="search" id="uniSearch" class="uni-search" placeholder="Universitet yoki davlat bo'yicha qidiring…" aria-label="Universitet qidirish">
+      <div class="uni-filters" id="uniFilters" role="group" aria-label="Mintaqa bo'yicha filtr">
+        <button type="button" class="uni-filter is-on" data-region="all">Hammasi</button>
+        <button type="button" class="uni-filter" data-region="us">AQSH</button>
+        <button type="button" class="uni-filter" data-region="uk">Buyuk Britaniya</button>
+        <button type="button" class="uni-filter" data-region="eu">Yevropa</button>
+        <button type="button" class="uni-filter" data-region="asia">Osiyo</button>
+      </div>
+    </div>
+
+    <div class="uni-grid" id="uniGrid"></div>
+    <p class="uni-empty" id="uniEmpty" hidden>Bunday universitet topilmadi.</p>
+  </div>
+</section>
+
+<div class="perforation"></div>
 
 <section id="compare">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="section-eyebrow">Qisqacha taqqoslash</span>
-      <h2 class="section-title">5 ta asosiy yo'nalish</h2>
-      <p class="section-desc">Raqamlar taxminiy va yiliga o'zgarishi mumkin — har doim rasmiy universitet saytidan tekshiring.</p>
+      <span class="section-eyebrow">2-qadam</span>
+      <h2 class="section-title">Yonma-yon taqqoslash</h2>
+      <p class="section-desc">Raqamlar taxminiy va har yili o'zgaradi. Har bir ustundagi havola sizni o'sha universitetning rasmiy qabul sahifasiga olib boradi — aniq ma'lumotni doim o'sha yerdan tekshiring.</p>
     </div>
 
-    <div class="compare-scroll">
-      <table class="compare">
-        <caption>Manba: universitetlarning rasmiy qabul sahifalari, 2025–2026 o'quv yili ma'lumotlari asosida</caption>
-        <thead>
-          <tr>
-            <th scope="col">Mezon</th>
-            <th scope="col">Harvard / Ivy+ (AQSH)</th>
-            <th scope="col">AQSH davlat universiteti</th>
-            <th scope="col">Buyuk Britaniya (UCAS)</th>
-            <th scope="col">Yevropa (masalan Germaniya)</th>
-            <th scope="col">Singapur (NUS/NTU)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Qabul foizi</th>
-            <td>~3–5%</td>
-            <td>~40–70%</td>
-            <td>~10–20%</td>
-            <td>Ko'p dasturda ochiq/talab asosida</td>
-            <td>~5–15%</td>
-          </tr>
-          <tr>
-            <th scope="row">Til talabi</th>
-            <td>IELTS/TOEFL (tavsiya), majburiy emas</td>
-            <td>IELTS/TOEFL majburiy</td>
-            <td>IELTS majburiy (odatda 6.5–7.0)</td>
-            <td>IELTS yoki nemis tili (dasturga qarab)</td>
-            <td>IELTS/TOEFL majburiy</td>
-          </tr>
-          <tr>
-            <th scope="row">Standart test</th>
-            <td>SAT/ACT (ko'p dastur test-optional)</td>
-            <td>SAT/ACT, ba'zilarida ixtiyoriy</td>
-            <td><span class="badge badge-no">Kerak emas</span></td>
-            <td><span class="badge badge-no">Kerak emas</span></td>
-            <td>SAT ba'zi dasturlarda kerak</td>
-          </tr>
-          <tr>
-            <th scope="row">Xalqaro talabaga moliyaviy yordam</th>
-            <td><span class="badge badge-yes">Need-blind, to'liq qoplanadi</span></td>
-            <td><span class="badge badge-partial">Cheklangan, universitetga bog'liq</span></td>
-            <td><span class="badge badge-partial">Kam, asosan stipendiya orqali</span></td>
-            <td><span class="badge badge-yes">Ko'p davlat universiteti bepul/arzon</span></td>
-            <td><span class="badge badge-partial">Stipendiya mavjud, cheklangan</span></td>
-          </tr>
-          <tr>
-            <th scope="row">Taxminiy yillik xarajat (yordamsiz)</th>
-            <td>$80,000+</td>
-            <td>$25,000–45,000</td>
-            <td>£20,000–38,000</td>
-            <td>€0–3,000 (ko'p davlat universitetida)</td>
-            <td>$25,000–40,000</td>
-          </tr>
-          <tr>
-            <th scope="row">Ariza murakkabligi</th>
-            <td>Yuqori — insho, tavsiyanoma, intervyu</td>
-            <td>O'rta</td>
-            <td>O'rta — bitta shaxsiy insho (UCAS)</td>
-            <td>O'rta-past, ko'p hujjat talab qilinmaydi</td>
-            <td>O'rta-yuqori</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="compare-legend">
-      <span><span class="badge badge-yes">Yashil</span> — talaba uchun eng qulay</span>
-      <span><span class="badge badge-partial">Sariq</span> — shartli/qisman</span>
-      <span><span class="badge badge-no">Qizil</span> — talab qilinmaydi yoki qattiq cheklov</span>
+    <p class="uni-hint" id="compareHint">Yuqoridan kamida 2 ta universitet tanlang.</p>
+    <div class="compare-scroll" id="compareWrap" hidden>
+      <table class="compare" id="compareTable"></table>
     </div>
   </div>
 </section>
@@ -180,23 +122,23 @@
     <div class="cards cols-2">
       <div class="card reveal">
         <span class="leg">Agar moliyaviy yordam hal qiluvchi bo'lsa</span>
-        <h3>Harvard / Ivy+ yoki Yevropa</h3>
-        <p>Harvard va shunga o'xshash boy universitetlar xalqaro talabaga ham to'liq ehtiyojni qopdaydi (need-blind). Yevropaning ko'p davlat universiteti esa umuman deyarli bepul — lekin qabul mezonlari va dastur tili har xil bo'ladi.</p>
+        <h3>Ivy+ yoki Yevropa</h3>
+        <p>Harvard, MIT, Yale kabi boy universitetlar xalqaro talabaning ham to'liq ehtiyojini qoplaydi. Germaniyaning davlat universitetlarida esa o'qish deyarli bepul — lekin ko'p dasturda nemis tili talab qilinadi.</p>
       </div>
       <div class="card reveal">
         <span class="leg">Agar ariza jarayonini soddaroq xohlasangiz</span>
         <h3>Buyuk Britaniya (UCAS)</h3>
-        <p>UCAS orqali bitta umumiy ariza va bitta shaxsiy insho bilan bir nechta universitetga murojaat qilish mumkin — AQSH tizimidan sezilarli soddaroq.</p>
+        <p>Bitta UCAS arizasi va bitta shaxsiy insho bilan 5 tagacha universitetga murojaat qilasiz — AQSH tizimidan sezilarli soddaroq, lekin moliyaviy yordam ancha kam.</p>
       </div>
       <div class="card reveal">
         <span class="leg">Agar SAT/ACT tayyorlashni xohlamasangiz</span>
-        <h3>Yevropa yoki Buyuk Britaniya</h3>
-        <p>Ikkalasida ham standart test odatda talab qilinmaydi — o'rniga akademik natijalar va motivatsion insho muhimroq.</p>
+        <h3>Yevropa, Koreya yoki Turkiya</h3>
+        <p>Bu yo'nalishlarning ko'pida standart test talab qilinmaydi — o'rniga maktab natijalari, til sertifikati va motivatsion insho hal qiladi.</p>
       </div>
       <div class="card reveal">
-        <span class="leg">Agar tajriba va tarmoq muhim bo'lsa</span>
-        <h3>FLEX dasturi (avval)</h3>
-        <p>Universitetga to'g'ridan-to'g'ri emas, lekin FLEX orqali AQShda bir yil o'qib, tajriba va ingliz tili darajasini oshirib, keyin istalgan yo'nalishga ariza topshirish mumkin.</p>
+        <span class="leg">Agar hali maktabda o'qiyotgan bo'lsangiz</span>
+        <h3>Avval FLEX</h3>
+        <p>FLEX orqali AQShda bir yil o'qib, til darajangizni va tajribangizni oshirasiz — keyin yuqoridagi istalgan yo'nalishga ancha kuchli ariza bilan chiqasiz.</p>
       </div>
     </div>
   </div>
@@ -214,7 +156,7 @@
       <a href="harvard-yoli.html" class="card reveal">
         <span class="leg">To'liq yo'l xaritasi</span>
         <h3>Harvard yo'li</h3>
-        <p>Agar Harvard/Ivy+ yo'nalishini tanlasangiz — bosqichma-bosqich reja shu yerda.</p>
+        <p>Ivy+ yo'nalishini tanlasangiz — bosqichma-bosqich reja shu yerda.</p>
         <span class="read">O'qish →</span>
       </a>
       <a href="flex.html" class="card reveal">
@@ -226,7 +168,7 @@
       <a href="ingliz-tili.html" class="card reveal">
         <span class="leg">Til tayyorgarligi</span>
         <h3>Ingliz tili resurslari</h3>
-        <p>Qaysi yo'nalishni tanlasangiz ham, IELTS/TOEFL darajangiz muhim bo'ladi.</p>
+        <p>Qaysi yo'nalishni tanlasangiz ham, IELTS/TOEFL darajangiz hal qiluvchi.</p>
         <span class="read">O'qish →</span>
       </a>
     </div>
@@ -261,7 +203,7 @@
         </div>
       </div>
       <div class="footer-cta">
-        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <span class="section-eyebrow">Keyingi qadam</span>
         <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
       </div>
     </div>
@@ -273,5 +215,6 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="uni-compare.js"></script>
 </body>
 </html>

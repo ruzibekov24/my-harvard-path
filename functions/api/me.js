@@ -1,4 +1,5 @@
 import { getCookie, verifySessionToken, json } from '../_lib.js';
+import { normalizeUser, XP_RULES } from './progress.js';
 
 // GET /api/me — joriy foydalanuvchini qaytaradi (agar kirgan bo'lsa)
 export async function onRequestGet({ request, env }) {
@@ -12,5 +13,14 @@ export async function onRequestGet({ request, env }) {
   }
   const raw = await env.MHP_KV.get(`user:${userId}`);
   if (!raw) return json({ ok: false, user: null });
-  return json({ ok: true, user: JSON.parse(raw) });
+
+  const user = normalizeUser(JSON.parse(raw));
+  // XP qayerdan kelgani — profil sahifasi shuni ko'rsatadi
+  const breakdown = {
+    streak: user.streakXp || 0,
+    ...Object.fromEntries(
+      Object.entries(XP_RULES).map(([type, { xp, list }]) => [type, (user[list]?.length || 0) * xp])
+    ),
+  };
+  return json({ ok: true, user, breakdown });
 }

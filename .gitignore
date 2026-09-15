@@ -1,0 +1,7 @@
+# local wrangler pages dev state/cache
+.wrangler/
+
+# local secrets (Cloudflare Pages dashboard'da sozlanadi)
+.dev.vars
+
+node_modules/

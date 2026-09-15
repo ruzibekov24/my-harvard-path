@@ -1,0 +1,171 @@
+{
+  "note": "Raqamlar taxminiy va har yili o'zgaradi — har doim rasmiy qabul sahifasidan tekshiring. Manba: universitetlarning o'z qabul sahifalari, 2025-2026 o'quv yili.",
+  "updated": "2026-09",
+  "fields": [
+    { "key": "acceptanceRate", "label": "Qabul foizi" },
+    { "key": "tuition", "label": "Yillik o'qish puli" },
+    { "key": "aid", "label": "Xalqaro talabaga yordam" },
+    { "key": "ielts", "label": "IELTS (minimal)" },
+    { "key": "test", "label": "SAT/ACT" },
+    { "key": "system", "label": "Ariza tizimi" },
+    { "key": "deadline", "label": "Asosiy muddat" }
+  ],
+  "universities": [
+    {
+      "id": "harvard", "name": "Harvard University", "country": "AQSH", "city": "Cambridge, MA", "region": "us",
+      "acceptanceRate": "~3.5%", "tuition": "$59,000", "aid": "To'liq ehtiyoj qoplanadi (need-blind)",
+      "ielts": "Majburiy emas", "test": "SAT yoki ACT", "system": "Common App", "deadline": "1-yanvar (RD)",
+      "website": "https://college.harvard.edu/admissions"
+    },
+    {
+      "id": "mit", "name": "MIT", "country": "AQSH", "city": "Cambridge, MA", "region": "us",
+      "acceptanceRate": "~4%", "tuition": "$62,000", "aid": "To'liq ehtiyoj qoplanadi (need-blind)",
+      "ielts": "7.0", "test": "SAT yoki ACT", "system": "MIT o'z portali", "deadline": "1-yanvar",
+      "website": "https://mitadmissions.org"
+    },
+    {
+      "id": "yale", "name": "Yale University", "country": "AQSH", "city": "New Haven, CT", "region": "us",
+      "acceptanceRate": "~4.5%", "tuition": "$67,000", "aid": "To'liq ehtiyoj qoplanadi (need-blind)",
+      "ielts": "7.0", "test": "SAT yoki ACT", "system": "Common App", "deadline": "2-yanvar",
+      "website": "https://admissions.yale.edu"
+    },
+    {
+      "id": "princeton", "name": "Princeton University", "country": "AQSH", "city": "Princeton, NJ", "region": "us",
+      "acceptanceRate": "~4%", "tuition": "$62,000", "aid": "To'liq ehtiyoj qoplanadi (need-blind)",
+      "ielts": "7.0", "test": "SAT yoki ACT", "system": "Common App", "deadline": "1-yanvar",
+      "website": "https://admission.princeton.edu"
+    },
+    {
+      "id": "stanford", "name": "Stanford University", "country": "AQSH", "city": "Stanford, CA", "region": "us",
+      "acceptanceRate": "~4%", "tuition": "$65,000", "aid": "To'liq ehtiyoj qoplanadi", "ielts": "7.0",
+      "test": "SAT yoki ACT", "system": "Common App", "deadline": "5-yanvar",
+      "website": "https://admission.stanford.edu"
+    },
+    {
+      "id": "columbia", "name": "Columbia University", "country": "AQSH", "city": "New York, NY", "region": "us",
+      "acceptanceRate": "~4%", "tuition": "$71,000", "aid": "To'liq ehtiyoj qoplanadi (need-blind)",
+      "ielts": "7.0", "test": "Majburiy emas", "system": "Common App", "deadline": "1-yanvar",
+      "website": "https://undergrad.admissions.columbia.edu"
+    },
+    {
+      "id": "upenn", "name": "UPenn", "country": "AQSH", "city": "Philadelphia, PA", "region": "us",
+      "acceptanceRate": "~6%", "tuition": "$68,000", "aid": "To'liq ehtiyoj qoplanadi", "ielts": "7.5",
+      "test": "SAT yoki ACT", "system": "Common App", "deadline": "5-yanvar",
+      "website": "https://admissions.upenn.edu"
+    },
+    {
+      "id": "cornell", "name": "Cornell University", "country": "AQSH", "city": "Ithaca, NY", "region": "us",
+      "acceptanceRate": "~7%", "tuition": "$68,000", "aid": "Ehtiyoj qoplanadi (need-aware)", "ielts": "7.0",
+      "test": "Majburiy emas", "system": "Common App", "deadline": "2-yanvar",
+      "website": "https://admissions.cornell.edu"
+    },
+    {
+      "id": "nyu", "name": "New York University", "country": "AQSH", "city": "New York, NY", "region": "us",
+      "acceptanceRate": "~12%", "tuition": "$62,000", "aid": "Cheklangan, stipendiya asosida", "ielts": "7.5",
+      "test": "Moslashuvchan (test-flexible)", "system": "Common App", "deadline": "5-yanvar",
+      "website": "https://www.nyu.edu/admissions"
+    },
+    {
+      "id": "umich", "name": "University of Michigan", "country": "AQSH", "city": "Ann Arbor, MI", "region": "us",
+      "acceptanceRate": "~18%", "tuition": "$60,000 (xalqaro)", "aid": "Juda cheklangan", "ielts": "6.5",
+      "test": "Majburiy emas", "system": "Common App", "deadline": "1-fevral",
+      "website": "https://admissions.umich.edu"
+    },
+    {
+      "id": "asu", "name": "Arizona State University", "country": "AQSH", "city": "Tempe, AZ", "region": "us",
+      "acceptanceRate": "~88%", "tuition": "$34,000 (xalqaro)", "aid": "Merit stipendiyalari", "ielts": "6.5",
+      "test": "Majburiy emas", "system": "O'z portali", "deadline": "Doimiy (rolling)",
+      "website": "https://admission.asu.edu"
+    },
+    {
+      "id": "oxford", "name": "University of Oxford", "country": "Buyuk Britaniya", "city": "Oxford", "region": "uk",
+      "acceptanceRate": "~16%", "tuition": "£33,000–48,000", "aid": "Juda cheklangan stipendiyalar", "ielts": "7.0–7.5",
+      "test": "Fan bo'yicha alohida test", "system": "UCAS", "deadline": "15-oktabr",
+      "website": "https://www.ox.ac.uk/admissions/undergraduate"
+    },
+    {
+      "id": "cambridge", "name": "University of Cambridge", "country": "Buyuk Britaniya", "city": "Cambridge", "region": "uk",
+      "acceptanceRate": "~17%", "tuition": "£25,000–65,000", "aid": "Juda cheklangan stipendiyalar", "ielts": "7.5",
+      "test": "Fan bo'yicha alohida test", "system": "UCAS", "deadline": "15-oktabr",
+      "website": "https://www.undergraduate.study.cam.ac.uk"
+    },
+    {
+      "id": "imperial", "name": "Imperial College London", "country": "Buyuk Britaniya", "city": "London", "region": "uk",
+      "acceptanceRate": "~11%", "tuition": "£37,000–45,000", "aid": "Cheklangan", "ielts": "6.5–7.0",
+      "test": "Ba'zi yo'nalishlarda", "system": "UCAS", "deadline": "29-yanvar",
+      "website": "https://www.imperial.ac.uk/study/apply"
+    },
+    {
+      "id": "ucl", "name": "University College London", "country": "Buyuk Britaniya", "city": "London", "region": "uk",
+      "acceptanceRate": "~30%", "tuition": "£28,000–40,000", "aid": "Cheklangan", "ielts": "6.5–7.5",
+      "test": "Kerak emas", "system": "UCAS", "deadline": "29-yanvar",
+      "website": "https://www.ucl.ac.uk/prospective-students/undergraduate"
+    },
+    {
+      "id": "edinburgh", "name": "University of Edinburgh", "country": "Buyuk Britaniya", "city": "Edinburgh", "region": "uk",
+      "acceptanceRate": "~40%", "tuition": "£26,000–35,000", "aid": "Cheklangan", "ielts": "6.5",
+      "test": "Kerak emas", "system": "UCAS", "deadline": "29-yanvar",
+      "website": "https://www.ed.ac.uk/studying/undergraduate"
+    },
+    {
+      "id": "tum", "name": "Technical University of Munich", "country": "Germaniya", "city": "Myunxen", "region": "eu",
+      "acceptanceRate": "~8–20% (yo'nalishga qarab)", "tuition": "€0 + ~€150 semestr yig'imi", "aid": "O'qish deyarli bepul",
+      "ielts": "6.5 yoki nemis tili", "test": "Kerak emas", "system": "TUMonline", "deadline": "15-iyul",
+      "website": "https://www.tum.de/en/studies/application"
+    },
+    {
+      "id": "lmu", "name": "LMU Munich", "country": "Germaniya", "city": "Myunxen", "region": "eu",
+      "acceptanceRate": "Yo'nalishga qarab ochiq", "tuition": "€0 + semestr yig'imi", "aid": "O'qish bepul",
+      "ielts": "Nemis tili (ko'p dasturda)", "test": "Kerak emas", "system": "Uni-assist", "deadline": "15-iyul",
+      "website": "https://www.lmu.de/en/study/important-contacts/international-office/"
+    },
+    {
+      "id": "tudelft", "name": "TU Delft", "country": "Niderlandiya", "city": "Delft", "region": "eu",
+      "acceptanceRate": "~50% (ba'zi dasturda numerus fixus)", "tuition": "€16,000–20,000", "aid": "Cheklangan stipendiya",
+      "ielts": "6.5", "test": "Kerak emas", "system": "Studielink", "deadline": "15-yanvar",
+      "website": "https://www.tudelft.nl/en/education/admission-and-application"
+    },
+    {
+      "id": "uva", "name": "University of Amsterdam", "country": "Niderlandiya", "city": "Amsterdam", "region": "eu",
+      "acceptanceRate": "~60%", "tuition": "€12,000–17,000", "aid": "Amsterdam Excellence Scholarship", "ielts": "6.5",
+      "test": "Kerak emas", "system": "Studielink", "deadline": "1-may",
+      "website": "https://www.uva.nl/en/education/bachelor-s"
+    },
+    {
+      "id": "nus", "name": "National University of Singapore", "country": "Singapur", "city": "Singapur", "region": "asia",
+      "acceptanceRate": "~5–10%", "tuition": "S$38,000 (subsidiyasiz)", "aid": "ASEAN/merit stipendiyalari", "ielts": "6.5–7.0",
+      "test": "SAT tavsiya etiladi", "system": "O'z portali", "deadline": "Fevral–mart",
+      "website": "https://www.nus.edu.sg/oam"
+    },
+    {
+      "id": "ntu", "name": "Nanyang Technological University", "country": "Singapur", "city": "Singapur", "region": "asia",
+      "acceptanceRate": "~10–15%", "tuition": "S$36,000 (subsidiyasiz)", "aid": "Merit stipendiyalari", "ielts": "6.5",
+      "test": "SAT ba'zi dasturlarda", "system": "O'z portali", "deadline": "Mart",
+      "website": "https://www.ntu.edu.sg/admissions"
+    },
+    {
+      "id": "kaist", "name": "KAIST", "country": "Janubiy Koreya", "city": "Daejeon", "region": "asia",
+      "acceptanceRate": "~15%", "tuition": "Deyarli to'liq stipendiya", "aid": "Xalqaro talabalarga keng stipendiya",
+      "ielts": "6.5 yoki TOEFL 83", "test": "Kerak emas", "system": "O'z portali", "deadline": "Sentabr–oktabr",
+      "website": "https://apply.kaist.ac.kr"
+    },
+    {
+      "id": "snu", "name": "Seoul National University", "country": "Janubiy Koreya", "city": "Seul", "region": "asia",
+      "acceptanceRate": "~10%", "tuition": "$5,000–7,000", "aid": "Stipendiyalar mavjud", "ielts": "6.5 yoki TOPIK",
+      "test": "Kerak emas", "system": "O'z portali", "deadline": "Sentabr",
+      "website": "https://en.snu.ac.kr/admission"
+    },
+    {
+      "id": "bogazici", "name": "Boğaziçi University", "country": "Turkiya", "city": "Istanbul", "region": "asia",
+      "acceptanceRate": "~20%", "tuition": "$1,500–3,000", "aid": "Türkiye Bursları (to'liq stipendiya)", "ielts": "6.5 yoki YÖS",
+      "test": "YÖS/SAT", "system": "O'z portali", "deadline": "Iyun–iyul",
+      "website": "https://www.boun.edu.tr/en_US"
+    },
+    {
+      "id": "metu", "name": "Middle East Technical University", "country": "Turkiya", "city": "Anqara", "region": "asia",
+      "acceptanceRate": "~25%", "tuition": "$2,000–4,000", "aid": "Türkiye Bursları", "ielts": "6.5 yoki maktab testi",
+      "test": "YÖS/SAT", "system": "O'z portali", "deadline": "Iyun–iyul",
+      "website": "https://www.metu.edu.tr/prospective-international-students"
+    }
+  ]
+}

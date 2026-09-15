@@ -102,7 +102,7 @@
     <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Reyting</div>
     <span class="eyebrow">Jonli reyting · Telegram bot orqali</span>
     <h1 class="subhero-title">Kim ko'proq <em>ball</em> to'plagan?</h1>
-    <p class="subhero-sub">Kanaldagi kunlik viktorinalarga to'g'ri javob bering, ball to'plang va shu yerda — jonli reytingda — o'z o'rningizni ko'ring.</p>
+    <p class="subhero-sub">Ball to'plashning bir necha yo'li bor: kitob o'qish, ariza checklist'ini bajarish, lug'at o'rganish, har kuni kirish va kanaldagi viktorinalarga javob berish. Hammasi shu yerda — bitta umumiy hisobda.</p>
   </div>
 </section>
 
@@ -111,7 +111,7 @@
     <div class="section-head reveal">
       <span class="section-eyebrow">TOP 20</span>
       <h2 class="section-title">Eng faol o'quvchilar</h2>
-      <p class="section-desc">Ro'yxat @MHP_adminbot orqali to'plangan real ballar asosida, avtomatik yangilanadi.</p>
+      <p class="section-desc">Umumiy ball = saytdagi XP (kitob, checklist, lug'at, kunlik kirish) + Telegram viktorinalaridan to'plangan ballar. Avtomatik yangilanadi.</p>
     </div>
 
     <div id="lbStatus" class="lb-status">Yuklanmoqda...</div>
@@ -119,8 +119,8 @@
 
     <div class="lb-cta reveal">
       <div>
-        <h3>Siz ham reytingga qo'shiling</h3>
-        <p>Botga o'ting, /fact yozib fakt oling yoki kanaldagi viktorinaga javob bering — har to'g'ri javob ball beradi.</p>
+        <h3>Ball qanday to'planadi</h3>
+        <p>Kitob o'qildi — 10 XP · Ariza checklist bosqichi — 25 XP · Lug'at to'plami — 5 XP · Har kunlik kirish — 5 XP (7 va 30 kunlik streak uchun bonus) · Viktorinaga to'g'ri javob — bot beradi.</p>
       </div>
       <a class="btn-primary" href="https://t.me/MHP_adminbot" target="_blank" rel="noopener">Botni ochish →</a>
     </div>
@@ -132,7 +132,8 @@
 (function loadLeaderboard() {
   const statusEl = document.getElementById('lbStatus');
   const listEl = document.getElementById('lbList');
-  const API_URL = 'https://harvard-path-admin-bot.ilyosbek41624.workers.dev/api/leaderboard';
+  // Birlashtirilgan reyting: saytdagi XP + Telegram viktorina ballari
+  const API_URL = '/api/leaderboard';
 
   fetch(API_URL)
     .then((res) => {
@@ -148,14 +149,17 @@
       statusEl.style.display = 'none';
       const rankClass = ['gold', 'silver', 'bronze'];
       listEl.innerHTML = rows.map((u, i) => {
-        const name = u.username ? '@' + u.username : (u.first_name || 'Foydalanuvchi');
-        const initial = (u.first_name || u.username || '?').trim().charAt(0).toUpperCase();
+        const initial = (u.firstName || u.name || '?').trim().replace('@', '').charAt(0).toUpperCase();
         const rc = rankClass[i] || '';
+        const parts = [];
+        if (u.siteXp) parts.push(u.siteXp + ' XP');
+        if (u.quizPoints) parts.push(u.quizPoints + ' viktorina');
+        const split = parts.length > 1 ? '<span class="lb-split">' + parts.join(' + ') + '</span>' : '';
         return '<div class="lb-row">' +
           '<span class="lb-rank ' + rc + '">' + (i + 1) + '</span>' +
           '<span class="lb-avatar">' + initial + '</span>' +
-          '<span class="lb-name">' + escapeHtml(name) + '</span>' +
-          '<span class="lb-points">' + u.points + ' ball</span></div>';
+          '<span class="lb-name">' + escapeHtml(u.name) + split + '</span>' +
+          '<span class="lb-points">' + u.total + ' ball</span></div>';
       }).join('');
     })
     .catch(() => {
