@@ -1342,6 +1342,16 @@ html[data-theme="dark"] .theme-toggle:hover { color: var(--stamp-red); backgroun
 .flex-countdown-nums b { display: block; font-size: 1.7rem; font-weight: 600; }
 .flex-countdown-nums span { font-family: var(--font-mono); font-size: 0.65rem; color: rgba(243,239,227,0.7); text-transform: uppercase; }
 
+.flex-status { font-family: var(--font-mono); font-size: 0.78rem; background: var(--gold); color: var(--navy); padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.flex-deadlines { margin: 0 0 30px; }
+.flex-deadlines h3 { margin: 0 0 8px; }
+.flex-note { color: var(--muted); font-size: 0.92rem; margin: 8px 0 14px; }
+.flex-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.flex-table th, .flex-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border, rgba(128,128,128,0.25)); vertical-align: top; }
+.flex-table th { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.flex-table td:first-child { white-space: nowrap; font-weight: 600; }
+@media (max-width: 600px) { .flex-table td:first-child { white-space: normal; } }
+
 /* ---------- Flashcard nusxalash tugmasi ---------- */
 .flash-copy {
   font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em;
