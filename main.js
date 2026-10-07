@@ -415,14 +415,14 @@ if (clItems) {
     const now = new Date();
     const diff = deadline - now;
     if (isNaN(deadline.getTime()) || diff <= 0) {
-      labelEl.textContent = "Ariza muddati";
+      labelEl.textContent = "Deadline";
       numsEl.innerHTML = `<div><b>—</b><span>Yaqinda e'lon qilinadi</span></div>`;
       return;
     }
     const days = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const mins = Math.floor((diff % 3600000) / 60000);
-    labelEl.textContent = "Keyingi FLEX arizasi muddatigacha";
+    labelEl.textContent = "Deadline gacha qoldi";
     numsEl.innerHTML = `
       <div><b>${days}</b><span>Kun</span></div>
       <div><b>${hours}</b><span>Soat</span></div>
