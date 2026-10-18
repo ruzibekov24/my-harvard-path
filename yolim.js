@@ -284,6 +284,7 @@
     const ai = fetchAi(p, u);
     const res = await Promise.all([ai, minWait]).then((x) => x[0]);
     clearInterval(msgTimer);
+    p.ai = res && !res.local ? res : null; save(p);
     const b = $('ylCalcBar'); if (b) b.style.width = '100%';
     await new Promise((r) => setTimeout(r, 350));
     wiz.hidden = true;
@@ -405,6 +406,7 @@
       const btn = $('ylAiBtn'); btn.disabled = true; btn.textContent = 'Hisoblanmoqda…';
       $('ylAiOut').innerHTML = '<div class="yl-ai-load"><span></span><span></span><span></span></div>';
       const r = await fetchAi(p, u);
+      p.ai = r.local ? null : r; save(p);
       renderChance(r, u, p);
       renderAi(r, r.local ? 'Oddiy hisob (AI hozir ulanmagan)' : 'AI tahlili');
       btn.disabled = false; btn.textContent = 'Qayta hisoblash';
@@ -422,8 +424,8 @@
       build(p, null);
       // saqlangan natijani yengil hisob bilan ko'rsatish (AI chaqirilmaydi)
       const u = unis.find((x) => x.id === p.uni);
-      const r = localAi(p, u); r.local = true;
-      renderChance(r, u, p); renderAi(r, 'Oddiy hisob: AI uchun «Qayta hisoblash» ni bosing');
+      if (p.ai) { renderChance(p.ai, u, p); renderAi(p.ai, 'AI tahlili'); }
+      else { const r = localAi(p, u); r.local = true; renderChance(r, u, p); renderAi(r, 'Oddiy hisob: AI uchun «Qayta hisoblash» ni bosing'); }
       $('ylResult').hidden = false;
     } else renderStep();
   });
