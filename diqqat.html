@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diqqat haqiqatan qisqaryaptimi? — MyHarvardPath</title>
+<meta name="description" content="Diqqat muddati qisqaryapti degan gap rostmi? Scientific American / Nature maqolasi asosida qisqa va rasmli tahlil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+.art { max-width: 720px; margin: 0 auto; padding: 56px 32px 24px; }
+.art p { font-size: 1.08rem; line-height: 1.75; margin-bottom: 20px; }
+.art h2 { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.15; }
+.art .lead { font-size: 1.22rem; line-height: 1.6; color: var(--muted); }
+.art-meta { font-family: var(--font-mono); font-size: var(--step-meta); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.art-fig { margin: 32px 0; }
+.art-fig svg { width: 100%; height: auto; display: block; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); color: var(--ink); }
+.art-fig figcaption { font-family: var(--font-mono); font-size: .68rem; color: var(--muted); margin-top: 8px; letter-spacing: .02em; }
+.art-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0; }
+.art-card { border: 1px solid var(--rule); background: var(--surface); border-radius: 6px; padding: 18px; }
+.art-card b { font-family: var(--font-display); font-size: 1.9rem; color: var(--stamp-red); display: block; line-height: 1; margin-bottom: 8px; }
+.art-card span { font-size: .88rem; color: var(--muted); line-height: 1.45; display: block; }
+.art-pull { border-left: 3px solid var(--stamp-red); padding: 4px 0 4px 20px; margin: 32px 0; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.35; letter-spacing: -0.01em; }
+.art-tips { list-style: none; margin: 0 0 24px; padding: 0; }
+.art-tips li { padding: 14px 0 14px 34px; border-top: 1px solid var(--rule); position: relative; line-height: 1.6; }
+.art-tips li:last-child { border-bottom: 1px solid var(--rule); }
+.art-tips li::before { content: attr(data-n); position: absolute; left: 0; top: 16px; font-family: var(--font-mono); color: var(--stamp-red); font-size: .85rem; }
+.art p.art-src { font-size: .9rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 18px; margin-top: 40px; }
+.art-src a { color: var(--stamp-red); border-bottom: 1px solid currentColor; }
+@media (max-width: 640px) { .art { padding: 40px 20px 16px; } .art-cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menyu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="links" id="navLinks">
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">AQSH yo'li</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="harvard-yoli.html">Harvard yo'li</a>
+            <a href="flex.html">FLEX</a>
+          <a href="universitetlar.html">Universitetlarni taqqoslash</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">O'quv materiallari</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="ingliz-tili.html">Ingliz tili</a>
+            <a href="lugat-va-iboralar.html">Lug'at</a>
+            <a href="kitoblar.html">Kitoblar</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-group active-group">
+        <button type="button" class="nav-group-trigger" aria-haspopup="true" aria-expanded="false">Jamiyat</button>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown-inner">
+            <a href="blog.html" class="active">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="reyting.html">Reyting</a>
+            <a href="about.html">Kanal haqida</a>
+            <a href="ota-onalar.html">Ota-onalar uchun</a>
+          </div>
+        </div>
+      </div>
+      <a href="profil.html">Profil</a>
+      <a class="nav-cta" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="subhero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / <a href="blog.html">Blog</a> / Diqqat</div>
+    <span class="eyebrow">Fan va o'qish</span>
+    <h1 class="subhero-title">Diqqat muddati haqiqatan ham <em>qisqaryaptimi?</em></h1>
+    <p class="subhero-sub">“Odamning diqqati oltin baliqnikidan ham qisqa” degan gap hamma joyda aytiladi. Fan nima deydi? Qisqa tahlil — 3 daqiqada.</p>
+  </div>
+</section>
+
+<article class="art">
+  <p class="art-meta">≈ 3 daqiqa o'qish · Manba: Scientific American / Nature, 2026</p>
+
+  <figure class="art-fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Stol ortidagi o'quvchi va atrofdagi telefon bildirishnomalari">
+      <rect width="720" height="300" fill="var(--paper-dark)"/>
+      <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="90" y="190" width="300" height="14" rx="3"/>
+        <path d="M120 204v60M360 204v60"/>
+        <rect x="170" y="130" width="140" height="60" rx="5"/>
+        <circle cx="240" cy="80" r="26"/>
+        <path d="M240 106v24"/>
+      </g>
+      <g style="fill:var(--stamp-red)">
+        <rect x="460" y="50" width="190" height="44" rx="8"/>
+        <rect x="500" y="110" width="190" height="44" rx="8" opacity=".78"/>
+        <rect x="450" y="170" width="200" height="44" rx="8" opacity=".56"/>
+      </g>
+      <g fill="#fff" font-family="Inter,sans-serif" font-size="14" font-weight="600">
+        <text x="478" y="77">Yangi xabar</text>
+        <text x="518" y="137">Video tavsiya</text>
+        <text x="468" y="197">12 ta bildirishnoma</text>
+      </g>
+      <path d="M270 80 Q360 40 455 68" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 6"/>
+    </svg>
+    <figcaption>Muammo miyada emas — atrofdagi muhitda bo'lishi mumkin.</figcaption>
+  </figure>
+
+  <p class="lead">Ko'pchilik “avval kitobni bir soat o'qiy olardim, endi bo'lmayapti” deb his qiladi. Lekin tadqiqotchilar to'g'ri savol beradi: diqqat qobiliyatimiz kamaydimi yoki shunchaki chalg'ituvchilar ko'paydimi?</p>
+
+  <h2>Biz o'zimizni shunday his qilamiz</h2>
+  <p>2021-yilda Britaniyada 2000 dan ortiq kattalar o'rtasida o'tkazilgan so'rovda deyarli yarmi o'z diqqati qisqarganini aytgan, taxminan uchdan ikki qismi esa yoshlarning diqqati yomonlashganiga ishongan. Chikago universiteti olimi Monika Rozenberg ta'kidlashicha, odamlar his qilayotgan narsa bilan isbotlangan narsa o'rtasida katta tafovut bor.</p>
+
+  <div class="art-cards">
+    <div class="art-card"><b>~50%</b><span>kattalar o'z diqqati qisqargan deb o'ylaydi (Britaniya, 2021)</span></div>
+    <div class="art-card"><b>21 000+</b><span>kishining d2 test natijalari tahlil qilindi, 32 mamlakat</span></div>
+    <div class="art-card"><b>0</b><span>bolalarda pasayish topilmadi; kattalarda ozgina yaxshilanish</span></div>
+  </div>
+
+  <h2>Laboratoriya: qobiliyat o'zgarmagan</h2>
+  <p>1990–2021-yillardagi diqqat testlari (d2) bo'yicha 2024-yilgi meta-tahlil bolalarda pasayishni ko'rsatmadi, kattalarda esa biroz yaxshilanish topdi. Missuri universiteti olimi Nelson Kouan fikricha, o'zgargan narsa miya emas — odatlarimiz.</p>
+  <p>“Oltin baliq” haqidagi mashhur da'vo esa 2015-yilgi Microsoft Canada hisobotiga borib taqaladi. U so'rovlar va raqamli odatlarga tayangan, kognitiv chegaralarni o'lchamagan. Oltin baliq bilan taqqoslash esa isbotlanmagan.</p>
+
+  <h2>Haqiqiy hayot: bu yerda o'zgarish bor</h2>
+  <p>Kaliforniya universiteti (Irvine) professori Gloriya Mark taxminan yigirma yil davomida ofis xodimlarini kuzatgan. Uning ma'lumotiga ko'ra, bitta ekran vazifasida o'rtacha o'tkazilgan vaqt 2000-yillar o'rtasidagi ≈2,5 daqiqadan 2020-yillar boshida ≈47 soniyagacha tushgan.</p>
+
+  <figure class="art-fig">
+    <svg viewBox="0 0 720 240" role="img" aria-label="Bitta ekranda o'rtacha vaqt: taxminan 150 soniyadan 47 soniyagacha">
+      <rect width="720" height="240" fill="var(--surface)"/>
+      <g font-family="Inter,sans-serif" font-size="14" fill="currentColor">
+        <text x="30" y="38" font-weight="600">Bitta ekran vazifasida o'rtacha vaqt</text>
+        <text x="30" y="96">2000-yillar o'rtasi</text>
+        <text x="30" y="156">2020-yillar boshi</text>
+      </g>
+      <rect x="190" y="72" width="480" height="34" rx="4" fill="currentColor" opacity=".18"/>
+      <rect x="190" y="132" width="150" height="34" rx="4" style="fill:var(--stamp-red)"/>
+      <g font-family="IBM Plex Mono,monospace" font-size="14" font-weight="500" fill="currentColor">
+        <text x="204" y="94">≈ 150 soniya</text>
+        <text x="352" y="154">≈ 47 soniya</text>
+      </g>
+      <text x="30" y="215" font-family="IBM Plex Mono,monospace" font-size="11" fill="var(--muted)">Manba: G. Mark (UC Irvine) kuzatuvlari</text>
+    </svg>
+    <figcaption>Qobiliyat emas, xatti-harakat o'zgargan: ekranlar orasida sakrash ko'paygan.</figcaption>
+  </figure>
+
+  <p>Yana bir qiziq topilma: odamlar o'zlarini ham tashqi xalaqit kabi tez-tez uzib turadi. Demak, odat katta rol o'ynaydi.</p>
+
+  <p class="art-pull">Diqqat yo'qolmagan — uni tortib olishga mo'ljallangan muhitda saqlab turish qiyinlashgan.</p>
+
+  <h2>Diqqatni qanday saqlash mumkin?</h2>
+  <ul class="art-tips">
+    <li data-n="01"><b>O'zingizni emas, muhitni o'zgartiring.</b> Telefonni boshqa xonaga qo'ying — ovozsiz bo'lsa ham u chalg'itadi.</li>
+    <li data-n="02"><b>Aniq maqsad.</b> “Bugun 2 ta abzas yozaman” kabi aniq vazifa va natijani ko'rib borish diqqatni ushlab turadi.</li>
+    <li data-n="03"><b>Qisqa tanaffuslar va mindfulness.</b> Miyani vaqti-vaqti bilan dam oldirish diqqatni mustahkamlaydi.</li>
+    <li data-n="04"><b>Uyqu va stressga e'tibor bering.</b> Kayfiyat, uyqu va xavotir diqqatga kuchli ta'sir qiladi.</li>
+  </ul>
+
+  <p>Bu Harvardga yoki FLEXga tayyorgarlik ko'rayotganlar uchun ayniqsa muhim: insho yozish, lug'at yodlash va test yechish — hammasi chuqur diqqat talab qiladi. Telefonni yashiring, taymerni yoqing, 25 daqiqa to'liq ishlang.</p>
+
+  <p class="art-src">Manba: David Adam, “Are Attention Spans Really Shrinking? What the Science Says”, <a href="https://www.scientificamerican.com/article/are-attention-spans-really-shrinking-what-the-science-says/" target="_blank" rel="noopener">Scientific American</a> (Nature'dan qayta nashr). Matn erkin qisqacha bayon, rasmlar — original illyustratsiyalar.</p>
+</article>
+
+<div class="perforation"></div>
+
+<section id="more">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Yana o'qing</span>
+      <h2 class="section-title">Blogdagi boshqa postlar</h2>
+    </div>
+    <a class="btn-ghost-dark reveal" href="blog.html">Blogga qaytish →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">MyHarvard<span class="dot">Path</span></a>
+        <p>FLEX dasturi, Harvard yo'li va akademik tayyorgarlik haqida amaliy kontent. Rasmiy ma'lumot uchun tegishli rasmiy saytlarga murojaat qiling.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <a href="harvard-yoli.html">Harvard yo'li</a>
+          <a href="flex.html">FLEX dasturi</a>
+          <a href="universitetlar.html">Universitetlarni taqqoslash</a>
+          <a href="ingliz-tili.html">Ingliz tili</a>
+          <a href="lugat-va-iboralar.html">Lug'at va iboralar</a>
+          <a href="kitoblar.html">Kitoblar</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Boshqa</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="reyting.html">Reyting</a>
+          <a href="about.html">Kanal haqida</a>
+          <a href="ota-onalar.html">Ota-onalar uchun</a>
+          <a href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanal</a>
+        </div>
+      </div>
+      <div class="footer-cta">
+        <span class="section-eyebrow" style="color:var(--gold)">Keyingi qadam</span>
+        <a class="btn-primary" href="https://t.me/MyHarvardPath" target="_blank" rel="noopener">Telegram kanalga qo'shilish →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>t.me/MyHarvardPath &nbsp;||&nbsp; Muallif: Ilyos Ruzibekov &nbsp;||&nbsp; <a href="https://t.me/Ilyos_Ruzibekov" target="_blank" rel="noopener">t.me/Ilyos_Ruzibekov</a> &nbsp;||&nbsp; <a href="mailto:ilyosruzibekov@gmail.com">ilyosruzibekov@gmail.com</a></p>
+      <p>© 2026 MyHarvardPath</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
