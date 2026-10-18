@@ -130,6 +130,7 @@
       stat('🔥', u.streak, 'kun ketma-ket') + stat('📖', d.words.due, 'takrorlanadigan so\'z') +
       stat('🧠', d.words.learned, "o'rganilgan so'z") + stat('🏆', u.rank || '—', "umumiy o'rin") + '</section>' +
       '<section class="rz-cols">' +
+      '<a class="rz-feature" href="#/play/galaxy"><span class="rz-new">YANGI · faqat saytda</span><b>So&#39;z galaktikasi</b><i>Botda o&#39;rgangan so&#39;zlaringiz yulduzlarga aylangan: ' + fmt(d.words.learned) + ' ta yulduz sizni kutmoqda.</i></a>' +
       link('play', '🎯', 'Kunlik viktorina', d.challenge.played ? 'Bugun ' + d.challenge.score + ' ball. Ertaga yangisi!' : 'Bugun hali o\'ynalmagan. XP yig\'ing!') +
       link('review', '📖', 'Takrorlash', d.words.due ? d.words.due + " ta so'z navbat kutmoqda" : "Hozircha takrorlanadigan so'z yo'q") +
       link('shop', '🛍️', "XP do'koni", 'Nishonlar, streak muzlatgich va sovg\'alar') +
@@ -175,6 +176,7 @@
   async function renderPlay() {
     view().innerHTML =
       '<header class="rz-head"><h1>O\'yinlar</h1></header>' +
+      '<a class="rz-feature" href="#/play/galaxy"><span class="rz-new">YANGI · faqat saytda</span><b>So&#39;z galaktikasi</b><i>O&#39;rgangan har bir so&#39;zingiz galaktikada yulduz bo&#39;lib porlaydi. Yaqinlashtiring, bosing va talaffuzini eshiting.</i></a>' +
       '<section class="rz-cols"><a class="rz-link rz-card" href="#/play/challenge">' + emo('🎯', 34) + '<div><b>Kunlik viktorina</b><span>Har kuni bir marta, XP beradi</span></div></a>' +
       '<a class="rz-link rz-card" href="#/play/memory">' + emo('🧩', 34) + '<div><b>Xotira</b><span>So\'z juftliklarini toping (XPsiz mashq)</span></div></a></section>' + botCard();
   }
@@ -224,6 +226,95 @@
         if (matched === pairs.length) setTimeout(() => toast('🎉 Barcha juftliklar topildi: ' + moves + ' yurishda'), 300);
       } else { lock = true; setTimeout(() => { a.classList.remove('up'); c.classList.remove('up'); lock = false; }, 800); }
     });
+  }
+
+  // ---------- So'z galaktikasi (faqat saytda) ----------
+  const CEFR_COL = { A1: '#8ecbff', A2: '#7ad7a6', B1: '#ffd36a', B2: '#ffa35c', C1: '#ff7a8a', C2: '#c08bff' };
+  const hash = n => { let x = (n * 2654435761) >>> 0; x ^= x >>> 15; x = Math.imul(x, 2246822519) >>> 0; x ^= x >>> 13; return (x >>> 0) / 4294967296; };
+
+  async function renderGalaxy() {
+    view().innerHTML = loading();
+    const d = await api('galaxy');
+    const words = d.words;
+    const pct = d.total ? Math.max(0.1, (words.length / d.total) * 100) : 0;
+    view().innerHTML =
+      '<header class="rz-head"><h1>So\'z galaktikasi</h1><span class="rz-pill">' + fmt(words.length) + ' yulduz</span></header>' +
+      '<div class="rz-gal"><canvas id="rz-gal-cv"></canvas>' +
+      '<div class="rz-gal-hud"><b>' + fmt(words.length) + '</b> / ' + fmt(d.total) + ' so\'z · ' + pct.toFixed(1) + '% kashf etildi</div>' +
+      '<div class="rz-gal-zoom"><button data-z="1.3" aria-label="Kattalashtirish">+</button><button data-z="0.77" aria-label="Kichraytirish">−</button></div>' +
+      '<div class="rz-gal-card" id="rz-gal-card" hidden></div></div>' +
+      '<div class="rz-legend">' + Object.keys(CEFR_COL).map(k => '<span><i style="background:' + CEFR_COL[k] + '"></i>' + k + '</span>').join('') + '<span><i class="due"></i>takrorlash vaqti</span><span><i class="gold"></i>o\'zlashtirilgan</span></div>' +
+      (words.length ? '' : '<p class="rz-center rz-hint">Hali yulduz yo\'q. Botda so\'z o\'rganing: har bir so\'z galaktikada yangi yulduzga aylanadi!</p>');
+
+    const cv = document.getElementById('rz-gal-cv'), ctx = cv.getContext('2d');
+    const card = document.getElementById('rz-gal-card');
+    let W = 0, H = 0, dpr = Math.min(2, window.devicePixelRatio || 1);
+    let scale = 1, ox = 0, oy = 0, sel = null, drag = null, moved = false;
+    const stars = words.map(w => {
+      const arm = Math.floor(hash(w.id + 7) * 3), r = Math.pow(hash(w.id + 1), 0.62);
+      const a = arm * 2.0944 + r * 5.2 + (hash(w.id + 3) - 0.5) * 0.9 * (1.1 - r);
+      const off = (hash(w.id + 5) - 0.5) * 0.12;
+      return { w, r, a, off, s: 1.6 + w.box * 0.7 + (w.mastered ? 1.2 : 0), ph: hash(w.id + 9) * 6.28 };
+    });
+    const bg = Array.from({ length: 90 }, (_, i) => ({ x: hash(i + 500), y: hash(i + 900), s: hash(i + 1300) }));
+    const resize = () => {
+      const b = cv.parentElement.getBoundingClientRect();
+      W = b.width; H = b.height; cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    const R = () => Math.min(W, H) * 0.46 * scale;
+    const pos = (s, t) => { const a = s.a + t * (0.015 / (0.3 + s.r)); const rr = (s.r + s.off) * R(); return [W / 2 + ox + Math.cos(a) * rr, H / 2 + oy + Math.sin(a) * rr * 0.72]; };
+
+    let alive = true, t0 = performance.now();
+    const draw = now => {
+      if (!alive || !cv.isConnected) { alive = false; return; }
+      const t = (now - t0) / 1000;
+      const g = ctx.createRadialGradient(W / 2 + ox, H / 2 + oy, 0, W / 2 + ox, H / 2 + oy, R() * 1.1);
+      g.addColorStop(0, '#2b1f5c'); g.addColorStop(0.45, '#120d33'); g.addColorStop(1, '#05030f');
+      ctx.fillStyle = '#05030f'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      bg.forEach(b => { ctx.globalAlpha = 0.25 + 0.5 * Math.abs(Math.sin(t * 0.6 + b.s * 9)); ctx.fillStyle = '#fff'; ctx.fillRect(b.x * W, b.y * H, 1.2, 1.2); });
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'lighter';
+      stars.forEach(s => {
+        const [x, y] = pos(s, t); s._x = x; s._y = y;
+        if (x < -20 || y < -20 || x > W + 20 || y > H + 20) return;
+        const col = CEFR_COL[s.w.cefr] || '#fff';
+        const pulse = s.w.due ? 1 + 0.35 * Math.sin(t * 3 + s.ph) : 1;
+        const rad = s.s * Math.sqrt(scale) * pulse;
+        const gr = ctx.createRadialGradient(x, y, 0, x, y, rad * 3.2);
+        gr.addColorStop(0, col); gr.addColorStop(0.25, col + '55'); gr.addColorStop(1, col + '00');
+        ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, rad * 3.2, 0, 6.283); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x, y, rad * 0.6, 0, 6.283); ctx.fill();
+        if (s.w.mastered) { ctx.strokeStyle = '#ffd60a'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, rad * 1.8, 0, 6.283); ctx.stroke(); }
+        if (s.w.due) { ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, rad * (2.2 + 0.6 * Math.sin(t * 3 + s.ph)), 0, 6.283); ctx.stroke(); }
+      });
+      ctx.globalCompositeOperation = 'source-over';
+      if (sel) {
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(sel._x, sel._y, 14, 0, 6.283); ctx.stroke();
+        ctx.fillStyle = '#fff'; ctx.font = '600 13px Inter, sans-serif'; ctx.fillText(sel.w.en, sel._x + 18, sel._y + 4);
+      }
+      requestAnimationFrame(draw);
+    };
+    requestAnimationFrame(draw);
+
+    const pick = (px, py) => { let best = null, bd = 18 * 18; stars.forEach(s => { const dx = s._x - px, dy = s._y - py, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = s; } }); return best; };
+    const show = s => {
+      sel = s;
+      if (!s) { card.hidden = true; return; }
+      const w = s.w;
+      card.hidden = false;
+      card.innerHTML = '<b>' + esc(w.en) + '</b><span>' + esc(w.uz) + '</span><em>' + esc(w.cefr) + ' · ' + esc(w.pos) + ' · ' + (w.mastered ? "o'zlashtirilgan" : w.box + '/5 quti') + (w.due ? ' · takrorlash vaqti!' : '') + '</em><button class="btn-ghost-dark" id="rz-say">Eshitish</button>';
+      document.getElementById('rz-say').onclick = () => { try { const u = new SpeechSynthesisUtterance(w.en); u.lang = 'en-US'; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) { toast('Brauzer ovozni qo\'llamaydi'); } };
+    };
+    const rel = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+    cv.addEventListener('pointerdown', e => { cv.setPointerCapture(e.pointerId); drag = { x: e.clientX, y: e.clientY, ox, oy }; moved = false; });
+    cv.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 4) moved = true; ox = drag.ox + dx; oy = drag.oy + dy; });
+    cv.addEventListener('pointerup', e => { if (!moved) { const [px, py] = rel(e); show(pick(px, py)); } drag = null; });
+    cv.addEventListener('wheel', e => { e.preventDefault(); scale = Math.max(0.5, Math.min(6, scale * (e.deltaY < 0 ? 1.12 : 0.9))); }, { passive: false });
+    view().querySelectorAll('[data-z]').forEach(b => b.onclick = () => { scale = Math.max(0.5, Math.min(6, scale * Number(b.dataset.z))); });
+    window.addEventListener('resize', resize);
   }
 
   // ---------- Reyting ----------
@@ -286,7 +377,7 @@
   // ---------- yo'naltirish ----------
   const ROUTES = {
     home: [renderHome, 'home'], review: [renderReview, 'review'], play: [renderPlay, 'play'], 'play/challenge': [renderChallenge, 'play'],
-    'play/memory': [renderMemory, 'play'], board: [renderBoard, 'board'], shop: [renderShop, 'shop'], profile: [renderProfile, 'profile'],
+    'play/memory': [renderMemory, 'play'], 'play/galaxy': [renderGalaxy, 'play'], board: [renderBoard, 'board'], shop: [renderShop, 'shop'], profile: [renderProfile, 'profile'],
   };
   let routeSeq = 0, lastKey = null;
   async function route() {

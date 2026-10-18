@@ -153,3 +153,23 @@ html[data-theme="dark"] .rz-tabs a { color: #fff; }
 @keyframes rzFade { to { opacity: 1; } }
 .rz-widget { display: flex; justify-content: center; margin: 4px 0 6px; min-height: 44px; }
 .rz-or { color: var(--muted); font-size: .8rem; margin: 10px 0; }
+
+.rz-feature { display: block; position: relative; overflow: hidden; margin-bottom: 14px; padding: 22px; border-radius: 24px; color: #fff; text-decoration: none; background: radial-gradient(circle at 80% 20%, #6b4fd8, #1c1255 55%, #070418); box-shadow: 0 12px 34px rgba(60,40,160,.35); transition: transform .2s cubic-bezier(.3,1.4,.5,1); }
+.rz-feature:active { transform: scale(.98); }
+.rz-feature::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent), radial-gradient(1px 1px at 70% 60%, #fff, transparent), radial-gradient(1.5px 1.5px at 40% 80%, #cdb8ff, transparent), radial-gradient(1px 1px at 90% 85%, #fff, transparent); animation: rzTw 3s ease-in-out infinite alternate; pointer-events: none; }
+@keyframes rzTw { from { opacity: .35; } to { opacity: 1; } }
+.rz-feature b { display: block; font-family: var(--font-display); font-size: 1.5rem; margin: 6px 0 4px; }
+.rz-feature i { font-style: normal; opacity: .85; font-size: .9rem; display: block; max-width: 420px; }
+.rz-new { background: rgba(255,255,255,.18); border-radius: 999px; padding: 4px 10px; font-size: .68rem; font-weight: 700; letter-spacing: .04em; }
+.rz-gal { position: relative; height: min(70vh, 520px); border-radius: 26px; overflow: hidden; background: #05030f; box-shadow: 0 14px 40px rgba(20,10,80,.35); touch-action: none; }
+.rz-gal canvas { display: block; cursor: grab; }
+.rz-gal-hud { position: absolute; left: 14px; top: 14px; color: #fff; font-size: .78rem; background: rgba(255,255,255,.12); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 999px; padding: 6px 14px; }
+.rz-gal-zoom { position: absolute; right: 12px; top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.rz-gal-zoom button { width: 40px; height: 40px; border-radius: 50%; border: 0; font-size: 1.3rem; color: #fff; background: rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; }
+.rz-gal-card { position: absolute; left: 12px; right: 12px; bottom: 12px; display: grid; gap: 4px; padding: 16px; border-radius: 20px; color: #fff; background: rgba(255,255,255,.14); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border: .5px solid rgba(255,255,255,.3); animation: rzIn .3s ease both; }
+.rz-gal-card b { font-size: 1.4rem; font-family: var(--font-display); }
+.rz-gal-card em { font-style: normal; font-size: .78rem; opacity: .8; }
+.rz-gal-card button { justify-self: start; margin-top: 6px; padding: 8px 18px !important; background: rgba(255,255,255,.2) !important; color: #fff !important; }
+.rz-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; margin: 14px 0; font-size: .75rem; color: var(--muted); }
+.rz-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
+.rz-legend i.due { border: 1.5px solid var(--muted); } .rz-legend i.gold { border: 1.5px solid #ffd60a; }
