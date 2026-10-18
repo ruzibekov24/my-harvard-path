@@ -269,7 +269,7 @@
     let alive = true, t0 = performance.now();
     const draw = now => {
       if (!alive || !cv.isConnected) { alive = false; return; }
-      const t = (now - t0) / 1000;
+      const t = (now - t0) / 1000, kd = Math.min(1, 380 / Math.max(1, stars.length));
       const g = ctx.createRadialGradient(W / 2 + ox, H / 2 + oy, 0, W / 2 + ox, H / 2 + oy, R() * 1.1);
       g.addColorStop(0, '#2b1f5c'); g.addColorStop(0.45, '#120d33'); g.addColorStop(1, '#05030f');
       ctx.fillStyle = '#05030f'; ctx.fillRect(0, 0, W, H);
@@ -285,8 +285,8 @@
         const rad = s.s * Math.sqrt(scale) * pulse;
         const gr = ctx.createRadialGradient(x, y, 0, x, y, rad * 3.2);
         gr.addColorStop(0, col); gr.addColorStop(0.25, col + '55'); gr.addColorStop(1, col + '00');
-        ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, rad * 3.2, 0, 6.283); ctx.fill();
-        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x, y, rad * 0.6, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = Math.max(0.16, kd); ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, rad * 3.2, 0, 6.283); ctx.fill(); ctx.globalAlpha = 1;
+        ctx.fillStyle = s.w.box >= 5 ? '#fff' : col; ctx.beginPath(); ctx.arc(x, y, rad * (s.w.box >= 5 ? 0.55 : 0.4), 0, 6.283); ctx.fill();
         if (s.w.mastered) { ctx.strokeStyle = '#ffd60a'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, rad * 1.8, 0, 6.283); ctx.stroke(); }
         if (s.w.due) { ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, rad * (2.2 + 0.6 * Math.sin(t * 3 + s.ph)), 0, 6.283); ctx.stroke(); }
       });

@@ -142,9 +142,9 @@ html[data-theme="dark"] .rz-tabs a { color: #fff; }
 .rz-page .rz-bar i, .rz-page .rz-level-badge, .rz-page .rz-avatar { background: var(--rz-blue); }
 @media (max-width: 520px) {
   .rz-grid { grid-template-columns: repeat(2, 1fr); }
-  .rz-page { padding-top: 92px; }
+  .rz-page { padding-top: 70px; }
 }
-  .rz-page { padding-top: 92px; }
+  .rz-page { padding-top: 70px; }
 }
 @media (min-width: 760px) { .rz-cols { grid-template-columns: 1fr 1fr; column-gap: 14px; } .rz-cols .rz-bot { grid-column: 1 / -1; } }
 .rz-page section { padding: 0; margin: 0; }
@@ -173,3 +173,4 @@ html[data-theme="dark"] .rz-tabs a { color: #fff; }
 .rz-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; margin: 14px 0; font-size: .75rem; color: var(--muted); }
 .rz-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
 .rz-legend i.due { border: 1.5px solid var(--muted); } .rz-legend i.gold { border: 1.5px solid #ffd60a; }
+.rz-gal-card[hidden] { display: none; }
