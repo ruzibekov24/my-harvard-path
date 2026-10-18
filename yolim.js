@@ -99,42 +99,82 @@
   const set = (k, v) => { a[k] = v; };
   const total = STEPS.length;
 
-  function optionsHtml(opts, cur) {
-    return '<div class="yl-opts">' + opts.map((o) => '<button type="button" class="yl-opt' + (cur === o[0] ? ' on' : '') + '" data-v="' + esc(o[0]) + '">' + esc(o[1]) + '</button>').join('') + '</div>';
-  }
+  const X_BTN = '<button type="button" class="yl-x" tabindex="-1" aria-label="Tozalash" hidden><svg viewBox="0 0 16 16"><path d="M5 5l6 6M11 5l-6 6"/></svg></button>';
+  const SEARCH_IC = '<svg class="yl-sic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>';
+  const searchField = (id, ph, val) => '<div class="yl-sf">' + SEARCH_IC + '<input type="search" id="' + id + '" placeholder="' + esc(ph) + '" autocomplete="off" value="' + esc(val || '') + '">' + X_BTN + '</div>';
+  const optionsHtml = (opts, cur) => '<div class="yl-group yl-opts">' + opts.map((o) => '<button type="button" class="yl-gr-row yl-opt' + (cur === o[0] ? ' on' : '') + '" data-v="' + esc(o[0]) + '"><span>' + esc(o[1]) + '</span><svg viewBox="0 0 16 16" class="yl-ok"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>').join('') + '</div>';
   const sel = (id, items, cur, ph) => '<select id="' + id + '"><option value="">' + esc(ph) + '</option>' + items.map((it) => { const v = Array.isArray(it) ? it[0] : it, l = Array.isArray(it) ? it[1] : it; return '<option value="' + esc(v) + '"' + (String(cur) === String(v) ? ' selected' : '') + '>' + esc(l) + '</option>'; }).join('') + '</select>';
+  const row = (label, inner) => '<label class="yl-gr-row"><span>' + esc(label) + '</span>' + inner + '</label>';
+  const toggleRow = (id, text, on) => '<div class="yl-group yl-tg"><label class="yl-gr-row"><span>' + esc(text) + '</span><input type="checkbox" class="yl-switch" id="' + id + '"' + (on ? ' checked' : '') + '></label></div>';
+  const slider = (id, min, max, step, val, dis, lo, hi) => '<div class="yl-slider"><span>' + lo + '</span><input type="range" id="' + id + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '"' + (dis ? ' disabled' : '') + '><span>' + hi + '</span></div>';
+
+  // ---- iOS kalendar (DOB uchun) ----
+  const WD = ['Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sha', 'Ya'];
+  let cal = { m: 0, y: 0 };
+  function calHtml() {
+    const cy = new Date().getFullYear();
+    const yrs = []; for (let y = cy - 12; y >= cy - 30; y--) yrs.push(y);
+    const first = new Date(cal.y, cal.m, 1), dim = new Date(cal.y, cal.m + 1, 0).getDate();
+    const lead = (first.getDay() + 6) % 7;
+    let cells = ''; for (let i = 0; i < lead; i++) cells += '<i></i>';
+    for (let d = 1; d <= dim; d++) { const on = +a.dd === d && +a.dm === cal.m + 1 && +a.dy === cal.y; cells += '<button type="button" class="yl-day' + (on ? ' on' : '') + '" data-d="' + d + '">' + d + '</button>'; }
+    return '<div class="yl-cal"><div class="yl-cal-h"><div class="yl-cal-t"><select id="ylCm">' + MONTHS.map((m, i) => '<option value="' + i + '"' + (i === cal.m ? ' selected' : '') + '>' + m + '</option>').join('') + '</select><select id="ylCy">' + yrs.map((y) => '<option' + (y === cal.y ? ' selected' : '') + '>' + y + '</option>').join('') + '</select></div><div class="yl-cal-n"><button type="button" id="ylCp" aria-label="Oldingi oy">&#8249;</button><button type="button" id="ylCn" aria-label="Keyingi oy">&#8250;</button></div></div><div class="yl-cal-w">' + WD.map((w) => '<span>' + w + '</span>').join('') + '</div><div class="yl-cal-g">' + cells + '</div></div>' +
+      '<div class="yl-pickedp">' + (a.dd ? '<span class="yl-pill">' + a.dd + ' ' + MONTHS[a.dm - 1] + ' ' + a.dy + '</span>' : '<span class="yl-pill dim">Sanani tanlang</span>') + '</div>';
+  }
+  function bindCal() {
+    const redraw = () => { $('ylCalBox').innerHTML = calHtml(); bindCal(); };
+    $('ylCm').onchange = (e) => { cal.m = +e.target.value; redraw(); };
+    $('ylCy').onchange = (e) => { cal.y = +e.target.value; redraw(); };
+    $('ylCp').onclick = () => { cal.m--; if (cal.m < 0) { cal.m = 11; cal.y--; } redraw(); };
+    $('ylCn').onclick = () => { cal.m++; if (cal.m > 11) { cal.m = 0; cal.y++; } redraw(); };
+    $('ylCalBox').querySelectorAll('.yl-day').forEach((b) => { b.onclick = () => { a.dd = b.dataset.d; a.dm = String(cal.m + 1); a.dy = String(cal.y); redraw(); }; });
+  }
+
+  function enhance() {
+    wiz.querySelectorAll('.yl-sf, .yl-gr-row').forEach((w) => {
+      const i = w.querySelector('input:not([type=checkbox]):not([type=range]), textarea'), x = w.querySelector('.yl-x');
+      if (!i || !x) return;
+      const sync = () => { x.hidden = !i.value; };
+      i.addEventListener('input', sync); sync();
+      x.onclick = () => { i.value = ''; i.dispatchEvent(new Event('input', { bubbles: true })); i.focus(); };
+    });
+    wiz.querySelectorAll('input[type=range]').forEach((r) => {
+      const fill = () => { r.style.setProperty('--p', ((r.value - r.min) / (r.max - r.min)) * 100 + '%'); };
+      r.addEventListener('input', fill); fill();
+    });
+  }
 
   function renderStep() {
     const st = STEPS[stepIx];
     let body = '';
     if (st.id === 'uni') {
-      body = '<input type="search" id="ylQ" class="yl-search" placeholder="Universitet nomini yozing…" autocomplete="off"><div class="yl-list" id="ylUniList"></div>';
+      body = searchField('ylQ', 'Universitet nomini yozing…', '') + '<div class="yl-list" id="ylUniList"></div>';
     } else if (st.opts) {
       body = optionsHtml(st.opts, a[st.id]);
     } else if (st.id === 'grad') {
       const y0 = new Date().getFullYear() + 1;
-      body = '<div class="yl-row2">' + sel('ylGm', MONTHS.map((m, i) => [String(i + 1), m]), a.gm || '6', 'Oy') + sel('ylGy', [0, 1, 2, 3, 4].map((i) => String(y0 + i)), a.gy || String(y0), 'Yil') + '</div>';
+      body = '<div class="yl-group">' + row('Oy', sel('ylGm', MONTHS.map((m, i) => [String(i + 1), m]), a.gm || '6', 'Oy')) + row('Yil', sel('ylGy', [0, 1, 2, 3, 4].map((i) => String(y0 + i)), a.gy || String(y0), 'Yil')) + '</div>';
     } else if (st.id === 'major') {
-      body = '<input type="search" id="ylQ" class="yl-search" placeholder="Yo\'nalishni qidiring…" autocomplete="off" value="' + esc(a.major || '') + '"><div class="yl-list" id="ylMajList"></div>';
+      body = searchField('ylQ', "Yo'nalishni qidiring…", a.major || '') + '<div class="yl-list" id="ylMajList"></div>';
     } else if (st.id === 'school') {
-      body = '<input type="text" id="ylSchool" class="yl-search" placeholder="Maktab nomini yozing" maxlength="80" value="' + esc(a.school || '') + '"><label class="yl-check"><input type="checkbox" id="ylNoSchool"' + (a.noSchool ? ' checked' : '') + '> Ro\'yxatda yo\'q / aytmayman</label>' + '<p class="yl-tip">Maslahat: maktabingiz raqobati va darajasi universitet uchun muhim signal.</p>';
+      body = '<div class="yl-group"><div class="yl-gr-row"><input type="text" id="ylSchool" placeholder="Maktab nomi" maxlength="80" value="' + esc(a.school || '') + '">' + X_BTN + '</div><label class="yl-gr-row"><span>Ro\'yxatda yo\'q / aytmayman</span><input type="checkbox" class="yl-switch" id="ylNoSchool"' + (a.noSchool ? ' checked' : '') + '></label></div><p class="yl-tip">Maslahat: maktabingiz raqobati va darajasi universitet uchun muhim signal.</p>';
     } else if (st.id === 'dob') {
-      const yrs = []; const cy = new Date().getFullYear(); for (let y = cy - 12; y >= cy - 30; y--) yrs.push(String(y));
-      body = '<div class="yl-row3">' + sel('ylDm', MONTHS.map((m, i) => [String(i + 1), m]), a.dm, 'Oy') + sel('ylDd', Array.from({ length: 31 }, (_, i) => String(i + 1)), a.dd, 'Kun') + sel('ylDy', yrs, a.dy, 'Yil') + '</div>';
+      if (!cal.y) { cal.y = +a.dy || new Date().getFullYear() - 17; cal.m = a.dm ? +a.dm - 1 : 0; }
+      body = '<div id="ylCalBox">' + calHtml() + '</div>';
     } else if (st.id === 'country') {
-      body = sel('ylCountry', COUNTRIES, a.country || COUNTRIES[0], 'Davlatni tanlang');
+      body = '<div class="yl-group">' + row('Davlat', sel('ylCountry', COUNTRIES, a.country || COUNTRIES[0], 'Tanlang')) + '</div>';
     } else if (st.id === 'gpa') {
-      body = '<div class="yl-big"><input type="number" id="ylGpa" min="0" max="100" step="0.01" value="' + esc(a.gpa != null ? a.gpa : '') + '" placeholder="0.0"><select id="ylGpaScale"><option value="5"' + (a.gpaScale === '5' ? ' selected' : '') + '>5 ballik</option><option value="4"' + (a.gpaScale === '4' ? ' selected' : '') + '>4.0 shkala</option><option value="100"' + (a.gpaScale === '100' ? ' selected' : '') + '>100 ball (%)</option></select></div>';
+      body = '<div class="yl-group"><div class="yl-gr-row yl-bigrow"><input type="number" id="ylGpa" min="0" max="100" step="0.01" value="' + esc(a.gpa != null ? a.gpa : '') + '" placeholder="0.0">' + X_BTN + '</div>' + row('Shkala', '<select id="ylGpaScale"><option value="5"' + (a.gpaScale === '5' ? ' selected' : '') + '>5 ballik</option><option value="4"' + (a.gpaScale === '4' ? ' selected' : '') + '>4.0 shkala</option><option value="100"' + (a.gpaScale === '100' ? ' selected' : '') + '>100 ball (%)</option></select>') + '</div>';
     } else if (st.id === 'sat') {
       const v = a.sat || 400;
-      body = '<div class="yl-sl"><input type="range" id="ylSat" min="400" max="1600" step="10" value="' + v + '"' + (a.noSat ? ' disabled' : '') + '><output id="ylSatOut" class="yl-pillbig">' + (a.noSat ? '—' : v) + '</output></div><label class="yl-check"><input type="checkbox" id="ylNoSat"' + (a.noSat ? ' checked' : '') + '> SAT topshirmaganman</label>';
+      body = '<div class="yl-pillrow"><output id="ylSatOut" class="yl-pillbig">' + (a.noSat ? '—' : v) + '</output></div>' + slider('ylSat', 400, 1600, 10, v, a.noSat, '400', '1600') + toggleRow('ylNoSat', 'SAT topshirmaganman', a.noSat);
     } else if (st.id === 'act') {
-      body = sel('ylAct', Array.from({ length: 27 }, (_, i) => String(10 + i)), a.act, 'ACT ballini tanlang') + '<label class="yl-check"><input type="checkbox" id="ylNoAct"' + (a.noAct ? ' checked' : '') + '> ACT topshirmaganman</label>';
+      body = '<div class="yl-group">' + row('ACT bali', sel('ylAct', Array.from({ length: 27 }, (_, i) => String(10 + i)), a.act, 'Tanlang')) + '</div>' + toggleRow('ylNoAct', 'ACT topshirmaganman', a.noAct);
     } else if (st.id === 'ielts') {
       const v = a.ielts || 6;
-      body = '<div class="yl-sl"><input type="range" id="ylIelts" min="4" max="9" step="0.5" value="' + v + '"' + (a.noIelts ? ' disabled' : '') + '><output id="ylIeltsOut" class="yl-pillbig">' + (a.noIelts ? '—' : Number(v).toFixed(1)) + '</output></div><label class="yl-check"><input type="checkbox" id="ylNoIelts"' + (a.noIelts ? ' checked' : '') + '> IELTS topshirmaganman</label>';
+      body = '<div class="yl-pillrow"><output id="ylIeltsOut" class="yl-pillbig">' + (a.noIelts ? '—' : Number(v).toFixed(1)) + '</output></div>' + slider('ylIelts', 4, 9, 0.5, v, a.noIelts, '4.0', '9.0') + toggleRow('ylNoIelts', 'IELTS topshirmaganman', a.noIelts);
     } else if (st.id === 'certs') {
-      body = '<div class="yl-chips" id="ylChips">' + CERTS.map((c) => '<button type="button" data-c="' + esc(c) + '" class="' + ((a.certs || []).indexOf(c) > -1 ? 'on' : '') + '">' + esc(c) + '</button>').join('') + '</div><textarea id="ylExtra" rows="3" maxlength="500" placeholder="Boshqa yutuqlaringiz (ixtiyoriy): masalan, Matematika olimpiadasi, viloyat 2-o\'rin">' + esc(a.extra || '') + '</textarea>';
+      body = '<div class="yl-chips" id="ylChips">' + CERTS.map((c) => '<button type="button" data-c="' + esc(c) + '" class="' + ((a.certs || []).indexOf(c) > -1 ? 'on' : '') + '">' + esc(c) + '</button>').join('') + '</div><div class="yl-group"><div class="yl-gr-row"><textarea id="ylExtra" rows="3" maxlength="500" placeholder="Boshqa yutuqlaringiz (ixtiyoriy)">' + esc(a.extra || '') + '</textarea></div></div>';
     }
     const last = stepIx === total - 1;
     wiz.innerHTML =
@@ -142,6 +182,7 @@
       '<div class="yl-stage" id="ylStage"><span class="yl-count-s">' + (stepIx + 1) + ' / ' + total + '</span><h2>' + esc(st.t) + '</h2>' + (st.s ? '<p>' + esc(st.s) + '</p>' : '') + '<div class="yl-body">' + body + '</div></div>' +
       '<div class="yl-nav">' + (stepIx > 0 ? '<button type="button" class="yl-back" id="ylBack">Orqaga</button>' : '<span></span>') + (st.opts ? '' : '<button type="button" class="btn-primary" id="ylNext">' + (last ? 'Hisoblash' : 'Davom etish') + '</button>') + '</div>';
     bindStep(st);
+    enhance();
   }
 
   function renderUniList(q) {
@@ -189,7 +230,7 @@
       $('ylNoSchool').onchange = (e) => set('noSchool', e.target.checked);
       $('ylSchool').onkeydown = (e) => { if (e.key === 'Enter') next(); };
     }
-    if (st.id === 'dob') { ['ylDm:dm', 'ylDd:dd', 'ylDy:dy'].forEach((x) => { const p = x.split(':'); $(p[0]).onchange = (e) => set(p[1], e.target.value); }); }
+    if (st.id === 'dob') bindCal();
     if (st.id === 'country') { set('country', $('ylCountry').value || COUNTRIES[0]); $('ylCountry').onchange = (e) => set('country', e.target.value); }
     if (st.id === 'gpa') {
       const upd = () => { set('gpa', parseFloat($('ylGpa').value) || 0); set('gpaScale', $('ylGpaScale').value); };

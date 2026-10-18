@@ -128,3 +128,71 @@
 .yl-chance-in small { opacity: .75; } .yl-chance-in h2 { font-family: var(--font-display); font-size: clamp(1.2rem, 3.4vw, 1.7rem); margin: 6px 0; line-height: 1.25; } .yl-chance-in u { text-decoration-color: var(--c); text-decoration-thickness: 3px; text-underline-offset: 4px; } .yl-chance-in p { margin: 0; opacity: .8; font-size: .9rem; }
 .yl-restart { text-align: center; margin-top: 22px; }
 @media (max-width: 640px) { .yl-chance-in { grid-template-columns: 1fr; text-align: center; } .yl-bigpct { justify-content: center; } .yl-row3 { grid-template-columns: 1fr 1fr 1fr; } .yl-stage { min-height: 300px; } }
+
+/* ===== iOS 26 uslubi: guruhlangan maydonlar, qidiruv, slayder, kalendar, switch ===== */
+.yl-wiz { --ios-bg: #f2f2f7; --ios-gr: #ffffff; --ios-sep: rgba(60,60,67,.18); --ios-fill: rgba(120,120,128,.12); background: var(--ios-bg); border-color: transparent; }
+html[data-theme="dark"] .yl-wiz { --ios-bg: #000; --ios-gr: #1c1c1e; --ios-sep: rgba(84,84,88,.6); --ios-fill: rgba(120,120,128,.24); }
+.yl-group { background: var(--ios-gr); border-radius: 22px; overflow: hidden; margin-bottom: 14px; text-align: left; }
+.yl-gr-row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 50px; padding: 0 16px; border: 0; background: transparent; width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); text-align: left; cursor: pointer; }
+.yl-gr-row + .yl-gr-row { box-shadow: inset 0 .5px 0 var(--ios-sep); }
+.yl-group input[type=text], .yl-group input[type=number], .yl-group textarea, .yl-group select { border: 0 !important; background: transparent !important; border-radius: 0 !important; padding: 14px 0 !important; font: inherit; color: var(--ink); width: 100%; box-sizing: border-box; caret-color: #0088ff; }
+.yl-group input::placeholder, .yl-group textarea::placeholder { color: rgba(60,60,67,.3); }
+.yl-group input:focus, .yl-group textarea:focus, .yl-group select:focus { outline: none; border: 0 !important; }
+.yl-group select { width: auto; max-width: 62%; text-align: right; color: #0088ff; font-weight: 500; appearance: none; -webkit-appearance: none; padding-right: 4px !important; cursor: pointer; }
+.yl-group textarea { resize: none; min-height: 84px; }
+.yl-bigrow input { font-size: 1.7rem !important; font-weight: 700; text-align: left; }
+.yl-x { flex: none; width: 20px; height: 20px; border: 0; border-radius: 50%; background: rgba(60,60,67,.3); display: grid; place-items: center; padding: 0; cursor: pointer; }
+.yl-x[hidden] { display: none; }
+.yl-x svg { width: 12px; height: 12px; stroke: #fff; stroke-width: 2; fill: none; stroke-linecap: round; }
+.yl-opt { font-weight: 500; }
+.yl-opt .yl-ok { width: 18px; height: 18px; color: #0088ff; opacity: 0; transform: scale(.5); transition: .2s cubic-bezier(.3,1.5,.5,1); }
+.yl-opt.on { background: transparent; border: 0; color: var(--ink); }
+.yl-opt.on .yl-ok { opacity: 1; transform: none; }
+.yl-opt:active { background: var(--ios-fill); }
+.yl-sf { position: relative; display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 14px; border-radius: 999px; background: rgba(255,255,255,.7); -webkit-backdrop-filter: blur(16px) saturate(1.8); backdrop-filter: blur(16px) saturate(1.8); box-shadow: 0 2px 10px rgba(0,0,0,.08), inset 0 0 0 .5px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.9); margin-bottom: 12px; }
+html[data-theme="dark"] .yl-sf { background: rgba(60,60,64,.7); box-shadow: 0 2px 10px rgba(0,0,0,.4), inset 0 0 0 .5px rgba(255,255,255,.12); }
+.yl-sf .yl-sic { width: 18px; height: 18px; color: rgba(60,60,67,.6); flex: none; }
+.yl-sf input { flex: 1; min-width: 0; border: 0 !important; background: transparent !important; font: inherit; color: var(--ink); padding: 0 !important; outline: none; caret-color: #0088ff; -webkit-appearance: none; appearance: none; }
+.yl-sf input::-webkit-search-cancel-button { display: none; }
+.yl-sf input::placeholder { color: rgba(60,60,67,.5); }
+.yl-sf:focus-within { box-shadow: 0 2px 14px rgba(0,136,255,.25), inset 0 0 0 1.5px #0088ff; }
+.yl-list { background: var(--ios-gr); border-radius: 22px; margin-top: 0; padding: 4px 0; gap: 0; }
+.yl-li { border: 0; border-radius: 0; background: transparent; padding: 10px 16px; }
+.yl-li + .yl-li { box-shadow: inset 0 .5px 0 var(--ios-sep); }
+.yl-li:hover { background: var(--ios-fill); }
+.yl-li.on { background: rgba(0,136,255,.1); }
+.yl-slider { display: flex; align-items: center; gap: 12px; background: var(--ios-gr); border-radius: 22px; padding: 22px 18px 26px; margin-bottom: 14px; }
+.yl-slider > span { font-size: .75rem; font-weight: 600; color: rgba(60,60,67,.55); min-width: 30px; text-align: center; }
+.yl-slider input[type=range] { --p: 0%; flex: 1; -webkit-appearance: none; appearance: none; height: 28px; background: transparent; margin: 0; cursor: pointer; }
+.yl-slider input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 99px; background: linear-gradient(to right, #0088ff var(--p), rgba(120,120,128,.2) var(--p)); }
+.yl-slider input[type=range]::-moz-range-track { height: 6px; border-radius: 99px; background: rgba(120,120,128,.2); }
+.yl-slider input[type=range]::-moz-range-progress { height: 6px; border-radius: 99px; background: #0088ff; }
+.yl-slider input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 38px; height: 24px; margin-top: -9px; border-radius: 99px; background: #fff; box-shadow: 0 1px 1px rgba(0,0,0,.08), 0 3px 8px rgba(0,0,0,.2), 0 0 0 .5px rgba(0,0,0,.06); transition: transform .15s cubic-bezier(.3,1.5,.5,1); }
+.yl-slider input[type=range]::-moz-range-thumb { width: 38px; height: 24px; border: 0; border-radius: 99px; background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,.2); }
+.yl-slider input[type=range]:active::-webkit-slider-thumb { transform: scale(1.12); }
+.yl-slider input[type=range]:disabled { opacity: .35; }
+.yl-pillrow { text-align: center; margin-bottom: 12px; }
+.yl-pillbig { display: inline-block; min-width: 96px; text-align: center; font-size: 1.5rem; font-weight: 700; padding: 8px 22px; border-radius: 999px; background: var(--ios-fill); color: var(--ink); font-variant-numeric: tabular-nums; }
+.yl-switch { -webkit-appearance: none; appearance: none; width: 51px; height: 31px; border-radius: 99px; background: rgba(120,120,128,.32); position: relative; flex: none; cursor: pointer; transition: background .25s ease; margin: 0; }
+.yl-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.28); transition: transform .3s cubic-bezier(.3,1.4,.5,1); }
+.yl-switch:checked { background: #34c759; }
+.yl-switch:checked::after { transform: translateX(20px); }
+.yl-cal { background: var(--ios-gr); border-radius: 22px; padding: 14px 14px 12px; box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+.yl-cal-h { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.yl-cal-t { display: flex; gap: 2px; }
+.yl-cal-t select { appearance: none; -webkit-appearance: none; border: 0; background: transparent; font: inherit; font-weight: 700; color: var(--ink); padding: 6px 4px; cursor: pointer; }
+.yl-cal-n button { width: 36px; height: 36px; border: 0; background: transparent; color: #0088ff; font-size: 1.7rem; line-height: 1; cursor: pointer; border-radius: 50%; }
+.yl-cal-n button:active { background: var(--ios-fill); }
+.yl-cal-w, .yl-cal-g { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; }
+.yl-cal-w span { font-size: .65rem; font-weight: 600; color: rgba(60,60,67,.5); padding: 4px 0 8px; }
+.yl-day { width: 38px; height: 38px; margin: 2px auto; border: 0; border-radius: 50%; background: transparent; font: inherit; font-size: 1.05rem; color: var(--ink); cursor: pointer; transition: background .15s, transform .12s; }
+.yl-day:hover { background: var(--ios-fill); }
+.yl-day:active { transform: scale(.9); }
+.yl-day.on { background: rgba(0,136,255,.2); color: #0088ff; font-weight: 700; }
+.yl-pickedp { margin-top: 12px; text-align: center; }
+.yl-pill { display: inline-block; padding: 8px 18px; border-radius: 999px; background: rgba(0,136,255,.14); color: #0088ff; font-weight: 600; font-size: .9rem; }
+.yl-pill.dim { background: var(--ios-fill); color: rgba(60,60,67,.55); }
+.yl-chips button { background: var(--ios-gr); }
+.yl-chips button.on { background: #0088ff; color: #fff; }
+.yl-wiz .yl-prog-top { background: rgba(120,120,128,.2); }
+.yl-count-s { background: var(--ios-fill); }
