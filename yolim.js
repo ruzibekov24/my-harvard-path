@@ -8,6 +8,7 @@
   let unis = [];
   let a = {}; // javoblar
   let stepIx = 0;
+  let quick = false; // natijadan keyin boshqa universitet tanlanganda: boshqa savollar qayta so'ralmaydi
 
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
   const save = (p) => { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) {} };
@@ -217,7 +218,7 @@
     if (st.id === 'uni') {
       renderUniList('');
       $('ylQ').oninput = (e) => renderUniList(e.target.value);
-      $('ylUniList').onclick = (e) => { const b = e.target.closest('.yl-li'); if (!b) return; set('uni', b.dataset.id); $('ylUniList').querySelectorAll('.yl-li').forEach((x) => x.classList.toggle('on', x === b)); setTimeout(next, 220); };
+      $('ylUniList').onclick = (e) => { const b = e.target.closest('.yl-li'); if (!b) return; set('uni', b.dataset.id); $('ylUniList').querySelectorAll('.yl-li').forEach((x) => x.classList.toggle('on', x === b)); if (quick) { quick = false; setTimeout(finish, 260); } else setTimeout(next, 220); };
     }
     if (st.id === 'grad') { $('ylGm').onchange = (e) => set('gm', e.target.value); $('ylGy').onchange = (e) => set('gy', e.target.value); if (!a.gm) set('gm', '6'); if (!a.gy) set('gy', $('ylGy').value); }
     if (st.id === 'major') {
@@ -408,7 +409,8 @@
       renderAi(r, r.local ? 'Oddiy hisob (AI hozir ulanmagan)' : 'AI tahlili');
       btn.disabled = false; btn.textContent = 'Qayta hisoblash';
     };
-    $('ylRestart').onclick = () => { $('ylResult').hidden = true; wiz.hidden = false; stepIx = 0; renderStep(); wiz.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+    $('ylOther').onclick = () => { quick = true; $('ylResult').hidden = true; wiz.hidden = false; stepIx = 0; renderStep(); wiz.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+    $('ylRestart').onclick = () => { quick = false; $('ylResult').hidden = true; wiz.hidden = false; stepIx = 0; renderStep(); wiz.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
   }
 
   fetch('data/universities.json').then((r) => r.json()).then((d) => {

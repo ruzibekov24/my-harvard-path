@@ -197,3 +197,4 @@ html[data-theme="dark"] .yl-sf { background: rgba(60,60,64,.7); box-shadow: 0 2p
 .yl-wiz .yl-prog-top { background: rgba(120,120,128,.2); }
 .yl-count-s { background: var(--ios-fill); }
 .yl-cal-t select { width: auto; padding-right: 10px; }
+.yl-restart{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.yl-restart .btn-primary{background:#0088ff;border:0;color:#fff;border-radius:999px;padding:13px 26px}
