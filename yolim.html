@@ -70,42 +70,16 @@
     <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Mening rejam</div>
     <span class="eyebrow"><img class="emo" src="images/emoji/target.png" alt="" width="20" height="20">Faqat saytda</span>
     <h1 class="subhero-title">Sizning <em>shaxsiy</em> yo'l xaritangiz</h1>
-    <p class="subhero-sub">Maqsad universitetni va holatingizni kiriting — sayt tayyorlik darajangizni hisoblaydi va ariza muddatidan orqaga sanab, har oy uchun aniq vazifalar beradi. Hammasi shu brauzerda saqlanadi.</p>
+    <p class="subhero-sub">Bir necha oddiy savolga javob bering: AI qabul ehtimolingizni hisoblaydi va ariza muddatidan orqaga sanab, har oy uchun aniq vazifalar beradi. Ma'lumotlaringiz faqat shu brauzerda saqlanadi.</p>
   </div>
 </section>
 
 <section style="padding-top:0">
   <div class="wrap">
-    <form class="yl-form" id="ylForm" autocomplete="off">
-      <label>Maqsad universitet<select id="ylUni"></select></label>
-      <label>Qaysi yil kuzida o'qishni boshlamoqchisiz?<select id="ylYear"></select></label>
-      <label>Hozirgi sinfingiz<select id="ylGrade"><option value="9">9-sinf</option><option value="10">10-sinf</option><option value="11" selected>11-sinf</option><option value="0">Bitirganman</option></select></label>
-      <label>GPA / o'rtacha baho
-        <div class="yl-gpa"><input type="number" id="ylGpa" min="0" max="100" step="0.01" value="4.5"><select id="ylGpaScale"><option value="5">5 ballik</option><option value="4">4.0 shkala</option><option value="100">100 ball (%)</option></select></div>
-      </label>
-      <label>IELTS (yo'q bo'lsa 0)<div class="yl-range"><input type="range" id="ylIelts" min="0" max="9" step="0.5" value="0"><output id="ylIeltsOut">yo'q</output></div></label>
-      <label>SAT (topshirmagan bo'lsangiz 0)<div class="yl-range"><input type="range" id="ylSatScore" min="0" max="1600" step="10" value="0"><output id="ylSatOut">yo'q</output></div></label>
-      <fieldset class="yl-certs"><legend>Qo'shimcha sertifikat va yutuqlar</legend>
-        <div class="yl-chips" id="ylChips">
-          <button type="button" data-c="Fan olimpiadasi">Fan olimpiadasi</button>
-          <button type="button" data-c="TOEFL / Duolingo">TOEFL / Duolingo</button>
-          <button type="button" data-c="AP / IB / A-level">AP / IB / A-level</button>
-          <button type="button" data-c="Tadqiqot / loyiha">Tadqiqot / loyiha</button>
-          <button type="button" data-c="Volontyorlik">Volontyorlik</button>
-          <button type="button" data-c="Sport / san'at">Sport / san'at</button>
-          <button type="button" data-c="Liderlik / klub">Liderlik / klub</button>
-          <button type="button" data-c="Onlayn kurs (Coursera, edX)">Onlayn kurs</button>
-        </div>
-        <textarea id="ylExtra" rows="2" maxlength="500" placeholder="Boshqa yutuqlaringiz (ixtiyoriy): masalan, 'Matematika olimpiadasi viloyat 2-o'rin'"></textarea>
-      </fieldset>
-      <div class="yl-checks">
-        <label class="yl-check"><input type="checkbox" id="ylSat"> SAT/ACT ga tayyorlanyapman</label>
-        <label class="yl-check"><input type="checkbox" id="ylAid" checked> Moliyaviy yordam kerak</label>
-      </div>
-      <button type="submit" class="btn-primary">Rejamni tuzish</button>
-    </form>
+    <div class="yl-wiz" id="ylWiz"></div>
 
     <div id="ylResult" hidden>
+      <div class="yl-chance" id="ylChance"></div>
       <div class="yl-top">
         <div class="yl-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="yl-ring-bg"/><circle cx="60" cy="60" r="52" class="yl-ring-fg" id="ylRing"/></svg><div><b id="ylScore">0</b><span>tayyorlik</span></div></div>
         <div class="yl-facts">
@@ -116,11 +90,12 @@
       </div>
       <div class="yl-bars" id="ylBars"></div>
       <section class="yl-ai" id="ylAi">
-        <div class="yl-ai-head"><div><b>AI tahlil</b><span>Profilingizni universitet talablari bilan solishtirib, baho va aniq qadamlar beradi</span></div><button type="button" class="btn-primary" id="ylAiBtn">AI bilan hisoblash</button></div>
+        <div class="yl-ai-head"><div><b>AI tahlil</b><span>Profilingiz universitet talablari bilan solishtirildi</span></div><button type="button" class="btn-primary" id="ylAiBtn">Qayta hisoblash</button></div>
         <div id="ylAiOut"></div>
       </section>
       <div class="yl-prog"><span id="ylProgText"></span><div class="yl-track"><i id="ylProgBar"></i></div></div>
       <ol class="yl-line" id="ylLine"></ol>
+      <p class="yl-restart"><button type="button" id="ylRestart" class="btn-ghost-dark">Savollarni qayta to'ldirish</button></p>
       <p class="yl-note">Sanalar taxminiy: ariza muddati sifatida tanlangan yilning 1-yanvari olingan. Aniq muddatni universitetning rasmiy sahifasidan tekshiring.</p>
     </div>
   </div>

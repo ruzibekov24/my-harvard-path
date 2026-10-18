@@ -75,3 +75,56 @@
 .yl-ai-load span:nth-child(2) { animation-delay: .15s; } .yl-ai-load span:nth-child(3) { animation-delay: .3s; }
 @keyframes rzDot { 0%, 80%, 100% { transform: scale(.5); opacity: .4; } 40% { transform: scale(1); opacity: 1; } }
 @media (max-width: 640px) { .yl-two { grid-template-columns: 1fr; } .yl-brow { grid-template-columns: 62px 1fr; } .yl-brow em { grid-column: 2; text-align: left; } }
+
+/* ---- Savollar oynasi (wizard) ---- */
+.yl-wiz { background: var(--surface); border: 1px solid var(--surface-border); border-radius: 30px; padding: 22px 22px 26px; box-shadow: 0 14px 40px rgba(0,0,0,.06); max-width: 720px; margin: 0 auto 28px; overflow: hidden; }
+.yl-prog-top { height: 6px; border-radius: 99px; background: var(--paper-dark); overflow: hidden; margin-bottom: 22px; }
+.yl-prog-fill { height: 100%; background: #0088ff; border-radius: 99px; transition: width .5s cubic-bezier(.22,1,.36,1); }
+.yl-stage { text-align: center; min-height: 340px; transition: transform .2s ease, opacity .2s ease; }
+.yl-stage.out-l { opacity: 0; transform: translateX(-30px); } .yl-stage.out-r { opacity: 0; transform: translateX(30px); }
+.yl-stage.in-r { animation: ylInR .35s cubic-bezier(.22,1,.36,1) both; } .yl-stage.in-l { animation: ylInL .35s cubic-bezier(.22,1,.36,1) both; }
+@keyframes ylInR { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: none; } }
+@keyframes ylInL { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: none; } }
+.yl-count-s { display: inline-block; font-size: .75rem; font-weight: 700; color: var(--muted); background: var(--paper-dark); padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; }
+.yl-stage h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 1.9rem); margin: 0 0 8px; letter-spacing: -.02em; }
+.yl-stage > p { color: var(--muted); margin: 0 auto 22px; max-width: 480px; }
+.yl-body { max-width: 520px; margin: 0 auto; text-align: left; }
+.yl-opts { display: grid; gap: 12px; }
+.yl-opt { font: inherit; font-weight: 600; text-align: left; padding: 18px 20px; border-radius: 16px; border: 1.5px solid var(--surface-border); background: var(--paper); color: var(--ink); cursor: pointer; transition: transform .15s ease, border-color .2s, background .2s; }
+.yl-opt:hover { border-color: #0088ff; } .yl-opt:active { transform: scale(.98); } .yl-opt.on { border-color: #0088ff; background: rgba(0,136,255,.1); color: #0070d6; }
+.yl-search, .yl-body select, .yl-body textarea, .yl-body input[type=number], .yl-body input[type=text] { width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); background: var(--paper); border: 1.5px solid var(--surface-border); border-radius: 16px; padding: 15px 16px; }
+.yl-search:focus, .yl-body select:focus, .yl-body textarea:focus, .yl-body input:focus { outline: none; border-color: #0088ff; }
+.yl-list { margin-top: 10px; max-height: 300px; overflow-y: auto; display: grid; gap: 6px; }
+.yl-li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; text-align: left; font: inherit; padding: 10px 12px; border-radius: 14px; border: 1.5px solid transparent; background: var(--paper); color: var(--ink); cursor: pointer; transition: border-color .2s, transform .12s; }
+.yl-li:hover { border-color: rgba(0,136,255,.4); } .yl-li:active { transform: scale(.985); } .yl-li.on { border-color: #0088ff; background: rgba(0,136,255,.08); }
+.yl-li span b { display: block; font-size: .95rem; } .yl-li em { font-style: normal; color: var(--muted); font-size: .78rem; } .yl-li i { font-style: normal; font-size: .78rem; color: var(--muted); font-weight: 600; }
+.yl-lilogo { position: relative; width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--surface-border); display: grid; place-items: center; overflow: hidden; }
+.yl-lilogo b { font-size: .7rem; color: var(--muted); } .yl-lilogo img { position: absolute; inset: 3px; width: calc(100% - 6px); height: calc(100% - 6px); object-fit: contain; background: #fff; }
+.yl-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .yl-row3 { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; }
+.yl-big { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .yl-big input { font-size: 1.6rem; font-weight: 700; text-align: center; }
+.yl-sl { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; } .yl-sl input { flex: 1; accent-color: #0088ff; }
+.yl-pillbig { min-width: 92px; text-align: center; font-size: 1.3rem; font-weight: 700; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: var(--paper); }
+.yl-tip { color: var(--muted); font-size: .82rem; margin: 12px 0 0; }
+.yl-body .yl-check { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: .9rem; color: var(--ink); }
+.yl-body .yl-check input { width: 20px; height: 20px; accent-color: #0088ff; }
+.yl-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.yl-back { font: inherit; font-weight: 600; border: 0; background: rgba(120,120,128,.14); color: var(--ink); padding: 12px 22px; border-radius: 999px; cursor: pointer; }
+.yl-nav .btn-primary { background: #0088ff; border: 0; color: #fff; border-radius: 999px; padding: 13px 30px; }
+.yl-nav .btn-primary.shake { animation: ylShake .35s; }
+@keyframes ylShake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+/* hisoblash */
+.yl-calc { text-align: center; padding: 40px 10px 20px; }
+.yl-calc h2 { font-family: var(--font-display); margin: 22px 0 6px; } .yl-calc p { color: var(--muted); min-height: 24px; transition: opacity .18s; margin-bottom: 22px; }
+.yl-orb { position: relative; width: 110px; height: 110px; margin: 0 auto; }
+.yl-orb i { position: absolute; inset: 0; border-radius: 50%; border: 3px solid transparent; border-top-color: #0088ff; animation: ylSpin 1.2s linear infinite; }
+.yl-orb i:nth-child(2) { inset: 14px; border-top-color: #5e5ce6; animation-duration: 1.7s; animation-direction: reverse; }
+.yl-orb i:nth-child(3) { inset: 30px; border-top-color: #ff9f0a; animation-duration: .9s; }
+@keyframes ylSpin { to { transform: rotate(360deg); } }
+/* natija */
+.yl-chance { margin-bottom: 18px; }
+.yl-chance-in { display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; padding: 28px; border-radius: 28px; background: linear-gradient(145deg, #0b1d4d, #1d4fd6); color: #fff; box-shadow: 0 16px 44px rgba(20,60,200,.28); animation: ylPop .6s cubic-bezier(.22,1.3,.4,1) both; }
+@keyframes ylPop { from { opacity: 0; transform: scale(.94) translateY(14px); } to { opacity: 1; transform: none; } }
+.yl-bigpct { display: flex; align-items: baseline; font-family: var(--font-display); } .yl-bigpct b { font-size: clamp(3.4rem, 12vw, 5.6rem); line-height: 1; } .yl-bigpct span { font-size: 2rem; opacity: .8; }
+.yl-chance-in small { opacity: .75; } .yl-chance-in h2 { font-family: var(--font-display); font-size: clamp(1.2rem, 3.4vw, 1.7rem); margin: 6px 0; line-height: 1.25; } .yl-chance-in u { text-decoration-color: var(--c); text-decoration-thickness: 3px; text-underline-offset: 4px; } .yl-chance-in p { margin: 0; opacity: .8; font-size: .9rem; }
+.yl-restart { text-align: center; margin-top: 22px; }
+@media (max-width: 640px) { .yl-chance-in { grid-template-columns: 1fr; text-align: center; } .yl-bigpct { justify-content: center; } .yl-row3 { grid-template-columns: 1fr 1fr 1fr; } .yl-stage { min-height: 300px; } }
