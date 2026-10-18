@@ -196,3 +196,4 @@ html[data-theme="dark"] .yl-sf { background: rgba(60,60,64,.7); box-shadow: 0 2p
 .yl-chips button.on { background: #0088ff; color: #fff; }
 .yl-wiz .yl-prog-top { background: rgba(120,120,128,.2); }
 .yl-count-s { background: var(--ios-fill); }
+.yl-cal-t select { width: auto; padding-right: 10px; }

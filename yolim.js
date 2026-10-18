@@ -338,7 +338,7 @@
     const v = VERD[r.verdict] || VERD[verdictOf(pct)];
     $('ylChance').innerHTML = '<div class="yl-chance-in" style="--c:' + v[1] + '"><div class="yl-bigpct"><b id="ylPct">0</b><span>%</span></div><div><small>' + esc(u.name) + ' · ' + p.year + '</small><h2>Siz taxminan <u>' + pct + '%</u> ehtimol bilan qabul qilinasiz</h2><p>' + v[0] + (r.local ? ' · oddiy hisob' : ' · AI tahlili') + '</p></div></div>';
     const t0 = performance.now();
-    const tick = (t) => { const k = Math.min(1, (t - t0) / 1400); $('ylPct').textContent = Math.round(pct * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); };
+    const tick = (t) => { const k = Math.max(0, Math.min(1, (t - t0) / 1400)); $('ylPct').textContent = Math.round(pct * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
   }
 
@@ -378,7 +378,7 @@
       ring.style.strokeDasharray = C;
       ring.style.strokeDashoffset = C * (1 - f.score / 100);
       const t0 = performance.now(), from = parseInt($('ylScore').textContent, 10) || 0;
-      const tick = (t) => { const k = Math.min(1, (t - t0) / 800); $('ylScore').textContent = Math.round(from + (f.score - from) * (1 - Math.pow(1 - k, 3))) + '%'; if (k < 1) requestAnimationFrame(tick); };
+      const tick = (t) => { const k = Math.max(0, Math.min(1, (t - t0) / 800)); $('ylScore').textContent = Math.round(from + (f.score - from) * (1 - Math.pow(1 - k, 3))) + '%'; if (k < 1) requestAnimationFrame(tick); };
       requestAnimationFrame(tick);
       const nextStep = steps.find((s) => !done.has(s.id) && s.date >= today);
       const nextId = nextStep ? nextStep.id : null;

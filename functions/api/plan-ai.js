@@ -4,7 +4,7 @@
 //   (zaxira sifatida ANTHROPIC_API_KEY ham ishlaydi)
 // Kalit yo'q bo'lsa 503 qaytadi va sahifa oddiy (lokal) hisobga o'tib ketadi.
 
-const GEMINI_MODEL = 'gemini-2.5-flash';
+const GEMINI_MODEL = 'gemini-3.8-flash';
 const CLAUDE_MODEL = 'claude-sonnet-5-5';
 const DAILY_LIMIT = 8; // bir IP uchun kuniga
 
@@ -28,7 +28,7 @@ async function askGemini(key, prompt) {
     body: JSON.stringify({
       systemInstruction: { parts: [{ text: SYSTEM }] },
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { responseMimeType: 'application/json', temperature: 0.4, maxOutputTokens: 1800, thinkingConfig: { thinkingBudget: 0 } },
+      generationConfig: { responseMimeType: 'application/json', temperature: 0.4, maxOutputTokens: 4000 },
     }),
   });
   if (!res.ok) throw new Error('gemini ' + res.status);
