@@ -502,6 +502,8 @@ if (clItems) {
   const placeAuth = () => {
     const host = compact.matches && navLinksEl ? navLinksEl : navInner;
     if (wrap.parentElement !== host) host.appendChild(wrap);
+    const cta = document.querySelector('.nav-cta');
+    if (cta) { if (compact.matches && navLinksEl) { if (cta.parentElement !== navLinksEl) navLinksEl.appendChild(cta); } else if (cta.parentElement !== navInner) navInner.appendChild(cta); }
   };
   placeAuth();
   if (compact.addEventListener) compact.addEventListener('change', placeAuth); else compact.addListener(placeAuth);
