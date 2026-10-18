@@ -496,6 +496,15 @@ if (clItems) {
   wrap.className = 'tg-auth-wrap';
   wrap.id = 'tgAuthWrap';
   navInner.appendChild(wrap);
+  // Tor ekranlarda (burger menyu) kirish bloki sarlavhaga sig'maydi: menyu ichiga ko'chiriladi.
+  const navLinksEl = document.getElementById('navLinks');
+  const compact = window.matchMedia('(max-width: 1100px)');
+  const placeAuth = () => {
+    const host = compact.matches && navLinksEl ? navLinksEl : navInner;
+    if (wrap.parentElement !== host) host.appendChild(wrap);
+  };
+  placeAuth();
+  if (compact.addEventListener) compact.addEventListener('change', placeAuth); else compact.addListener(placeAuth);
 
   function renderLoggedOut() {
     wrap.innerHTML = '';

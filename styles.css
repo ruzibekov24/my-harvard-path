@@ -2285,3 +2285,60 @@ html[data-theme="dark"] .theme-seg button[aria-checked="true"] .ts-ico { color: 
   html[data-theme="dark"] .nav-toggle { background: rgba(118,118,128,0.24); }
 }
 @media (max-width: 640px) { .nav-inner { padding: 12px 16px; } header.nav.is-pill .nav-inner { padding: 8px 10px 8px 18px; } .logo { font-size: 1.2rem; } }
+
+/* ---------- Kirgan foydalanuvchi kartochkasi: iOS kapsula ---------- */
+.nav-inner { flex-wrap: nowrap; }
+header.nav.is-pill .nav-inner { max-width: min(1260px, calc(100% - 32px)); }
+.tg-auth-wrap { margin-left: 4px; padding-left: 12px; flex: none; }
+.tg-user-box {
+  display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  padding: 4px 6px 4px 4px; border-radius: 999px;
+  background: rgba(118,118,128,0.12); font-size: 0.88rem;
+}
+.tg-user-avatar { width: 30px; height: 30px; border-radius: 50%; flex: none; object-fit: cover; }
+.tg-user-name { font-weight: 600; max-width: 96px; overflow: hidden; text-overflow: ellipsis; padding-left: 2px; }
+.tg-user-xp, .tg-user-streak {
+  display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+  font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; letter-spacing: 0; text-transform: none;
+  color: var(--ink); background: #fff; border: 0; border-radius: 999px; padding: 5px 10px 5px 7px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(0,0,0,0.05);
+}
+.tg-user-streak { padding: 5px 10px; color: var(--stamp-red); }
+.tg-user-xp .emo { width: 15px; height: 15px; vertical-align: 0; }
+.tg-logout {
+  display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border-radius: 50%;
+  background: transparent; color: var(--muted); transition: background-color .2s ease, color .2s ease, transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.tg-logout:hover { background: rgba(118,118,128,0.18); color: var(--stamp-red); }
+.tg-logout:active { transform: scale(.9); }
+.tg-logout .icon { width: 15px; height: 15px; }
+html[data-theme="dark"] .tg-user-box { background: rgba(118,118,128,0.24); }
+html[data-theme="dark"] .tg-user-xp, html[data-theme="dark"] .tg-user-streak { background: #3A3A3C; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+html[data-theme="dark"] .tg-user-streak { color: #FF6B6B; }
+html[data-theme="dark"] .tg-user-name { color: #fff; }
+@media (max-width: 1100px) { .tg-user-name { max-width: 70px; } }
+/* Burger menyu ichida kirish bloki */
+nav.links .tg-auth-wrap { margin: 12px 0 0; padding: 12px 0 0; border-left: 0; border-top: 0.5px solid var(--rule); width: 100%; justify-content: flex-start; order: 0; }
+nav.links .tg-user-name { max-width: 160px; }
+/* Mobil menyu paneli: orqadagi matn ko'rinmasligi uchun zichroq shisha */
+@media (max-width: 1100px) {
+  nav.links { background: rgba(255,255,255,0.97); -webkit-backdrop-filter: blur(36px) saturate(1.9); backdrop-filter: blur(36px) saturate(1.9); }
+  html[data-theme="dark"] nav.links { background: rgba(28,28,30,0.92); }
+}
+/* Ochiladigan bo'limlar menyusi: xira emas, aniq o'qiladigan zich shisha */
+.nav-dropdown-inner {
+  background: rgba(255,255,255,0.97);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8); backdrop-filter: blur(40px) saturate(1.8);
+  box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.1), 0 24px 60px -14px rgba(0,0,0,0.38), 0 4px 14px rgba(0,0,0,0.08);
+  padding: 8px; min-width: 250px;
+}
+.nav-dropdown-inner a { opacity: 1; color: #1c1c1e; font-weight: 500; padding: 11px 12px; font-size: 0.78rem; }
+.nav-dropdown-inner a:hover, .nav-dropdown-inner a.active { background: rgba(118,118,128,0.14); color: #000; }
+.nav-dropdown-inner a.active { color: var(--stamp-red); }
+html[data-theme="dark"] .nav-dropdown-inner {
+  background: rgba(44,44,46,0.98);
+  box-shadow: inset 0 0 0 0.5px rgba(255,255,255,0.12), 0 24px 60px -14px rgba(0,0,0,0.85);
+}
+html[data-theme="dark"] .nav-dropdown-inner a { color: #f2f2f7; }
+html[data-theme="dark"] .nav-dropdown-inner a:hover, html[data-theme="dark"] .nav-dropdown-inner a.active { background: rgba(255,255,255,0.1); color: #fff; }
+html[data-theme="dark"] .nav-dropdown-inner a.active { color: #ff6b6b; }
