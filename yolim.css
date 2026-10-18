@@ -1,0 +1,46 @@
+.yl-hero { padding: 120px 0 36px; }
+.yl-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; background: var(--surface); border: 1px solid var(--surface-border); border-radius: 26px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.05); margin-bottom: 28px; }
+.yl-form label { display: flex; flex-direction: column; gap: 8px; font-size: .85rem; font-weight: 600; color: var(--muted); }
+.yl-form select { font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--surface-border); border-radius: 14px; padding: 12px 14px; }
+.yl-range { display: flex; align-items: center; gap: 12px; }
+.yl-range input { flex: 1; accent-color: #0088ff; }
+.yl-range output { min-width: 34px; font-weight: 700; color: var(--ink); }
+.yl-checks { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.yl-check { flex-direction: row !important; align-items: center; gap: 10px !important; font-weight: 500 !important; color: var(--ink) !important; }
+.yl-check input { width: 20px; height: 20px; accent-color: #0088ff; }
+.yl-form .btn-primary { grid-column: 1 / -1; justify-self: start; background: #0088ff; border: 0; color: #fff; border-radius: 999px; padding: 14px 30px; }
+.yl-top { display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; background: var(--surface); border: 1px solid var(--surface-border); border-radius: 26px; padding: 28px; margin-bottom: 16px; }
+.yl-ring { position: relative; width: 180px; height: 180px; }
+.yl-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.yl-ring circle { fill: none; stroke-width: 10; }
+.yl-ring-bg { stroke: var(--paper-dark); }
+.yl-ring-fg { stroke: #0088ff; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(.22,1,.36,1); }
+.yl-ring > div { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.yl-ring b { font-family: var(--font-display); font-size: 2.4rem; }
+.yl-ring span { color: var(--muted); font-size: .8rem; }
+.yl-facts h2 { font-family: var(--font-display); margin: 0 0 12px; font-size: 1.4rem; }
+.yl-count { display: flex; gap: 28px; margin-bottom: 16px; }
+.yl-count b { font-family: var(--font-display); font-size: 2rem; display: block; }
+.yl-count span { color: var(--muted); font-size: .8rem; }
+.yl-ielts span, .yl-prog span { font-size: .85rem; color: var(--muted); }
+.yl-track { height: 10px; background: var(--paper-dark); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+.yl-track i { display: block; height: 100%; width: 0; background: #0088ff; border-radius: 99px; transition: width 1s cubic-bezier(.22,1,.36,1); }
+.yl-prog { margin-bottom: 20px; }
+.yl-line { list-style: none; margin: 0; padding: 0 0 0 18px; border-left: 2px solid var(--rule); }
+.yl-step { position: relative; display: grid; grid-template-columns: 34px 28px 1fr; gap: 12px; align-items: start; background: var(--surface); border: 1px solid var(--surface-border); border-radius: 20px; padding: 16px; margin: 0 0 12px 14px; transition: transform .2s ease, box-shadow .2s ease; }
+.yl-step::before { content: ''; position: absolute; left: -33px; top: 24px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--rule-strong); }
+.yl-step.is-next { box-shadow: 0 0 0 2px #0088ff, 0 10px 26px rgba(0,136,255,.18); transform: scale(1.01); }
+.yl-step.is-next::before { background: #0088ff; border-color: #0088ff; }
+.yl-step.is-late { border-color: rgba(165,28,48,.4); }
+.yl-step.is-done { opacity: .6; }
+.yl-step.is-done b { text-decoration: line-through; }
+.yl-step.is-done::before { background: #34c759; border-color: #34c759; }
+.yl-step b { display: block; }
+.yl-step span { display: block; color: var(--muted); font-size: .88rem; margin: 2px 0 4px; }
+.yl-step em { font-style: normal; font-size: .75rem; font-weight: 600; color: #0088ff; }
+.yl-step.is-late em { color: var(--stamp-red); }
+.yl-tick { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--rule-strong); background: transparent; color: transparent; cursor: pointer; display: grid; place-items: center; padding: 0; transition: .2s; }
+.yl-tick svg { width: 16px; height: 16px; }
+.yl-step.is-done .yl-tick { background: #34c759; border-color: #34c759; color: #fff; transform: scale(1.1); }
+.yl-note { color: var(--muted); font-size: .8rem; margin-top: 16px; }
+@media (max-width: 640px) { .yl-top { grid-template-columns: 1fr; justify-items: center; text-align: center; } .yl-count { justify-content: center; } .yl-facts { width: 100%; } .yl-hero { padding-top: 96px; } }
