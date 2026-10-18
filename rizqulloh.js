@@ -104,9 +104,18 @@
       '<h1>Rizqulloh English</h1>' +
       '<p class="rz-lead">Botda to\'plagan XP, streak va o\'yinlaringiz shu yerda ham. Kirish uchun botdan bir marta havola oling.</p>' +
       (note ? '<p class="rz-note">' + rich(note) + '</p>' : '') +
+      '<div id="rz-widget" class="rz-widget"></div><p class="rz-or">yoki botdan havola orqali</p>' +
       '<ol class="rz-steps"><li>Telegramda <b>@Rizqulloh_bot</b> ni oching</li><li><code>/sayt</code> buyrug\'ini yuboring</li><li><b>Saytni ochish</b> tugmasini bosing</li></ol>' +
       '<a class="btn-primary" href="' + BOT_URL + '" target="_blank" rel="noopener">Botni ochish</a>' +
       '</div></div>';
+    const slot = document.getElementById('rz-widget');
+    if (slot && window.onTelegramAuth) {
+      const sc = document.createElement('script');
+      sc.async = true; sc.src = 'https://telegram.org/js/telegram-widget.js?22';
+      sc.setAttribute('data-telegram-login', 'Rizqulloh_bot'); sc.setAttribute('data-size', 'large'); sc.setAttribute('data-radius', '20');
+      sc.setAttribute('data-onauth', 'onTelegramAuth(user)'); sc.setAttribute('data-request-access', 'write');
+      slot.appendChild(sc);
+    }
   }
 
   // ---------- Bosh ----------

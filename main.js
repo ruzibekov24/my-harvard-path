@@ -485,12 +485,15 @@ if (clItems) {
   setInterval(tick, 60000);
 })();
 
-/* ---------- Telegram orqali kirish + XP holati ---------- */
-(function telegramAuth() {
+/* ---------- Telegram orqali kirish (Rizqulloh English boti) + XP holati ---------- */
+(function rizqullohAuth() {
   const navInner = document.querySelector('.nav-inner');
   if (!navInner) return;
 
-  const BOT_USERNAME = 'GoingToHarvard_bot';
+  const BOT_USERNAME = 'Rizqulloh_bot';
+  const API = 'https://rizqulloh-bot.ilyosbek41624.workers.dev/site/api/';
+  const KEY = 'rz_session';
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   const wrap = document.createElement('div');
   wrap.className = 'tg-auth-wrap';
@@ -508,6 +511,10 @@ if (clItems) {
   placeAuth();
   if (compact.addEventListener) compact.addEventListener('change', placeAuth); else compact.addListener(placeAuth);
 
+  const getToken = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+  const setToken = t => { try { t ? localStorage.setItem(KEY, t) : localStorage.removeItem(KEY); } catch (e) {} };
+  const broadcastAuth = user => document.dispatchEvent(new CustomEvent('mhp:user', { detail: { user } }));
+
   function renderLoggedOut() {
     wrap.innerHTML = '';
     const tgScript = document.createElement('script');
@@ -519,89 +526,62 @@ if (clItems) {
     tgScript.setAttribute('data-onauth', 'onTelegramAuth(user)');
     tgScript.setAttribute('data-request-access', 'write');
     wrap.appendChild(tgScript);
-
-    const profileSlot = document.getElementById('profileLoginWidget');
-    if (profileSlot) {
-      profileSlot.innerHTML = '';
-      const tgScript2 = tgScript.cloneNode();
-      profileSlot.appendChild(tgScript2);
-    }
+    const slot = document.getElementById('profileLoginWidget');
+    if (slot) { slot.innerHTML = ''; slot.appendChild(tgScript.cloneNode()); }
   }
 
-  function broadcastAuth(user) {
-    document.dispatchEvent(new CustomEvent('mhp:user', { detail: { user } }));
-  }
-
-  function renderLoggedIn(user) {
+  function renderLoggedIn(u) {
     wrap.innerHTML = '';
     const box = document.createElement('div');
     box.className = 'tg-user-box';
     box.innerHTML = `
-      ${user.photoUrl ? `<img src="${user.photoUrl}" alt="" class="tg-user-avatar">` : ''}
-      <a href="profil.html" class="tg-user-name">${user.firstName || user.username || 'Foydalanuvchi'}</a>
-      <span class="tg-user-xp"><img class="emo" src="images/emoji/trophy.png" alt="" width="16" height="16"> ${user.xp} XP</span>
-      ${user.streak?.count > 1 ? `<span class="tg-user-streak" title="Ketma-ket kunlar">${user.streak.count} kun</span>` : ''}
+      <span class="tg-user-avatar tg-initial">${esc((u.name || '?').trim().charAt(0).toUpperCase())}</span>
+      <a href="rizqulloh.html#/profile" class="tg-user-name">${esc(u.name || 'Foydalanuvchi')}</a>
+      <span class="tg-user-xp"><img class="emo" src="images/emoji/trophy.png" alt="" width="16" height="16"> ${Number(u.xp || 0).toLocaleString('en-US').replace(/,/g, ' ')} XP</span>
+      ${u.streak > 1 ? `<span class="tg-user-streak" title="Ketma-ket kunlar">${u.streak} kun</span>` : ''}
       <button type="button" class="tg-logout" title="Chiqish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>
     `;
     wrap.appendChild(box);
-    box.querySelector('.tg-logout').addEventListener('click', async (e) => {
+    box.querySelector('.tg-logout').addEventListener('click', (e) => {
       e.preventDefault();
-      await fetch('/api/logout', { method: 'POST' });
+      setToken(null);
       window.currentUser = null;
-      renderLoggedOut();
       broadcastAuth(null);
+      if (/rizqulloh/.test(location.pathname)) location.reload(); else renderLoggedOut();
     });
   }
 
+  function applyMe(u) {
+    window.currentUser = { firstName: u.name, xp: u.xp, streak: { count: u.streak }, readBooks: [] };
+    renderLoggedIn(u);
+    broadcastAuth(window.currentUser);
+  }
+
+  async function loadMe() {
+    const token = getToken();
+    if (!token) return broadcastAuth(null);
+    try {
+      const r = await fetch(API + 'me', { headers: { authorization: 'Bearer ' + token } });
+      if (r.status === 401 || r.status === 403) { setToken(null); return broadcastAuth(null); }
+      const d = await r.json();
+      if (d && d.user) applyMe(d.user); else broadcastAuth(null);
+    } catch (e) { broadcastAuth(null); }
+  }
+
+  // Telegram vidjeti ma'lumotni Rizqulloh botining serveriga yuboradi: imzoni o'sha bot tekshiradi.
   window.onTelegramAuth = async function (tgUser) {
     try {
-      const res = await fetch('/api/telegram-auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(tgUser),
-      });
+      const res = await fetch(API + 'telegram', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(tgUser) });
       const data = await res.json();
-      if (data.ok) {
-        window.currentUser = data.user;
-        renderLoggedIn(data.user);
-        syncReadBooksToServer(data.user);
-        broadcastAuth(data.user);
-      }
-    } catch (e) { console.error('Telegram auth xatosi', e); }
+      if (res.status === 403) { alert("Avval Telegramda @" + BOT_USERNAME + " botini ochib /start bosing, keyin qayta kiring."); return; }
+      if (!res.ok || !data.token) return;
+      setToken(data.token);
+      if (/rizqulloh/.test(location.pathname)) location.reload(); else loadMe();
+    } catch (e) { console.error('Kirish xatosi', e); }
   };
 
-  // Kitob "o'qidim" belgilarini serverdagi XP bilan sinxronlash
-  async function syncReadBooksToServer(user) {
-    document.querySelectorAll('input[data-book-id]').forEach(box => {
-      if (user.readBooks.includes(box.dataset.bookId) && !box.checked) {
-        box.checked = true;
-        box.dispatchEvent(new Event('change'));
-      }
-    });
-  }
-
-  document.addEventListener('change', (e) => {
-    if (!e.target.matches('input[data-book-id]')) return;
-    if (!window.currentUser) return;
-    fetch('/api/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bookId: e.target.dataset.bookId, read: e.target.checked }),
-    }).then(r => r.json()).then(data => {
-      if (data.ok) { window.currentUser = data.user; broadcastAuth(data.user); }
-    }).catch(() => {});
-  });
-
-  // Sahifa yuklanganda joriy foydalanuvchini tekshirish
   renderLoggedOut();
-  fetch('/api/me').then(r => r.json()).then(data => {
-    if (data.ok && data.user) {
-      window.currentUser = data.user;
-      renderLoggedIn(data.user);
-      syncReadBooksToServer(data.user);
-    }
-    broadcastAuth(data.user || null);
-  }).catch(() => broadcastAuth(null));
+  loadMe();
 })();
 
 /* ---------- Navbar: tepada yopishgan panel, pastda suzuvchi "pill" ---------- */

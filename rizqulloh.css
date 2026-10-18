@@ -151,3 +151,5 @@ html[data-theme="dark"] .rz-tabs a { color: #fff; }
 .rz-page section.rz-card { margin-bottom: 14px; }
 .rz-page section.rz-card { padding: 20px; }
 @keyframes rzFade { to { opacity: 1; } }
+.rz-widget { display: flex; justify-content: center; margin: 4px 0 6px; min-height: 44px; }
+.rz-or { color: var(--muted); font-size: .8rem; margin: 10px 0; }
