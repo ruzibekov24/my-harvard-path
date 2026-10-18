@@ -1730,6 +1730,7 @@ a.mq-card { display: block; color: inherit; }
 .mq-figure { margin: 36px 0; }
 .mq-figure img { width: 100%; display: block; border-radius: 3px; }
 .mq-figure.wide { max-width: 1100px; margin: 8px auto 40px; padding: 0 32px; }
+.mq-figure.portrait { max-width: 360px; margin-left: auto; margin-right: auto; }
 .mq-figure figcaption { font-size: .82rem; line-height: 1.5; color: var(--muted); margin-top: 10px; }
 .mq-figure figcaption .credit { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
 .mq-body { max-width: 680px; margin: 0 auto; padding: 0 32px 40px; font-family: 'Source Serif 4', Georgia, serif; }
