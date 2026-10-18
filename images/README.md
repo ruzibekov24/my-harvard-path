@@ -15,7 +15,7 @@ Tavsiya: Unsplash, Pexels yoki Wikimedia Commons kabi bepul-litsenziyali saytlar
 | `flex-ishtirokchilari.jpg` | flex.html | 680×510px | FLEX dasturi ishtirokchilari / intervyu sahnasi |
 | `ingliz-tili-banner.jpg` | ingliz-tili.html | 1600×450px | Til o'rganish bilan bog'liq banner |
 | `lugat-banner.jpg` | lugat-va-iboralar.html | 1600×450px | Lug'at/kitob bilan bog'liq banner |
-| `blog-banner.jpg` | blog.html | 1600×450px | Yozish/blog bilan bog'liq banner |
+| `banner-blog.jpg` | blog.html | 1600×450px | Yozish/blog bilan bog'liq banner |
 | `faq-rasm.jpg` | faq.html | 680×510px | Savol-javob bilan bog'liq rasm |
 | `kitob-beginner-01.jpg` ... `kitob-beginner-10.jpg` | kitoblar.html | 400×600px | Beginner kitoblar muqovalari (1-10) |
 | `kitob-lugat-01.jpg` ... `kitob-lugat-09.jpg` | kitoblar.html | 400×600px | Lug'at kitoblar muqovalari (1-9) |

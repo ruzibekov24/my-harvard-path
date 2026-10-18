@@ -269,32 +269,85 @@ if (clItems) {
    YANGI QO'SHILGAN FUNKSIYALAR
    ========================================================================== */
 
-/* ---------- Dark mode ---------- */
+/* ---------- Dark mode ----------
+   Kun/tun almashtirgichi — maqolalardagi til tugmasi kabi iOS segmentli boshqaruv:
+   oq "suzuvchi" tanlov, bosilganda shisha linza, sudrab o'tkazish ham mumkin. */
 (function themeToggle() {
   const KEY = 'mhp-theme';
-  const saved = localStorage.getItem(KEY);
-  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  const root = document.documentElement;
+  let saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved === 'dark') root.setAttribute('data-theme', 'dark');
 
   const navInner = document.querySelector('.nav-inner');
   if (!navInner) return;
-  const btn = document.createElement('button');
-  btn.className = 'theme-toggle';
-  btn.type = 'button';
-  btn.setAttribute('aria-label', "Rejimni almashtirish");
-  btn.innerHTML = document.documentElement.getAttribute('data-theme') === 'dark' ? '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>' : '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5Z"/></svg>';
-  navInner.appendChild(btn);
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const current = () => (root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
-  btn.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem(KEY, 'light');
-      btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5Z"/></svg>';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem(KEY, 'dark');
-      btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
-    }
+  const seg = document.createElement('div');
+  seg.className = 'theme-seg';
+  seg.setAttribute('role', 'radiogroup');
+  seg.setAttribute('aria-label', 'Rejim');
+  seg.innerHTML =
+    '<span class="ts-thumb" aria-hidden="true"><span class="ts-thumb-in"></span></span>' +
+    '<button type="button" role="radio" data-set="light" title="Kunduzgi rejim" aria-label="Kunduzgi rejim"><svg class="ts-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.55 1.55M17.25 17.25l1.55 1.55M5.2 18.8l1.55-1.55M17.25 6.75l1.55-1.55"/></g></svg></button>' +
+    '<button type="button" role="radio" data-set="dark" title="Tungi rejim" aria-label="Tungi rejim"><svg class="ts-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.6 14.9a.75.75 0 0 0-.98-.9 7.4 7.4 0 0 1-9.6-9.6.75.75 0 0 0-.9-.98A9.25 9.25 0 1 0 20.6 14.9Z"/></svg></button>';
+  navInner.appendChild(seg);
+  const buttons = seg.querySelectorAll('[data-set]');
+  const thumb = seg.querySelector('.ts-thumb');
+
+  function apply(mode, save) {
+    if (mode === 'dark') root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+    seg.dataset.pos = mode;
+    buttons.forEach(b => {
+      const on = b.dataset.set === mode;
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+    });
+    if (save) { try { localStorage.setItem(KEY, mode); } catch (e) {} }
+  }
+  apply(current(), false);
+
+  buttons.forEach(b => b.addEventListener('click', e => { if (e.detail === 0) apply(b.dataset.set, true); }));
+  seg.addEventListener('keydown', e => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
+    e.preventDefault();
+    const next = current() === 'light' ? 'dark' : 'light';
+    apply(next, true);
+    seg.querySelector(`[data-set="${next}"]`).focus();
+  });
+
+  let drag = null, lensTimer = 0;
+  seg.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    clearTimeout(lensTimer);
+    seg.setPointerCapture(e.pointerId);
+    const r = seg.getBoundingClientRect();
+    drag = { x0: e.clientX, r, half: (r.width - 6) / 2, from: current(), moved: false, x: 0 };
+    seg.classList.add('pressing');
+  });
+  seg.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x0;
+    if (!drag.moved && Math.abs(dx) > 3) { drag.moved = true; seg.classList.add('dragging'); }
+    if (!drag.moved) return;
+    const base = drag.from === 'dark' ? drag.half : 0;
+    drag.x = Math.max(0, Math.min(drag.half, base + dx));
+    thumb.style.transform = `translateX(${drag.x}px)`;
+  });
+  seg.addEventListener('pointerup', e => {
+    if (!drag) return;
+    const target = drag.moved
+      ? (drag.x > drag.half / 2 ? 'dark' : 'light')
+      : (e.clientX - drag.r.left > drag.r.width / 2 ? 'dark' : 'light');
+    seg.classList.remove('dragging');
+    thumb.style.transform = '';
+    drag = null;
+    apply(target, true);
+    lensTimer = setTimeout(() => seg.classList.remove('pressing'), reduce ? 0 : 320);
+  });
+  seg.addEventListener('pointercancel', () => {
+    seg.classList.remove('pressing', 'dragging'); thumb.style.transform = ''; drag = null;
   });
 })();
 
@@ -475,7 +528,7 @@ if (clItems) {
     box.innerHTML = `
       ${user.photoUrl ? `<img src="${user.photoUrl}" alt="" class="tg-user-avatar">` : ''}
       <a href="profil.html" class="tg-user-name">${user.firstName || user.username || 'Foydalanuvchi'}</a>
-      <span class="tg-user-xp"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.3 6.6L12 16.9l-5.9 3.5 1.3-6.6-4.9-4.5 6.6-.7Z"/></svg> ${user.xp} XP</span>
+      <span class="tg-user-xp"><img class="emo" src="images/emoji/trophy.png" alt="" width="16" height="16"> ${user.xp} XP</span>
       ${user.streak?.count > 1 ? `<span class="tg-user-streak" title="Ketma-ket kunlar">${user.streak.count} kun</span>` : ''}
       <button type="button" class="tg-logout" title="Chiqish"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>
     `;
@@ -538,4 +591,18 @@ if (clItems) {
     }
     broadcastAuth(data.user || null);
   }).catch(() => broadcastAuth(null));
+})();
+
+/* ---------- Navbar: tepada yopishgan panel, pastda suzuvchi "pill" ---------- */
+(function navPill() {
+  const header = document.querySelector('header.nav');
+  if (!header) return;
+  let pill = false, ticking = false;
+  const update = () => {
+    ticking = false;
+    const next = window.scrollY > 24;
+    if (next !== pill) { pill = next; header.classList.toggle('is-pill', pill); }
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
 })();

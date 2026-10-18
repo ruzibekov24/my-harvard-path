@@ -163,13 +163,13 @@ function saveBest(state) {
     copyBtn.type = 'button';
     copyBtn.className = 'wod-copy';
     copyBtn.id = 'wodCopy';
-    copyBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg> Nusxalash';
+    copyBtn.innerHTML = '<img class="emo" src="images/emoji/memo.png" alt="" width="16" height="16"> Nusxalash';
     wodEx.insertAdjacentElement('afterend', copyBtn);
     copyBtn.addEventListener('click', () => {
       const text = `${item.w} — ${item.uz}\n${item.ex}`;
       navigator.clipboard?.writeText(text).then(() => {
-        copyBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Nusxalandi';
-        setTimeout(() => { copyBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg> Nusxalash'; }, 1500);
+        copyBtn.innerHTML = '<img class="emo" src="images/emoji/check-mark.png" alt="" width="16" height="16"> Nusxalandi';
+        setTimeout(() => { copyBtn.innerHTML = '<img class="emo" src="images/emoji/memo.png" alt="" width="16" height="16"> Nusxalash'; }, 1500);
       });
     });
   }
@@ -236,7 +236,7 @@ function updateVocabProgress() {
 
   function render() {
     if (!deck.length) {
-      front.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px;color:var(--teal)"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 5-5"/></svg>';
+      front.innerHTML = '<img class="emo" src="images/emoji/card-index.png" alt="" width="44" height="44">';
       frontPos.textContent = "";
       frontCat.textContent = "";
       backUz.textContent = "Bu kategoriyada barcha so'zlarni bilasiz!";
@@ -268,7 +268,7 @@ function updateVocabProgress() {
     flashCopyBtn.type = 'button';
     flashCopyBtn.className = 'flash-copy';
     flashCopyBtn.id = 'flashCopy';
-    flashCopyBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg> Nusxalash';
+    flashCopyBtn.innerHTML = '<img class="emo" src="images/emoji/memo.png" alt="" width="16" height="16"> Nusxalash';
     backEx.insertAdjacentElement('afterend', flashCopyBtn);
     flashCopyBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -276,9 +276,9 @@ function updateVocabProgress() {
       if (!item) return;
       const text = `${item.w} — ${item.uz}\n${item.ex}`;
       navigator.clipboard?.writeText(text).then(() => {
-        flashCopyBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Nusxalandi';
+        flashCopyBtn.innerHTML = '<img class="emo" src="images/emoji/check-mark.png" alt="" width="16" height="16"> Nusxalandi';
         flashCopyBtn.classList.add('copied');
-        setTimeout(() => { flashCopyBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg> Nusxalash'; flashCopyBtn.classList.remove('copied'); }, 1500);
+        setTimeout(() => { flashCopyBtn.innerHTML = '<img class="emo" src="images/emoji/memo.png" alt="" width="16" height="16"> Nusxalash'; flashCopyBtn.classList.remove('copied'); }, 1500);
       });
     });
   }
