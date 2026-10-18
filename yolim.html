@@ -79,8 +79,25 @@
     <form class="yl-form" id="ylForm" autocomplete="off">
       <label>Maqsad universitet<select id="ylUni"></select></label>
       <label>Qaysi yil kuzida o'qishni boshlamoqchisiz?<select id="ylYear"></select></label>
-      <label>Hozirgi IELTS (yo'q bo'lsa 0)<div class="yl-range"><input type="range" id="ylIelts" min="0" max="9" step="0.5" value="5.5"><output id="ylIeltsOut">5.5</output></div></label>
       <label>Hozirgi sinfingiz<select id="ylGrade"><option value="9">9-sinf</option><option value="10">10-sinf</option><option value="11" selected>11-sinf</option><option value="0">Bitirganman</option></select></label>
+      <label>GPA / o'rtacha baho
+        <div class="yl-gpa"><input type="number" id="ylGpa" min="0" max="100" step="0.01" value="4.5"><select id="ylGpaScale"><option value="5">5 ballik</option><option value="4">4.0 shkala</option><option value="100">100 ball (%)</option></select></div>
+      </label>
+      <label>IELTS (yo'q bo'lsa 0)<div class="yl-range"><input type="range" id="ylIelts" min="0" max="9" step="0.5" value="0"><output id="ylIeltsOut">yo'q</output></div></label>
+      <label>SAT (topshirmagan bo'lsangiz 0)<div class="yl-range"><input type="range" id="ylSatScore" min="0" max="1600" step="10" value="0"><output id="ylSatOut">yo'q</output></div></label>
+      <fieldset class="yl-certs"><legend>Qo'shimcha sertifikat va yutuqlar</legend>
+        <div class="yl-chips" id="ylChips">
+          <button type="button" data-c="Fan olimpiadasi">Fan olimpiadasi</button>
+          <button type="button" data-c="TOEFL / Duolingo">TOEFL / Duolingo</button>
+          <button type="button" data-c="AP / IB / A-level">AP / IB / A-level</button>
+          <button type="button" data-c="Tadqiqot / loyiha">Tadqiqot / loyiha</button>
+          <button type="button" data-c="Volontyorlik">Volontyorlik</button>
+          <button type="button" data-c="Sport / san'at">Sport / san'at</button>
+          <button type="button" data-c="Liderlik / klub">Liderlik / klub</button>
+          <button type="button" data-c="Onlayn kurs (Coursera, edX)">Onlayn kurs</button>
+        </div>
+        <textarea id="ylExtra" rows="2" maxlength="500" placeholder="Boshqa yutuqlaringiz (ixtiyoriy): masalan, 'Matematika olimpiadasi viloyat 2-o'rin'"></textarea>
+      </fieldset>
       <div class="yl-checks">
         <label class="yl-check"><input type="checkbox" id="ylSat"> SAT/ACT ga tayyorlanyapman</label>
         <label class="yl-check"><input type="checkbox" id="ylAid" checked> Moliyaviy yordam kerak</label>
@@ -97,6 +114,11 @@
           <div class="yl-ielts"><span>IELTS: sizda <b id="ylHave"></b> / kerak <b id="ylNeed"></b></span><div class="yl-track"><i id="ylIeltsBar"></i></div></div>
         </div>
       </div>
+      <div class="yl-bars" id="ylBars"></div>
+      <section class="yl-ai" id="ylAi">
+        <div class="yl-ai-head"><div><b>AI tahlil</b><span>Profilingizni universitet talablari bilan solishtirib, baho va aniq qadamlar beradi</span></div><button type="button" class="btn-primary" id="ylAiBtn">AI bilan hisoblash</button></div>
+        <div id="ylAiOut"></div>
+      </section>
       <div class="yl-prog"><span id="ylProgText"></span><div class="yl-track"><i id="ylProgBar"></i></div></div>
       <ol class="yl-line" id="ylLine"></ol>
       <p class="yl-note">Sanalar taxminiy: ariza muddati sifatida tanlangan yilning 1-yanvari olingan. Aniq muddatni universitetning rasmiy sahifasidan tekshiring.</p>

@@ -44,3 +44,34 @@
 .yl-step.is-done .yl-tick { background: #34c759; border-color: #34c759; color: #fff; transform: scale(1.1); }
 .yl-note { color: var(--muted); font-size: .8rem; margin-top: 16px; }
 @media (max-width: 640px) { .yl-top { grid-template-columns: 1fr; justify-items: center; text-align: center; } .yl-count { justify-content: center; } .yl-facts { width: 100%; } .yl-hero { padding-top: 96px; } }
+.yl-form select, .yl-form input[type=number], .yl-form textarea { font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--surface-border); border-radius: 14px; padding: 12px 14px; width: 100%; box-sizing: border-box; }
+.yl-gpa { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.yl-certs { grid-column: 1 / -1; border: 0; padding: 0; margin: 0; }
+.yl-certs legend { font-size: .85rem; font-weight: 600; color: var(--muted); padding: 0; margin-bottom: 8px; }
+.yl-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.yl-chips button { font: inherit; font-size: .85rem; font-weight: 600; padding: 8px 14px; border-radius: 999px; border: 0; background: rgba(120,120,128,.14); color: var(--ink); cursor: pointer; transition: transform .15s ease, background .2s ease; }
+.yl-chips button:active { transform: scale(.94); }
+.yl-chips button.on { background: #0088ff; color: #fff; }
+.yl-bars { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--surface-border); border-radius: 22px; padding: 18px 20px; margin-bottom: 16px; }
+.yl-brow { display: grid; grid-template-columns: 74px 1fr 150px; gap: 12px; align-items: center; font-size: .85rem; }
+.yl-brow span { font-weight: 700; } .yl-brow em { font-style: normal; color: var(--muted); font-size: .78rem; text-align: right; }
+.yl-brow .yl-track { margin: 0; }
+.yl-ai { background: linear-gradient(145deg, #1c1255, #3b2a9a); color: #fff; border-radius: 26px; padding: 22px; margin-bottom: 20px; box-shadow: 0 14px 36px rgba(50,30,150,.3); }
+.yl-ai-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+.yl-ai-head b { font-family: var(--font-display); font-size: 1.3rem; display: block; }
+.yl-ai-head span { opacity: .8; font-size: .85rem; display: block; max-width: 420px; }
+.yl-ai .btn-primary { background: #fff; color: #1c1255; }
+.yl-ai .btn-primary:hover { background: #eee; color: #1c1255; }
+.yl-verdict { margin-top: 16px; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.12); border-left: 5px solid var(--c); display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
+.yl-verdict b { font-size: 1.05rem; } .yl-verdict span { opacity: .85; font-size: .9rem; } .yl-verdict em { font-style: normal; font-size: .72rem; opacity: .6; margin-left: auto; }
+.yl-sum { margin: 14px 0; line-height: 1.55; }
+.yl-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.yl-ai h4 { margin: 14px 0 6px; font-size: .95rem; }
+.yl-ai ul, .yl-ai ol { margin: 0; padding-left: 20px; line-height: 1.55; font-size: .9rem; }
+.yl-actions li { margin-bottom: 6px; }
+.yl-cert { font-size: .9rem; opacity: .9; }
+.yl-ai-load { display: flex; gap: 8px; padding: 22px 0 6px; }
+.yl-ai-load span { width: 10px; height: 10px; border-radius: 50%; background: #fff; animation: rzDot 1s infinite ease-in-out; }
+.yl-ai-load span:nth-child(2) { animation-delay: .15s; } .yl-ai-load span:nth-child(3) { animation-delay: .3s; }
+@keyframes rzDot { 0%, 80%, 100% { transform: scale(.5); opacity: .4; } 40% { transform: scale(1); opacity: 1; } }
+@media (max-width: 640px) { .yl-two { grid-template-columns: 1fr; } .yl-brow { grid-template-columns: 62px 1fr; } .yl-brow em { grid-column: 2; text-align: left; } }
