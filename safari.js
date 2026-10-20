@@ -11,47 +11,8 @@
   var HOME = 'maqolalar.html';
 
   // ---------- 1. Art fon: o'xshash uslubdagi illyustratsiyalar almashib turadi ----------
-  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
-  function ridge(r, W, base, amp, rough, n) {
-    var pts = [];
-    for (var i = 0; i <= n; i++) {
-      var x = (i / n) * W;
-      var y = base - amp * (0.35 + 0.65 * Math.sin(i * 0.9 + r() * 2.2) * 0.5 + 0.5 * r()) + (r() - 0.5) * rough;
-      pts.push([x, y]);
-    }
-    var d = 'M0 1000 L0 ' + pts[0][1].toFixed(1);
-    for (var j = 1; j < pts.length; j++) {
-      var p = pts[j - 1], q = pts[j], mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
-      d += ' Q' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' ' + mx.toFixed(1) + ' ' + my.toFixed(1);
-    }
-    return d + ' L' + W + ' ' + pts[pts.length - 1][1].toFixed(1) + ' L' + W + ' 1000 Z';
-  }
-  function art(p) {
-    var W = 1600, r = rng(p.seed), s = '';
-    s += '<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + p.sky[0] + '"/><stop offset="1" stop-color="' + p.sky[1] + '"/></linearGradient>' +
-      '<linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + p.water[0] + '"/><stop offset="1" stop-color="' + p.water[1] + '"/></linearGradient></defs>';
-    s += '<rect width="1600" height="1000" fill="url(#s)"/>';
-    if (p.stars) for (var k = 0; k < 90; k++) s += '<circle cx="' + (r() * W).toFixed(0) + '" cy="' + (r() * 420).toFixed(0) + '" r="' + (0.6 + r() * 1.4).toFixed(1) + '" fill="#fff" opacity="' + (0.35 + r() * 0.6).toFixed(2) + '"/>';
-    if (p.sun) s += '<circle cx="' + p.sun[0] + '" cy="' + p.sun[1] + '" r="' + p.sun[2] + '" fill="' + p.sun[3] + '"/>';
-    var L = p.layers.length;
-    for (var i = 0; i < L; i++) {
-      var base = 430 + i * (330 / L), amp = (L - i) * 52 + 40;
-      s += '<path d="' + ridge(r, W, base, amp, 30 + i * 6, 7 + i * 2) + '" fill="' + p.layers[i] + '"/>';
-      if (p.glow && i === 0) s += '<path d="' + ridge(rng(p.seed + 9), W, base - 8, amp * 0.6, 20, 7) + '" fill="' + p.glow + '" opacity=".55"/>';
-    }
-    // suv va aks
-    s += '<path d="M0 860 C 300 840 520 880 800 860 S 1300 840 1600 865 L1600 1000 L0 1000 Z" fill="url(#w)"/>';
-    for (var t = 0; t < 7; t++) { var y = 880 + t * 16, x = 300 + r() * 900; s += '<rect x="' + x.toFixed(0) + '" y="' + y + '" width="' + (120 + r() * 260).toFixed(0) + '" height="4" rx="2" fill="#fff" opacity=".18"/>'; }
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">' + s + '</svg>');
-  }
-  var ARTS = [
-    'images/bg-mountain.webp',
-    art({ seed: 11, sky: ['#f6c9a3', '#8f9ccc'], sun: [1180, 330, 70, '#ffe2bd'], glow: '#f7a27c', layers: ['#a597c4', '#7c74ad', '#555a8e', '#353a68', '#1d2142'], water: ['#6b78ad', '#2b3263'] }),
-    art({ seed: 23, sky: ['#9fc6dd', '#e9eef0'], sun: [380, 260, 54, '#fff6e6'], layers: ['#c1d6e1', '#93b5ca', '#638cab', '#3a6383', '#1f3d55'], water: ['#7fa8c2', '#2d5470'] }),
-    art({ seed: 37, sky: ['#fbd7ae', '#f09d79'], sun: [820, 360, 90, '#fff0d4'], layers: ['#eab88c', '#d9926a', '#b86b50', '#8b4c3e', '#5b302c'], water: ['#d28968', '#6a3a33'] }),
-    art({ seed: 51, sky: ['#d3e6db', '#8bb6ad'], layers: ['#a1c6ba', '#72a698', '#4b8274', '#2e5e53', '#183b35'], glow: '#e9d9b5', water: ['#6aa093', '#1e4a43'] }),
-    art({ seed: 67, sky: ['#1b2350', '#4a5384'], stars: true, sun: [1240, 220, 44, '#f4ebd3'], layers: ['#424b7a', '#323a63', '#242a4c', '#171b35', '#0b0e20'], water: ['#2c3566', '#0a0d1e'] })
-  ];
+  // Foydalanuvchi tanlagan macOS uslubidagi fon rasmlari
+  var ARTS = ['images/bg-mountain.webp', 'images/wall/desert-day.jpg', 'images/wall/desert-dusk.jpg', 'images/wall/mojave-day.jpg', 'images/wall/mojave-night.jpg', 'images/wall/waves-light.jpg', 'images/wall/waves-dark.jpg', 'images/wall/wave-blue.jpg', 'images/wall/liquid.avif'];
   var bgA = document.createElement('div'), bgB = document.createElement('div');
   bgA.className = bgB.className = 'mw-bg';
   body.insertBefore(bgB, body.firstChild); body.insertBefore(bgA, body.firstChild);
@@ -84,16 +45,79 @@
       if (reduce) return go();
       win.classList.add('sf-closing'); setTimeout(go, 260);
     });
+    // macOS "Genie" effekti: oyna gorizontal bo'laklarga bo'linadi, pastki qismi Dock belgisiga qarab
+    // voronka shaklida torayadi va butun oyna o'sha nuqtaga "so'rilib" kiradi. Qaytarishda teskari.
+    var SLICES = 40;
+    function genie(reverse, target, done) {
+      var r = win.getBoundingClientRect();
+      if (reduce || !r.width) { done(); return; }
+      var layer = document.createElement('div');
+      layer.className = 'mw-genie';
+      var sTop = scroller ? scroller.scrollTop : 0, parts = [];
+      var sliceH = r.height / SLICES;
+      for (var i = 0; i < SLICES; i++) {
+        var c = win.cloneNode(true);
+        c.classList.remove('sf-open', 'sf-min', 'side-on');
+        c.removeAttribute('id');
+        c.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
+        c.style.cssText = 'position:fixed;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px;margin:0;transform-origin:50% 0;clip-path:inset(' + (i * sliceH) + 'px 0 ' + Math.max(0, r.height - (i + 1) * sliceH - 0.6) + 'px 0);transition:none;animation:none;will-change:transform;';
+        layer.appendChild(c);
+        parts.push({ el: c, y0: i * sliceH });
+      }
+      body.appendChild(layer);
+      parts.forEach(function (p) { var sc = p.el.querySelector('.vw-frame'); if (sc) sc.scrollTop = sTop; });
+      win.style.visibility = 'hidden';
+      var W = r.width, H = r.height, cx0 = r.left + W / 2;
+      var tx = target.x, ty = target.y, iconW = 46, dist = ty - r.top;
+      var D = 620, t0 = performance.now();
+      var ease = function (x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
+      function frame(now) {
+        var k = Math.min(1, (now - t0) / D);
+        var t = reverse ? 1 - k : k;
+        var pinch = ease(Math.min(1, t / 0.45));           // 1-bosqich: pastki qism torayadi
+        var slide = ease(Math.max(0, (t - 0.25) / 0.75));    // 2-bosqich: oyna nuqtaga oqib tushadi
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i];
+          var yAbs = r.top + p.y0 + slide * (dist + 30);     // bo'lakning yangi o'rni
+          var u = Math.max(0, Math.min(1, (yAbs - r.top) / Math.max(1, dist)));
+          var f = (1 - Math.cos(Math.PI * u)) / 2;            // voronka egriligi
+          var w = W - (W - iconW) * f * pinch;
+          var cx = cx0 + (tx - cx0) * f * pinch;
+          var gone = yAbs > ty + 4;
+          p.el.style.transform = 'translate(' + (cx - cx0) + 'px,' + (yAbs - r.top - p.y0) + 'px) scaleX(' + (w / W).toFixed(4) + ')';
+          p.el.style.opacity = gone ? '0' : '1';
+        }
+        if (k < 1) requestAnimationFrame(frame);
+        else { layer.remove(); win.style.visibility = ''; done(); }
+      }
+      requestAnimationFrame(frame);
+    }
     var dockIcon = null;
+    var dockTarget = function () {
+      var b = dockIcon.querySelector('.mw-dockapp').getBoundingClientRect();
+      return { x: b.left + b.width / 2, y: b.top + b.height / 2 };
+    };
     Y.addEventListener('click', function () {
-      if (win.classList.contains('sf-min')) return;
-      win.classList.add('sf-min');
+      if (win.classList.contains('sf-min') || dockIcon) return;
       dockIcon = document.createElement('button');
       dockIcon.type = 'button'; dockIcon.className = 'mw-dockicon';
-      dockIcon.innerHTML = '<span class="mw-dockapp"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z" fill="#fff" stroke="none"/></svg></span><span>' + esc(document.title.split(' — ')[0]) + '</span>';
+      dockIcon.innerHTML = '<span class="mw-dockapp"><img src="images/wall/safari.png" alt="" width="48" height="48"></span><span class="mw-docktitle">' + esc(document.title.split(' — ')[0]) + '</span>';
       body.appendChild(dockIcon);
-      requestAnimationFrame(function () { dockIcon.classList.add('in'); });
-      dockIcon.onclick = function () { win.classList.remove('sf-min'); dockIcon.remove(); dockIcon = null; };
+      dockIcon.getBoundingClientRect();
+      dockIcon.classList.add('in');
+      setTimeout(function () {
+        genie(false, dockTarget(), function () { win.classList.add('sf-min'); dockIcon.classList.add('ready'); });
+      }, 120);
+      dockIcon.onclick = function () {
+        if (!dockIcon.classList.contains('ready')) return;
+        var tgt = dockTarget();
+        win.classList.remove('sf-min');
+        genie(true, tgt, function () {
+          dockIcon.classList.remove('in');
+          var d = dockIcon; dockIcon = null;
+          setTimeout(function () { d.remove(); }, 400);
+        });
+      };
     });
     var full = function () { win.classList.toggle('sf-full'); };
     G.addEventListener('click', full);
