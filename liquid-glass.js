@@ -40,7 +40,17 @@
     // matn ko'p bo'lgan navbar kapsulasi o'qilishi uchun yengil tus
     'html.lg header.nav.is-pill .nav-inner.lg-on{background-color:rgba(255,255,255,.42)!important}' +
     'html[data-theme="dark"].lg .lg-on{background-color:rgba(20,20,24,.10)!important;box-shadow:inset 0 -4px 4px rgba(255,255,255,.12),inset 0 4px 4px rgba(255,255,255,.14),inset -4px 0 14px rgba(0,0,0,.25),inset 4px 0 14px rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(255,255,255,.1),0 2px 10px rgba(0,0,0,.3),0 0 0 .5px rgba(255,255,255,.18)!important}' +
-    'html[data-theme="dark"].lg header.nav.is-pill .nav-inner.lg-on{background-color:rgba(28,28,32,.55)!important}';
+    'html[data-theme="dark"].lg header.nav.is-pill .nav-inner.lg-on{background-color:rgba(28,28,32,.55)!important}' +
+    // Moslashuvchan tus: shisha ostidagi fon qorong'i bo'lsa, shisha ham qorayadi va matn oqaradi (iOS kabi)
+    'html.lg .lg-on[data-lg-tone="dark"]{background-color:rgba(18,18,22,.30)!important;color:#f5f5f7}' +
+    'html.lg header.nav.is-pill .nav-inner.lg-on[data-lg-tone="dark"]{background-color:rgba(18,18,22,.48)!important}' +
+    'html.lg .lg-on[data-lg-tone="dark"] .logo{color:#f5f5f7}' +
+    'html.lg .lg-on[data-lg-tone="dark"] nav.links a:not(.nav-cta), html.lg .lg-on[data-lg-tone="dark"] .nav-group-trigger{color:rgba(245,245,247,.82)}' +
+    'html.lg .lg-on[data-lg-tone="dark"] nav.links a:hover, html.lg .lg-on[data-lg-tone="dark"] nav.links a.active{color:#ff6b7d}' +
+    'html.lg .lg-on[data-lg-tone="light"]{color:#1d1d1f}' +
+    'html[data-theme="dark"].lg .lg-on[data-lg-tone="light"]{background-color:rgba(255,255,255,.30)!important}' +
+    'html[data-theme="dark"].lg .lg-on[data-lg-tone="light"] nav.links a:not(.nav-cta), html[data-theme="dark"].lg .lg-on[data-lg-tone="light"] .nav-group-trigger, html[data-theme="dark"].lg .lg-on[data-lg-tone="light"] .logo{color:#1d1d1f}' +
+    '.lg-on[data-lg-tone]{transition:background-color .35s ease,color .35s ease}';
   document.head.appendChild(css);
 
   var defs = null;
@@ -134,6 +144,39 @@
     state.delete(el);
   }
 
+  // Shisha ostidagi rangni aniqlash: element markazi ostidagi birinchi rangli fon (yoki rasm) yorug'ligi
+  function parseRGB(c) { var m = c && c.match(/rgba?\(([^)]+)\)/); if (!m) return null; var p = m[1].split(',').map(parseFloat); return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 }; }
+  function lumAt(x, y, self) {
+    var list = document.elementsFromPoint(x, y);
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i];
+      if (e === self || self.contains(e) || e.contains(self) && e !== document.body && e !== root && getComputedStyle(e).position === 'fixed') continue;
+      if (e.closest && e.closest('.lg-on') && !e.contains(self)) continue;
+      if (e.tagName === 'IMG' || e.tagName === 'CANVAS' || e.tagName === 'VIDEO') return 0.5;
+      var cs = getComputedStyle(e), c = parseRGB(cs.backgroundColor);
+      if (cs.backgroundImage && cs.backgroundImage !== 'none' && !(c && c.a > 0.5)) return 0.5;
+      if (c && c.a > 0.5) return (0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b) / 255;
+    }
+    var bc = parseRGB(getComputedStyle(document.body).backgroundColor);
+    return bc ? (0.2126 * bc.r + 0.7152 * bc.g + 0.0722 * bc.b) / 255 : 1;
+  }
+  function tone() {
+    toning = false;
+    state.forEach(function (st, el) {
+      var b = el.getBoundingClientRect();
+      if (b.bottom < 0 || b.top > innerHeight || !b.width) return;
+      var pts = [[b.left + b.width * 0.25, b.top + b.height / 2], [b.left + b.width / 2, b.top + b.height / 2], [b.left + b.width * 0.75, b.top + b.height / 2]];
+      var sum = 0;
+      pts.forEach(function (p) { sum += lumAt(p[0], p[1], el); });
+      var L = sum / pts.length;
+      var t = L < 0.42 ? 'dark' : L > 0.58 ? 'light' : (el.getAttribute('data-lg-tone') || 'light');
+      if (el.getAttribute('data-lg-tone') !== t) el.setAttribute('data-lg-tone', t);
+    });
+  }
+  var toning = false;
+  function toneSoon() { if (!toning) { toning = true; setTimeout(tone, 60); } }
+  window.addEventListener('scroll', toneSoon, { passive: true, capture: true });
+
   var ro = 'ResizeObserver' in window ? new ResizeObserver(function (entries) { entries.forEach(function (e) { build(e.target); }); }) : null;
   var pending = false;
   function scan() {
@@ -141,6 +184,7 @@
     var now = new Set(document.querySelectorAll(CLEAR));
     state.forEach(function (_, el) { if (!now.has(el) || !el.isConnected) drop(el); });
     now.forEach(build);
+    toneSoon();
   }
   function soon() { if (!pending) { pending = true; requestAnimationFrame(scan); } }
   new MutationObserver(soon).observe(root, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] });
