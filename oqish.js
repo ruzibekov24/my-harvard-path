@@ -22,7 +22,7 @@
       source: 'Source', sourceNote: 'The full article is on the original page.', badge: 'Articles'
     }
   };
-  var lang = (function () { try { var p = new URLSearchParams(location.search).get('lang'); return p === 'en' ? 'en' : p === 'uz' ? 'uz' : (localStorage.getItem('mhp_read_lang') === 'en' ? 'en' : 'uz'); } catch (e) { return 'uz'; } })();
+  var _unusedLang = (function () { try { var p = new URLSearchParams(location.search).get('lang'); return p === 'en' ? 'en' : p === 'uz' ? 'uz' : (localStorage.getItem('mhp_read_lang') === 'en' ? 'en' : 'uz'); } catch (e) { return 'uz'; } })();
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var fail = function (msg) {
     load.style.display = 'none';
@@ -35,31 +35,35 @@
   document.getElementById('vwOpen').href = url;
   document.title = (q.get('t') || 'Maqola') + ' — MyHarvardPath';
 
-  var last = null;
-  function render(d) {
-    last = d;
-    var t = TR[d.url] || TR[url];
-    var en = lang === 'en' && !!t;
-    var title = en ? t.title : d.title, date = en ? t.date : d.date, image = d.image;
+  function block(d, t, en) {
+    var title = en ? t.title : d.title, date = en ? t.date : d.date;
     var paras = en ? t.paragraphs.slice() : d.paragraphs.slice(), by = [];
     if (en) by = t.by.slice();
     else while (paras.length > 2 && paras[paras.length - 1].length < 90 && by.length < 3) by.unshift(paras.pop());
-    document.title = title + ' — MyHarvardPath';
-    var sw = t ? '<div class="vw-lang" role="tablist"><button type="button" data-l="uz" class="' + (en ? '' : 'on') + '">O’zbekcha</button><button type="button" data-l="en" class="' + (en ? 'on' : '') + '">English</button></div>' : '';
-    art.innerHTML =
-      '<div class="vw-top">' + sw + '</div>' +
-      '<div class="vw-meta"><span class="vw-badge">' + (en ? t.badge : 'Maqolalar') + '</span>' + (date ? '<time>' + esc(date) + '</time>' : '') + '</div>' +
+    return '<div class="vw-meta"><span class="vw-badge">' + (en ? t.badge : 'Maqolalar') + '</span>' + (date ? '<time>' + esc(date) + '</time>' : '') + '</div>' +
       '<h1>' + esc(title) + '</h1>' +
-      (image ? '<img class="vw-hero" src="' + esc(image) + '" alt="' + esc(title) + '" referrerpolicy="no-referrer">' : '') +
+      (d.image ? '<img class="vw-hero" src="' + esc(d.image) + '" alt="' + esc(title) + '" referrerpolicy="no-referrer">' : '') +
       '<div class="vw-body">' + paras.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' +
       (by.length ? '<div class="vw-by">' + by.map(function (p) { return '<div>' + esc(p) + '</div>'; }).join('') + '</div>' : '') +
       (en ? '<div class="vw-tr">' + esc(t.credit) + '</div>' : '') +
       '<div class="vw-src">' + (en ? t.source : 'Manba') + ': <a href="' + esc(d.url) + '" target="_blank" rel="noopener">Yangi Sirdaryo ' + (en ? 'newspaper' : 'gazetasi') + ' (' + esc(d.source) + ') ↗</a><span>' + (en ? t.sourceNote : "Maqola to'liq holda asl sahifada.") + '</span></div>';
-    art.querySelectorAll('.vw-lang button').forEach(function (b) {
-      b.onclick = function () { lang = b.dataset.l; try { localStorage.setItem('mhp_read_lang', lang); } catch (e) {} render(last); document.querySelector('.vw-frame').scrollTop = 0; };
-    });
+  }
+  function render(d) {
+    var t = TR[d.url] || TR[url];
+    // Tarjima bor bo'lsa ikkala til bloki chiqariladi; almashtirish va animatsiyani read-lang.js (oddiy maqolalardagi bilan bir xil) bajaradi.
+    art.innerHTML = t
+      ? '<div data-lang="uz">' + block(d, t, false) + '</div><div data-lang="en" lang="en">' + block(d, t, true) + '</div>'
+      : block(d, null, false);
     load.style.display = 'none';
     art.hidden = false;
+    var old = document.querySelector('.rl-dock'); if (old) old.remove();
+    if (t) {
+      var s = document.createElement('script');
+      s.src = 'read-lang.js?v=' + Date.now();
+      document.body.appendChild(s);
+      var title = document.querySelector('meta[name="title-en"]'); if (title) title.content = t.title + ' — MyHarvardPath';
+      document.title = d.title + ' — MyHarvardPath';
+    } else document.title = d.title + ' — MyHarvardPath';
   }
 
   function get() {
