@@ -13,6 +13,8 @@
   document.getElementById('vwTab').textContent = q.get('t') || 'Maqola';
   document.getElementById('vwHost').textContent = host.replace(/^www\./, '');
   document.getElementById('vwOpen').href = url;
+  document.getElementById('vwUrl').textContent = url;
+  document.getElementById('vwReload').onclick = function () { load.style.display = 'flex'; frame.src = url; };
   document.title = (q.get('t') || 'Maqola') + ' — MyHarvardPath';
   frame.addEventListener('load', function () { load.style.display = 'none'; });
   frame.src = url;
