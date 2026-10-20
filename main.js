@@ -597,3 +597,6 @@ if (clItems) {
   window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   update();
 })();
+
+/* ---------- Clear Liquid Glass (butun sayt) ---------- */
+(function () { var s = document.createElement('script'); s.src = 'liquid-glass.js'; s.defer = true; document.head.appendChild(s); })();
