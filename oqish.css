@@ -302,3 +302,12 @@ html[data-theme="dark"] .mw-dockicon.ready::after { background: rgba(255,255,255
 /* Clear glass: panel ostidagi blur olib tashlandi, faqat juda yengil soya qoldi */
 .vwp .sf-win::after { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(rgba(255,255,255,.28), rgba(255,255,255,0)); height: 90px; }
 html[data-theme="dark"] .vwp .sf-win::after { background: linear-gradient(rgba(20,20,22,.3), rgba(20,20,22,0)); }
+
+/* Qorong'i rejim: hamkor maqola oynasining ichi ham qorong'i bo'lsin (avval oq qolib, matn o'qilmasdi) */
+html[data-theme="dark"] .vw-frame, html[data-theme="dark"] .vwp .vw-frame, html[data-theme="dark"] .vw-load { background: #1c1c1e; }
+html[data-theme="dark"] .vw-art { color: #f2f2f7; }
+html[data-theme="dark"] .vw-meta, html[data-theme="dark"] .vw-by, html[data-theme="dark"] .vw-src span { color: #a1a1a6; }
+html[data-theme="dark"] .vw-by { border-top-color: rgba(255,255,255,.14); }
+html[data-theme="dark"] .vw-src { background: rgba(255,255,255,.07); }
+html[data-theme="dark"] .vw-src a { color: #64b5ff; }
+html[data-theme="dark"] .vw-err { color: #f2f2f7; }
