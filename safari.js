@@ -12,7 +12,8 @@
 
   // ---------- 1. Art fon: o'xshash uslubdagi illyustratsiyalar almashib turadi ----------
   // Foydalanuvchi tanlagan macOS uslubidagi fon rasmlari
-  var ARTS = ['images/bg-mountain.webp', 'images/wall/desert-day.jpg', 'images/wall/desert-dusk.jpg', 'images/wall/mojave-day.jpg', 'images/wall/mojave-night.jpg', 'images/wall/waves-light.jpg', 'images/wall/waves-dark.jpg', 'images/wall/wave-blue.jpg', 'images/wall/liquid.avif'];
+  // Past o'lchamli fotosuratlar to'liq ekranda xira chiqqani uchun olib tashlandi; mayin abstrakt fonlar kattalashtirilganda ham toza ko'rinadi.
+  var ARTS = ['images/bg-mountain.webp', 'images/wall/waves-light.jpg', 'images/wall/waves-dark.jpg', 'images/wall/wave-blue.jpg', 'images/wall/liquid.avif'];
   var bgA = document.createElement('div'), bgB = document.createElement('div');
   bgA.className = bgB.className = 'mw-bg';
   body.insertBefore(bgB, body.firstChild); body.insertBefore(bgA, body.firstChild);
@@ -45,52 +46,147 @@
       if (reduce) return go();
       win.classList.add('sf-closing'); setTimeout(go, 260);
     });
-    // macOS "Genie" effekti: oyna gorizontal bo'laklarga bo'linadi, pastki qismi Dock belgisiga qarab
-    // voronka shaklida torayadi va butun oyna o'sha nuqtaga "so'rilib" kiradi. Qaytarishda teskari.
-    var SLICES = 40;
+    // macOS "Genie" (lamp) effekti. Egri chiziq formulasi Windhawk "MacOS Minimize Animation" modidan
+    // (Abdullah Masood, Potassiumuncher'ning genie dvigateli, MIT litsenziyasi) JavaScript'ga ko'chirildi.
+    // Oyna bir marta rasmga olinadi (html2canvas), so'ng WebGL'da 32x32 to'r bo'ylab egiladi:
+    // DOM klonlari yo'q, shuning uchun animatsiya silliq va piksellar ko'rinmaydi.
+    var DUR = 480, TILES = 32;
+    var snap = null, snapKey = '', snapBusy = null;
+    function lamp(tx, ty, p, w, i) {
+      var split = 0.3;
+      var k = p <= split ? p / split : 1, j = p > split ? (p - split) / (1 - split) : 0;
+      var expandHeight = i.y - w.y - w.height;
+      var fullHeight = (i.y - w.y) - expandHeight * (1 - k);
+      var height = fullHeight - j * fullHeight;
+      var y = ty * height;
+      var x = tx * i.width + tx * (w.width - i.width) * (1 - j) * (1 - ty) + tx * (w.width - i.width) * (1 - k) * ty;
+      var offsetX = (i.x - w.x) * (y / (fullHeight + 0.1)) * k + (i.x - w.x) * j;
+      var offsetY = i.y - w.y - height - expandHeight * (1 - k);
+      var effectX = Math.sin(((height - y) / fullHeight) * 2 * Math.PI + Math.PI) * (w.x + w.width * tx - (i.x + i.width * tx)) / 7 * k;
+      return [w.x + x + offsetX + effectX, w.y + y + offsetY];
+    }
+    function loadH2C() {
+      if (window.html2canvas) return Promise.resolve();
+      return new Promise(function (ok, bad) {
+        var s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        s.onload = ok; s.onerror = bad; document.head.appendChild(s);
+      });
+    }
+    function capture() {
+      var r = win.getBoundingClientRect();
+      var key = Math.round(r.width) + 'x' + Math.round(r.height) + ':' + (scroller ? scroller.scrollTop : 0) + ':' + document.documentElement.getAttribute('data-read');
+      if (snap && snapKey === key) return Promise.resolve(snap);
+      if (snapBusy) return snapBusy;
+      var st = scroller ? scroller.scrollTop : 0;
+      snapBusy = loadH2C().then(function () {
+        return window.html2canvas(win, {
+          backgroundColor: null, scale: Math.min(2, window.devicePixelRatio || 1), useCORS: true, logging: false,
+          ignoreElements: function (el) { return el.classList && (el.classList.contains('mw-pop') || el.classList.contains('mw-toast')); },
+          onclone: function (doc) {
+            var c = doc.querySelector('.sf-win'); if (!c) return;
+            c.classList.remove('sf-open'); c.style.animation = 'none'; c.style.transform = 'none';
+            var sc = c.querySelector('.vw-frame'); if (sc) sc.scrollTop = st;
+          }
+        });
+      }).then(function (cv) { snap = cv; snapKey = key; snapBusy = null; return cv; }, function (e) { snapBusy = null; throw e; });
+      return snapBusy;
+    }
+    // svetofor ustiga kelinganda oldindan rasmga olib qo'yamiz: bosilganda kechikish bo'lmaydi
+    var prewarm = function () { if (!reduce && !win.classList.contains('sf-min')) capture().catch(function () {}); };
+    lights.addEventListener('mouseenter', prewarm);
+    if (bar) bar.addEventListener('mouseenter', prewarm);
+    // kutubxonani sahifa bo'shaganda oldindan yuklab qo'yamiz
+    (window.requestIdleCallback || function (f) { setTimeout(f, 2500); })(function () { if (!reduce) loadH2C().catch(function () {}); });
+
+    var gl = null, glc = null, prog = null, posBuf = null, uvBuf = null, idxBuf = null, tex = null, nIdx = 0;
+    function setupGL() {
+      if (gl) return true;
+      glc = document.createElement('canvas');
+      glc.className = 'mw-genie';
+      gl = glc.getContext('webgl2', { premultipliedAlpha: true, antialias: true, alpha: true }) || glc.getContext('webgl', { premultipliedAlpha: true, antialias: true, alpha: true });
+      if (!gl) return false;
+      var vs = 'attribute vec2 p;attribute vec2 uv;uniform vec2 res;varying vec2 v;void main(){v=uv;vec2 c=p/res*2.0-1.0;gl_Position=vec4(c.x,-c.y,0.0,1.0);}';
+      var fs = 'precision mediump float;varying vec2 v;uniform sampler2D t;void main(){gl_FragColor=texture2D(t,v);}';
+      var sh = function (type, src) { var o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+      prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { gl = null; return false; }
+      var uv = [], idx = [];
+      for (var y = 0; y <= TILES; y++) for (var x = 0; x <= TILES; x++) uv.push(x / TILES, y / TILES);
+      for (var yy = 0; yy < TILES; yy++) for (var xx = 0; xx < TILES; xx++) {
+        var a = yy * (TILES + 1) + xx, b = a + 1, c = a + TILES + 1, d = c + 1;
+        idx.push(a, b, c, b, d, c);
+      }
+      nIdx = idx.length;
+      uvBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, uvBuf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(uv), gl.STATIC_DRAW);
+      idxBuf = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
+      posBuf = gl.createBuffer();
+      tex = gl.createTexture();
+      return true;
+    }
+    function uploadTex(cv) {
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, cv);
+      var isGL2 = typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext;
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      if (isGL2) { gl.generateMipmap(gl.TEXTURE_2D); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); }
+      else gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    }
+    var simple = function (reverse, done) {
+      // WebGL yoki rasmga olish ishlamasa: oddiy kichrayish
+      if (reverse) { win.style.visibility = ''; done(); return; }
+      win.animate([{ transform: 'none', opacity: 1 }, { transform: 'translateY(40vh) scale(.08)', opacity: 0 }], { duration: 380, easing: 'cubic-bezier(.55,.05,.35,1)' }).finished.then(done, done);
+    };
     function genie(reverse, target, done) {
       var r = win.getBoundingClientRect();
       if (reduce || !r.width) { done(); return; }
-      var layer = document.createElement('div');
-      layer.className = 'mw-genie';
-      var sTop = scroller ? scroller.scrollTop : 0, parts = [];
-      var sliceH = r.height / SLICES;
-      for (var i = 0; i < SLICES; i++) {
-        var c = win.cloneNode(true);
-        c.classList.remove('sf-open', 'sf-min', 'side-on');
-        c.removeAttribute('id');
-        c.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
-        c.style.cssText = 'position:fixed;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px;margin:0;transform-origin:50% 0;clip-path:inset(' + (i * sliceH) + 'px 0 ' + Math.max(0, r.height - (i + 1) * sliceH - 0.6) + 'px 0);transition:none;animation:none;will-change:transform;';
-        layer.appendChild(c);
-        parts.push({ el: c, y0: i * sliceH });
-      }
-      body.appendChild(layer);
-      parts.forEach(function (p) { var sc = p.el.querySelector('.vw-frame'); if (sc) sc.scrollTop = sTop; });
-      win.style.visibility = 'hidden';
-      var W = r.width, H = r.height, cx0 = r.left + W / 2;
-      var tx = target.x, ty = target.y, iconW = 46, dist = ty - r.top;
-      var D = 620, t0 = performance.now();
-      var ease = function (x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
-      function frame(now) {
-        var k = Math.min(1, (now - t0) / D);
-        var t = reverse ? 1 - k : k;
-        var pinch = ease(Math.min(1, t / 0.45));           // 1-bosqich: pastki qism torayadi
-        var slide = ease(Math.max(0, (t - 0.25) / 0.75));    // 2-bosqich: oyna nuqtaga oqib tushadi
-        for (var i = 0; i < parts.length; i++) {
-          var p = parts[i];
-          var yAbs = r.top + p.y0 + slide * (dist + 30);     // bo'lakning yangi o'rni
-          var u = Math.max(0, Math.min(1, (yAbs - r.top) / Math.max(1, dist)));
-          var f = (1 - Math.cos(Math.PI * u)) / 2;            // voronka egriligi
-          var w = W - (W - iconW) * f * pinch;
-          var cx = cx0 + (tx - cx0) * f * pinch;
-          var gone = yAbs > ty + 4;
-          p.el.style.transform = 'translate(' + (cx - cx0) + 'px,' + (yAbs - r.top - p.y0) + 'px) scaleX(' + (w / W).toFixed(4) + ')';
-          p.el.style.opacity = gone ? '0' : '1';
+      var run = function (cv) {
+        if (!cv || !setupGL()) return simple(reverse, done);
+        var dpr = window.devicePixelRatio || 1, VW = innerWidth, VH = innerHeight;
+        glc.width = Math.round(VW * dpr); glc.height = Math.round(VH * dpr);
+        glc.style.width = VW + 'px'; glc.style.height = VH + 'px';
+        if (!glc.isConnected) body.appendChild(glc);
+        gl.viewport(0, 0, glc.width, glc.height);
+        gl.useProgram(prog);
+        uploadTex(cv);
+        gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        var locP = gl.getAttribLocation(prog, 'p'), locUV = gl.getAttribLocation(prog, 'uv');
+        gl.uniform2f(gl.getUniformLocation(prog, 'res'), VW, VH);
+        gl.bindBuffer(gl.ARRAY_BUFFER, uvBuf); gl.enableVertexAttribArray(locUV); gl.vertexAttribPointer(locUV, 2, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+        var wG = { x: r.left, y: r.top, width: r.width, height: r.height };
+        // Dock oynadan pastda bo'lishi shart (formula shuni kutadi)
+        var iG = { x: target.x - 11, y: Math.max(target.y - 18, r.bottom + 2), width: 22, height: 36 };
+        var pos = new Float32Array((TILES + 1) * (TILES + 1) * 2);
+        var t0 = performance.now(), shown = false;
+        function draw(now) {
+          var raw = Math.max(0, Math.min(1, (now - t0) / DUR));
+          var e = raw * raw * (3 - 2 * raw);
+          var p = reverse ? 1 - e : e, n = 0;
+          for (var y = 0; y <= TILES; y++) for (var x = 0; x <= TILES; x++) {
+            var q = lamp(x / TILES, y / TILES, p, wG, iG);
+            pos[n++] = q[0]; pos[n++] = q[1];
+          }
+          gl.bindBuffer(gl.ARRAY_BUFFER, posBuf); gl.bufferData(gl.ARRAY_BUFFER, pos, gl.DYNAMIC_DRAW);
+          gl.enableVertexAttribArray(locP); gl.vertexAttribPointer(locP, 2, gl.FLOAT, false, 0, 0);
+          gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+          gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
+          if (!shown) { shown = true; glc.style.visibility = 'visible'; if (!reverse) win.style.visibility = 'hidden'; }
+          if (raw < 1) requestAnimationFrame(draw);
+          else {
+            if (reverse) win.style.visibility = '';
+            requestAnimationFrame(function () { glc.style.visibility = 'hidden'; gl.clear(gl.COLOR_BUFFER_BIT); done(); });
+          }
         }
-        if (k < 1) requestAnimationFrame(frame);
-        else { layer.remove(); win.style.visibility = ''; done(); }
-      }
-      requestAnimationFrame(frame);
+        requestAnimationFrame(draw);
+      };
+      if (reverse && snap) run(snap);
+      else capture().then(run, function () { run(null); });
     }
     var dockIcon = null;
     var dockTarget = function () {
@@ -105,17 +201,19 @@
       body.appendChild(dockIcon);
       dockIcon.getBoundingClientRect();
       dockIcon.classList.add('in');
-      setTimeout(function () {
-        genie(false, dockTarget(), function () { win.classList.add('sf-min'); dockIcon.classList.add('ready'); });
-      }, 120);
+      var d = dockIcon;
+      genie(false, dockTarget(), function () { win.style.visibility = ''; win.classList.add('sf-min'); d.classList.add('ready'); });
       dockIcon.onclick = function () {
-        if (!dockIcon.classList.contains('ready')) return;
+        if (!d.classList.contains('ready')) return;
+        d.classList.remove('ready');
         var tgt = dockTarget();
+        win.style.visibility = 'hidden';
         win.classList.remove('sf-min');
         genie(true, tgt, function () {
-          dockIcon.classList.remove('in');
-          var d = dockIcon; dockIcon = null;
-          setTimeout(function () { d.remove(); }, 400);
+          win.style.visibility = '';
+          d.classList.remove('in');
+          dockIcon = null;
+          setTimeout(function () { d.remove(); }, 450);
         });
       };
     });

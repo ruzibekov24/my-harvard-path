@@ -290,3 +290,4 @@ html[data-theme="dark"] .vwp .sf-pill, html[data-theme="dark"] .vwp .sf-url { ba
 .vwp .sf-url { height: 34px; }
 .vwp .sf-win .mw-side { padding-top: 116px; }
 @media (max-width: 760px) { .vwp .sf-urlrow { top: 56px; padding: 2px 10px 8px; } .vwp .sf-bar { padding: max(10px, env(safe-area-inset-top)) 10px 6px; } .vwp .sf-win .vw-frame { padding-top: 100px; } }
+canvas.mw-genie { position: fixed; left: 0; top: 0; z-index: 65; pointer-events: none; visibility: hidden; }
