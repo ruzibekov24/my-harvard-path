@@ -56,6 +56,7 @@
       : block(d, null, false);
     load.style.display = 'none';
     art.hidden = false;
+    if (window.mhpHighlights) window.mhpHighlights.restore();
     var old = document.querySelector('.rl-dock'); if (old) old.remove();
     if (t) {
       var s = document.createElement('script');
