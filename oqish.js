@@ -10,8 +10,7 @@
     document.querySelector('.vw-frame').innerHTML = '<p class="vw-err">Bu manba ruxsat etilmagan yoki havola noto\'g\'ri. <a href="maqolalar.html">Maqolalarga qaytish</a></p>';
     return;
   }
-  document.getElementById('vwTab').textContent = q.get('t') || 'Maqola';
-  document.getElementById('vwHost').textContent = host.replace(/^www\./, '');
+    document.getElementById('vwHost').textContent = host.replace(/^www\./, '');
   document.getElementById('vwOpen').href = url;
   document.getElementById('vwUrl').textContent = url;
   document.getElementById('vwReload').onclick = function () { load.style.display = 'flex'; frame.src = url; };
