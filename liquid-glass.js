@@ -8,10 +8,19 @@
   window.__liquidGlass = true;
 
   var CLEAR = [
-    '.rl-dock', 'header.nav.is-pill .nav-inner',
-    '.rz-tabs-main', '.rz-tabs-side', '.rz-gal-hud', '.rz-gal-zoom button',
-    '.yl-sf', '.sf-pill', '.sf-url', '.mw-dockicon'
+    // navigatsiya va umumiy boshqaruvlar
+    'header.nav.is-pill .nav-inner', '.theme-seg', '.tg-user-box', '.nav-cta', '.tg-login',
+    '.btn-ghost-dark', '.btn-ghost', '.chip', '.uni-filter', '.mode-tab', '.flash-mark',
+    '.rl-dock', '.book-modal-close', '.theme-toggle',
+    // Rizqulloh English
+    '.rz-tabs-main', '.rz-tabs-side', '.rz-gal-hud', '.rz-gal-zoom button', '.rz-seg', '.rz-pill',
+    // Mening rejam
+    '.yl-sf', '.yl-chips button', '.yl-back', '.yl-count-s', '.yl-pillbig',
+    // Safari oynasi
+    '.sf-pill', '.sf-url', '.mw-dockicon'
   ].join(',');
+  var MIRROR_MAX = 380;   // shundan kichik elementlar "pufak" (teskari tasvir) linzasi bo'ladi
+  var FLIP = 0.85;        // teskari tasvir masshtabi (1 = aynan ko'zgu; 1 dan katta bo'lsa chetlar element tashqarisidan o'qiladi)
   var EDGE = 16;      // chetdagi egilish zonasi, px
   var STRENGTH = 26;  // egilish kuchi, px
   var refract = !!window.chrome && /Chrom(e|ium)\/|Edg\//.test(navigator.userAgent);
@@ -36,6 +45,20 @@
 
   // Displacement map: R = gorizontal, G = vertikal surilish; 128 = joyida. Chetlarga yaqinlashganda qiymat
   // keskin o'zgaradi (qavariq linza qirrasi), markaz esa tekis va tiniq.
+  // "Pufak" linzasi: shisha ichida orqa fon teskari (180 grad) va biroz kattalashgan holda ko'rinadi,
+  // xuddi suv tomchisi yoki shisha shar orqali qaraganday. x' = c - FLIP*(x - c).
+  // Bitta o'q bo'yicha gradient xarita (8-bit aniqlikni to'liq ishlatish uchun x va y alohida).
+  // ch: 'r' yoki 'g'; qolgan kanallar 128 (joyida).
+  function axisURI(w, h, ch) {
+    var len = ch === 'r' ? w : h;
+    var c = function (v) { return ch === 'r' ? 'rgb(' + v + ',128,128)' : 'rgb(128,' + v + ',128)'; };
+    var x2 = ch === 'r' ? w : 0, y2 = ch === 'r' ? 0 : h;
+    var s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' +
+      '<defs><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="' + x2 + '" y2="' + y2 + '">' +
+      '<stop offset="0" stop-color="' + c(255) + '"/><stop offset="1" stop-color="' + c(0) + '"/></linearGradient></defs>' +
+      '<rect width="' + w + '" height="' + h + '" fill="url(#a)"/></svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+  }
   function mapURI(w, h, r) {
     var fx = Math.min(0.45, EDGE / w), fy = Math.min(0.45, EDGE / h);
     var stops = function (f, ch) {
@@ -75,16 +98,25 @@
       f.setAttribute('filterUnits', 'userSpaceOnUse');
       f.setAttribute('primitiveUnits', 'userSpaceOnUse');
       f.setAttribute('color-interpolation-filters', 'sRGB');
-      f.innerHTML = '<feImage result="m" preserveAspectRatio="none"/>' +
-        '<feDisplacementMap in="SourceGraphic" in2="m" xChannelSelector="R" yChannelSelector="G"/>';
       ensureDefs().appendChild(f);
       st.f = f;
     }
     f.setAttribute('x', '0'); f.setAttribute('y', '0'); f.setAttribute('width', w); f.setAttribute('height', h);
-    var img = f.firstChild;
-    img.setAttribute('x', '0'); img.setAttribute('y', '0'); img.setAttribute('width', w); img.setAttribute('height', h);
-    img.setAttribute('href', mapURI(w, h, r));
-    f.lastChild.setAttribute('scale', Math.min(STRENGTH, Math.min(w, h) * 0.5).toFixed(1));
+    var box = ' x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none"';
+    if (Math.max(w, h) <= MIRROR_MAX) {
+      // "pufak": x' = c - FLIP*(x - c); siljish diapazoni (1+FLIP)*o'lcham, har o'q alohida
+      f.innerHTML =
+        '<feImage result="mx"' + box + ' href="' + axisURI(w, h, 'r') + '"/>' +
+        '<feImage result="my"' + box + ' href="' + axisURI(w, h, 'g') + '"/>' +
+        '<feDisplacementMap in="SourceGraphic" in2="mx" result="d1" scale="' + ((1 + FLIP) * w).toFixed(1) + '" xChannelSelector="R" yChannelSelector="B"/>' +
+        '<feDisplacementMap in="d1" in2="my" result="d2" scale="' + ((1 + FLIP) * h).toFixed(1) + '" xChannelSelector="B" yChannelSelector="G"/>' +
+        // 8-bit xaritaning zinapoyalarini yashirish uchun siljish qadamiga mos yumshatish
+        '<feGaussianBlur in="d2" stdDeviation="' + Math.max(0.4, Math.min(1.6, (1 + FLIP) * w / 255 * 0.55)).toFixed(2) + '"/>';
+    } else {
+      f.innerHTML =
+        '<feImage result="m"' + box + ' href="' + mapURI(w, h, r) + '"/>' +
+        '<feDisplacementMap in="SourceGraphic" in2="m" scale="' + Math.min(STRENGTH, Math.min(w, h) * 0.5).toFixed(1) + '" xChannelSelector="R" yChannelSelector="G"/>';
+    }
     var v = 'url(#' + st.id + ') saturate(1.6) brightness(1.05)';
     el.style.setProperty('backdrop-filter', v, 'important');
   }
