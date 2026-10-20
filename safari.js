@@ -13,7 +13,7 @@
   // ---------- 1. Art fon: o'xshash uslubdagi illyustratsiyalar almashib turadi ----------
   // Foydalanuvchi tanlagan macOS uslubidagi fon rasmlari
   // Past o'lchamli fotosuratlar to'liq ekranda xira chiqqani uchun olib tashlandi; mayin abstrakt fonlar kattalashtirilganda ham toza ko'rinadi.
-  var ARTS = ['images/bg-mountain.webp', 'images/wall/waves-light.jpg', 'images/wall/waves-dark.jpg', 'images/wall/wave-blue.jpg', 'images/wall/liquid.avif'];
+  var ARTS = ['images/bg-mountain.webp', 'images/wall/mojave-day.jpg', 'images/wall/mojave-night.jpg', 'images/wall/waves-light.jpg', 'images/wall/waves-dark.jpg', 'images/wall/wave-blue.jpg', 'images/wall/liquid.avif'];
   var bgA = document.createElement('div'), bgB = document.createElement('div');
   bgA.className = bgB.className = 'mw-bg';
   body.insertBefore(bgB, body.firstChild); body.insertBefore(bgA, body.firstChild);
