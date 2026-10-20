@@ -1,33 +1,46 @@
-/* "Clear" Liquid Glass (iOS 26 / macOS 26 uslubi) butun sayt uchun.
-   Frosted/blur o'rniga: orqadagi kontent tiniq ko'rinadi, faqat chetlarida linza kabi egiladi (refraction)
-   va qirralarda yorug'lik aksi bor. Egilish SVG displacement map bilan qilinadi: har bir shisha element uchun
-   o'z o'lchamidagi xarita yaratiladi, shuning uchun chetdagi egilish kengligi har doim bir xil (piksellarda).
-   backdrop-filter: url() faqat Chromium'da ishlaydi; boshqa brauzerlarda shisha tiniq qoladi, lekin egilishsiz. */
+/* iOS 27 "Clear" Liquid Glass butun sayt uchun.
+   Material qiymatlari Figma'dagi "iOS 27 Liquid Glass Material" faylidan olingan:
+     fill #F8F8F8 6%, tashqi chiziq #000 40% 0.5px, 8 ta ichki soya + 1 ta tashqi soya,
+     Glass effekti: light -45° 80%, refraction 63, depth 44, dispersion 100, frost 0, splay 0.
+   Refraction: har bir element uchun uning yumaloq to'rtburchak shakli bo'yicha masofa maydoni (SDF) hisoblanadi.
+   Qirra zonasida orqa fon ichkariga qarab kuchli suriladi; surilish zonadan katta bo'lgani uchun qirrada tasvir
+   teskari (ko'zgudek) ko'rinadi, markaz esa tiniq qoladi. Dispersion: R, G, B kanallari biroz farqli kuch bilan
+   suriladi, shuning uchun qirralarda rangli (moviy/to'q sariq) chiziq paydo bo'ladi.
+   backdrop-filter: url() faqat Chromium'da ishlaydi; boshqa brauzerlarda shisha tiniq, lekin egilishsiz. */
 (function () {
   if (window.__liquidGlass) return;
   window.__liquidGlass = true;
 
   var CLEAR = [
-    // navigatsiya va umumiy boshqaruvlar
     'header.nav.is-pill .nav-inner', '.theme-seg', '.tg-user-box', '.nav-cta', '.tg-login',
     '.btn-ghost-dark', '.btn-ghost', '.chip', '.uni-filter', '.mode-tab', '.flash-mark',
     '.rl-dock', '.book-modal-close', '.theme-toggle',
-    // Rizqulloh English
     '.rz-tabs-main', '.rz-tabs-side', '.rz-gal-hud', '.rz-gal-zoom button', '.rz-seg', '.rz-pill',
-    // Mening rejam
     '.yl-sf', '.yl-chips button', '.yl-back', '.yl-count-s', '.yl-pillbig',
-    // Safari oynasi
     '.sf-pill', '.sf-url', '.mw-dockicon'
   ].join(',');
-  var MIRROR_MAX = 380;   // shundan kichik elementlar "pufak" (teskari tasvir) linzasi bo'ladi
-  var FLIP = 0.85;        // teskari tasvir masshtabi (1 = aynan ko'zgu; 1 dan katta bo'lsa chetlar element tashqarisidan o'qiladi)
-  var EDGE = 16;      // chetdagi egilish zonasi, px
-  var STRENGTH = 26;  // egilish kuchi, px
+  var REFRACTION = 0.63, DEPTH = 0.44, DISPERSION = 1.0;
   var refract = !!window.chrome && /Chrom(e|ium)\/|Edg\//.test(navigator.userAgent);
   var NS = 'http://www.w3.org/2000/svg';
-  document.documentElement.classList.add('lg', refract ? 'lg-refract' : 'lg-flat');
+  var root = document.documentElement;
+  root.classList.add('lg', refract ? 'lg-refract' : 'lg-flat');
+
+  // Figma'dagi soyalar va to'ldirish aynan shu tartibda
+  var SHADOWS = [
+    'inset 0 -4px 4px rgba(255,255,255,.45)', 'inset 0 4px 4px rgba(255,255,255,.45)',
+    'inset 0 6px 10px rgba(255,255,255,.02)', 'inset 0 -14px 34px rgba(255,255,255,.04)',
+    'inset -4px 0 14px rgba(0,0,0,.08)', 'inset 4px 0 14px rgba(0,0,0,.08)',
+    'inset 0 2px 0 rgba(255,255,255,.35)', 'inset 0 -2px 0 rgba(255,255,255,.35)',
+    '0 2px 10px rgba(0,0,0,.10)', '0 0 0 .5px rgba(0,0,0,.40)'
+  ].join(',');
   var css = document.createElement('style');
-  css.textContent = 'html.lg .lg-on{background-color:rgba(255,255,255,.07)!important;background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 60%)!important;border-color:transparent!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(255,255,255,.25),inset 1px 0 0 rgba(255,255,255,.3),inset -1px 0 0 rgba(255,255,255,.3),0 0 0 .5px rgba(0,0,0,.08),0 10px 28px rgba(0,0,0,.14)!important}\nhtml.lg-flat .lg-on{-webkit-backdrop-filter:saturate(1.6) brightness(1.05)!important;backdrop-filter:saturate(1.6) brightness(1.05)!important}\nhtml.lg header.nav.is-pill .nav-inner.lg-on{background-color:rgba(255,255,255,.46)!important}\nhtml[data-theme="dark"].lg .lg-on{background-color:rgba(28,28,32,.16)!important;background-image:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,0) 60%)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(255,255,255,.08),inset 1px 0 0 rgba(255,255,255,.12),inset -1px 0 0 rgba(255,255,255,.12),0 0 0 .5px rgba(255,255,255,.08),0 10px 28px rgba(0,0,0,.45)!important}\nhtml[data-theme="dark"].lg header.nav.is-pill .nav-inner.lg-on{background-color:rgba(28,28,32,.55)!important}';
+  css.textContent =
+    'html.lg .lg-on{background-color:rgba(248,248,248,.06)!important;background-image:none!important;border-color:transparent!important;box-shadow:' + SHADOWS + '!important}' +
+    'html.lg-flat .lg-on{-webkit-backdrop-filter:saturate(1.5) brightness(1.04)!important;backdrop-filter:saturate(1.5) brightness(1.04)!important}' +
+    // matn ko'p bo'lgan navbar kapsulasi o'qilishi uchun yengil tus
+    'html.lg header.nav.is-pill .nav-inner.lg-on{background-color:rgba(255,255,255,.42)!important}' +
+    'html[data-theme="dark"].lg .lg-on{background-color:rgba(20,20,24,.10)!important;box-shadow:inset 0 -4px 4px rgba(255,255,255,.12),inset 0 4px 4px rgba(255,255,255,.14),inset -4px 0 14px rgba(0,0,0,.25),inset 4px 0 14px rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(255,255,255,.1),0 2px 10px rgba(0,0,0,.3),0 0 0 .5px rgba(255,255,255,.18)!important}' +
+    'html[data-theme="dark"].lg header.nav.is-pill .nav-inner.lg-on{background-color:rgba(28,28,32,.55)!important}';
   document.head.appendChild(css);
 
   var defs = null;
@@ -43,41 +56,34 @@
     return defs;
   }
 
-  // Displacement map: R = gorizontal, G = vertikal surilish; 128 = joyida. Chetlarga yaqinlashganda qiymat
-  // keskin o'zgaradi (qavariq linza qirrasi), markaz esa tekis va tiniq.
-  // "Pufak" linzasi: shisha ichida orqa fon teskari (180 grad) va biroz kattalashgan holda ko'rinadi,
-  // xuddi suv tomchisi yoki shisha shar orqali qaraganday. x' = c - FLIP*(x - c).
-  // Bitta o'q bo'yicha gradient xarita (8-bit aniqlikni to'liq ishlatish uchun x va y alohida).
-  // ch: 'r' yoki 'g'; qolgan kanallar 128 (joyida).
-  function axisURI(w, h, ch) {
-    var len = ch === 'r' ? w : h;
-    var c = function (v) { return ch === 'r' ? 'rgb(' + v + ',128,128)' : 'rgb(128,' + v + ',128)'; };
-    var x2 = ch === 'r' ? w : 0, y2 = ch === 'r' ? 0 : h;
-    var s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' +
-      '<defs><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="' + x2 + '" y2="' + y2 + '">' +
-      '<stop offset="0" stop-color="' + c(255) + '"/><stop offset="1" stop-color="' + c(0) + '"/></linearGradient></defs>' +
-      '<rect width="' + w + '" height="' + h + '" fill="url(#a)"/></svg>';
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
-  }
-  function mapURI(w, h, r) {
-    var fx = Math.min(0.45, EDGE / w), fy = Math.min(0.45, EDGE / h);
-    var stops = function (f, ch) {
-      var c = function (v) { return ch === 'r' ? 'rgb(' + v + ',0,0)' : 'rgb(0,' + v + ',0)'; };
-      return '<stop offset="0" stop-color="' + c(255) + '"/>' +
-        '<stop offset="' + (f * 0.35).toFixed(4) + '" stop-color="' + c(205) + '"/>' +
-        '<stop offset="' + f.toFixed(4) + '" stop-color="' + c(128) + '"/>' +
-        '<stop offset="' + (1 - f).toFixed(4) + '" stop-color="' + c(128) + '"/>' +
-        '<stop offset="' + (1 - f * 0.35).toFixed(4) + '" stop-color="' + c(51) + '"/>' +
-        '<stop offset="1" stop-color="' + c(0) + '"/>';
-    };
-    var s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' +
-      '<defs><linearGradient id="x" x1="0" y1="0" x2="1" y2="0">' + stops(fx, 'r') + '</linearGradient>' +
-      '<linearGradient id="y" x1="0" y1="0" x2="0" y2="1">' + stops(fy, 'g') + '</linearGradient>' +
-      '<filter id="b"><feGaussianBlur stdDeviation="' + Math.max(1, Math.min(r, EDGE) / 4).toFixed(1) + '"/></filter></defs>' +
-      '<rect width="' + w + '" height="' + h + '" fill="rgb(128,128,0)"/>' +
-      '<g filter="url(#b)"><rect width="' + w + '" height="' + h + '" fill="url(#x)"/>' +
-      '<rect width="' + w + '" height="' + h + '" fill="url(#y)" style="mix-blend-mode:screen"/></g></svg>';
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+  // Yumaloq to'rtburchak bo'yicha displacement xaritasi (canvas'da hisoblanadi).
+  // R/G: ichkariga qarab surilish yo'nalishi * kuch; 128 = joyida.
+  var cvs = document.createElement('canvas');
+  function rimMap(w, h, r, band) {
+    cvs.width = w; cvs.height = h;
+    var ctx = cvs.getContext('2d');
+    var img = ctx.createImageData(w, h), d = img.data;
+    var hw = w / 2, hh = h / 2, ex = hw - r, ey = hh - r;
+    for (var y = 0; y < h; y++) {
+      var py = y + 0.5 - hh, ay = Math.abs(py), qy = ay - ey;
+      for (var x = 0; x < w; x++) {
+        var px = x + 0.5 - hw, ax = Math.abs(px), qx = ax - ex;
+        var nx, ny, dist;
+        if (qx > 0 && qy > 0) {
+          var len = Math.sqrt(qx * qx + qy * qy) || 1;
+          nx = qx / len; ny = qy / len; dist = r - len;
+        } else if (qx > qy) { nx = 1; ny = 0; dist = r - qx; }
+        else { nx = 0; ny = 1; dist = r - qy; }
+        var f = dist < band ? Math.pow(1 - Math.max(0, dist) / band, 1.7) : 0;
+        var sx = px < 0 ? 1 : -1, sy = py < 0 ? 1 : -1;   // ichkariga
+        var i = (y * w + x) * 4;
+        d[i] = Math.round(128 + 127 * sx * nx * f);
+        d[i + 1] = Math.round(128 + 127 * sy * ny * f);
+        d[i + 2] = 128; d[i + 3] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    return cvs.toDataURL('image/png');
   }
 
   var state = new Map(), seq = 0;
@@ -90,7 +96,9 @@
     st.w = w; st.h = h;
     el.classList.add('lg-on');
     if (!refract) return;
-    var r = parseFloat(getComputedStyle(el).borderTopLeftRadius) || 12;
+    var r = Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 12, w / 2, h / 2);
+    var band = Math.max(6, Math.min(40, Math.min(w, h) * DEPTH * 0.85, r));
+    var S = band * (0.55 + REFRACTION * 0.85);   // zonadan katta surilish: qirrada ko'zgu effekti
     var f = st.f;
     if (!f) {
       f = document.createElementNS(NS, 'filter');
@@ -103,22 +111,19 @@
     }
     f.setAttribute('x', '0'); f.setAttribute('y', '0'); f.setAttribute('width', w); f.setAttribute('height', h);
     var box = ' x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none"';
-    if (Math.max(w, h) <= MIRROR_MAX) {
-      // "pufak": x' = c - FLIP*(x - c); siljish diapazoni (1+FLIP)*o'lcham, har o'q alohida
-      f.innerHTML =
-        '<feImage result="mx"' + box + ' href="' + axisURI(w, h, 'r') + '"/>' +
-        '<feImage result="my"' + box + ' href="' + axisURI(w, h, 'g') + '"/>' +
-        '<feDisplacementMap in="SourceGraphic" in2="mx" result="d1" scale="' + ((1 + FLIP) * w).toFixed(1) + '" xChannelSelector="R" yChannelSelector="B"/>' +
-        '<feDisplacementMap in="d1" in2="my" result="d2" scale="' + ((1 + FLIP) * h).toFixed(1) + '" xChannelSelector="B" yChannelSelector="G"/>' +
-        // 8-bit xaritaning zinapoyalarini yashirish uchun siljish qadamiga mos yumshatish
-        '<feGaussianBlur in="d2" stdDeviation="' + Math.max(0.4, Math.min(1.6, (1 + FLIP) * w / 255 * 0.55)).toFixed(2) + '"/>';
-    } else {
-      f.innerHTML =
-        '<feImage result="m"' + box + ' href="' + mapURI(w, h, r) + '"/>' +
-        '<feDisplacementMap in="SourceGraphic" in2="m" scale="' + Math.min(STRENGTH, Math.min(w, h) * 0.5).toFixed(1) + '" xChannelSelector="R" yChannelSelector="G"/>';
-    }
-    var v = 'url(#' + st.id + ') saturate(1.6) brightness(1.05)';
-    el.style.setProperty('backdrop-filter', v, 'important');
+    var sc = function (k) { return (2 * S * k).toFixed(1); };
+    var disp = DISPERSION * 0.035;
+    f.innerHTML =
+      '<feImage result="m"' + box + ' href="' + rimMap(w, h, r, band) + '"/>' +
+      '<feDisplacementMap in="SourceGraphic" in2="m" scale="' + sc(1) + '" xChannelSelector="R" yChannelSelector="G" result="dr"/>' +
+      '<feDisplacementMap in="SourceGraphic" in2="m" scale="' + sc(1 - disp) + '" xChannelSelector="R" yChannelSelector="G" result="dg"/>' +
+      '<feDisplacementMap in="SourceGraphic" in2="m" scale="' + sc(1 - 2 * disp) + '" xChannelSelector="R" yChannelSelector="G" result="db"/>' +
+      '<feColorMatrix in="dr" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="cr"/>' +
+      '<feColorMatrix in="dg" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="cg"/>' +
+      '<feColorMatrix in="db" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="cb"/>' +
+      '<feComposite in="cr" in2="cg" operator="arithmetic" k2="1" k3="1" result="rg"/>' +
+      '<feComposite in="rg" in2="cb" operator="arithmetic" k2="1" k3="1"/>';
+    el.style.setProperty('backdrop-filter', 'url(#' + st.id + ') saturate(1.45) brightness(1.04)', 'important');
   }
   function drop(el) {
     var st = state.get(el); if (!st) return;
@@ -138,7 +143,7 @@
     now.forEach(build);
   }
   function soon() { if (!pending) { pending = true; requestAnimationFrame(scan); } }
-  new MutationObserver(soon).observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(soon).observe(root, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] });
   window.addEventListener('resize', soon);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scan); else scan();
 })();
