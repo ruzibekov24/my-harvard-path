@@ -12,7 +12,7 @@
   window.__liquidGlass = true;
 
   var CLEAR = [
-    'header.nav.is-pill .nav-inner', '.theme-seg', '.tg-user-box', '.nav-cta', '.tg-login',
+    'header.nav.is-pill .nav-inner',
     '.btn-ghost-dark', '.btn-ghost', '.chip', '.uni-filter', '.mode-tab', '.flash-mark',
     '.rl-dock', '.book-modal-close', '.theme-toggle',
     '.rz-tabs-main', '.rz-tabs-side', '.rz-gal-hud', '.rz-gal-zoom button', '.rz-seg', '.rz-pill',
