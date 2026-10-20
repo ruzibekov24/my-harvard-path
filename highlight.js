@@ -14,12 +14,12 @@
 
   var css = document.createElement('style');
   css.textContent =
-    'mark.hl{--hl:rgba(255,214,10,.55);color:inherit;background:linear-gradient(104deg,transparent .4em,var(--hl) .5em,var(--hl) calc(100% - .5em),transparent calc(100% - .4em)) no-repeat 0 60%/100% 78%;padding:0 .12em;margin:0 -.04em;border-radius:.35em;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:pointer;transition:background-color .2s,filter .2s}' +
+    'mark.hl{--hl:rgba(255,222,0,.78);color:inherit;background:linear-gradient(104deg,transparent .4em,var(--hl) .5em,var(--hl) calc(100% - .5em),transparent calc(100% - .4em)) no-repeat 0 60%/100% 78%;padding:0 .12em;margin:0 -.04em;border-radius:.35em;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:pointer;transition:background-color .2s,filter .2s}' +
     'mark.hl:hover{filter:saturate(1.3) brightness(.97)}' +
     'mark.hl.hl-new{animation:hlSweep .5s cubic-bezier(.2,.8,.2,1) both}' +
     '@keyframes hlSweep{from{background-size:0% 78%}to{background-size:100% 78%}}' +
-    'mark.hl-yellow{--hl:rgba(255,214,10,.55)} mark.hl-green{--hl:rgba(52,199,89,.38)} mark.hl-pink{--hl:rgba(255,55,135,.30)} mark.hl-blue{--hl:rgba(10,132,255,.30)} mark.hl-purple{--hl:rgba(175,82,222,.32)}' +
-    'html[data-theme="dark"] mark.hl-yellow{--hl:rgba(255,214,10,.35)} html[data-theme="dark"] mark.hl-green{--hl:rgba(48,209,88,.32)} html[data-theme="dark"] mark.hl-pink{--hl:rgba(255,55,135,.32)} html[data-theme="dark"] mark.hl-blue{--hl:rgba(64,156,255,.34)} html[data-theme="dark"] mark.hl-purple{--hl:rgba(191,90,242,.34)}' +
+    'mark.hl-yellow{--hl:rgba(255,222,0,.78)} mark.hl-green{--hl:rgba(60,230,110,.58)} mark.hl-pink{--hl:rgba(255,80,160,.48)} mark.hl-blue{--hl:rgba(40,160,255,.48)} mark.hl-purple{--hl:rgba(190,110,255,.50)}' +
+    'html[data-theme="dark"] mark.hl-yellow{--hl:rgba(255,222,0,.52)} html[data-theme="dark"] mark.hl-green{--hl:rgba(60,230,110,.45)} html[data-theme="dark"] mark.hl-pink{--hl:rgba(255,80,160,.45)} html[data-theme="dark"] mark.hl-blue{--hl:rgba(70,170,255,.48)} html[data-theme="dark"] mark.hl-purple{--hl:rgba(200,120,255,.48)}' +
     '.hl-bar{position:fixed;z-index:90;display:flex;align-items:center;gap:6px;padding:7px 8px;border-radius:999px;background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(20px) saturate(1.9);backdrop-filter:blur(20px) saturate(1.9);box-shadow:inset 0 1px 1px rgba(255,255,255,.9),inset 0 0 0 .5px rgba(255,255,255,.6),0 12px 32px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transform:translate(-50%,6px) scale(.9);opacity:0;pointer-events:none;transition:transform .28s cubic-bezier(.2,.9,.25,1.2),opacity .18s ease}' +
     'html[data-theme="dark"] .hl-bar{background:rgba(44,44,48,.72);box-shadow:inset 0 1px 1px rgba(255,255,255,.18),0 12px 32px rgba(0,0,0,.5)}' +
     '.hl-bar.on{transform:translate(-50%,0) scale(1);opacity:1;pointer-events:auto}' +
