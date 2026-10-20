@@ -10,8 +10,8 @@
     document.querySelector('.vw-frame').innerHTML = '<p class="vw-err">Bu manba ruxsat etilmagan yoki havola noto\'g\'ri. <a href="maqolalar.html">Maqolalarga qaytish</a></p>';
     return;
   }
-  document.getElementById('vwTitle').textContent = q.get('t') || 'Maqola';
-  document.getElementById('vwHost').textContent = host;
+  document.getElementById('vwTab').textContent = q.get('t') || 'Maqola';
+  document.getElementById('vwHost').textContent = host.replace(/^www\./, '');
   document.getElementById('vwOpen').href = url;
   document.title = (q.get('t') || 'Maqola') + ' — MyHarvardPath';
   frame.addEventListener('load', function () { load.style.display = 'none'; });
