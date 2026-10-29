@@ -57,7 +57,10 @@ export async function onRequestPost({ request, env }) {
         generationConfig: { temperature: 0.6, maxOutputTokens: 700 },
       }),
     });
-    if (!res.ok) return json({ error: 'upstream' }, 502);
+    if (!res.ok) {
+      const detail = (await res.text().catch(() => '')).slice(0, 300);
+      return json({ error: 'upstream', status: res.status, detail }, 502);
+    }
     const data = await res.json();
     const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
     const reply = parts.map((p) => p.text || '').join('').trim();
