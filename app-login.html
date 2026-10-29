@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Telegram orqali kirish: Harvard yo'li ilovasi</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif; background: #f2f2f7; color: #16181d; }
+  main { background: #fff; border-radius: 24px; padding: 32px 24px; width: min(92vw, 380px); text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  p { color: #6e7075; font-size: 15px; line-height: 1.5; margin: 0 0 24px; }
+  #msg { margin-top: 20px; font-weight: 600; }
+  .ok { color: #1b7f3b; } .err { color: #e5484d; }
+  @media (prefers-color-scheme: dark) { body { background: #0f1014; color: #f1f2f4; } main { background: #1c1e25; } p { color: #9ea2ab; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Harvard yo'li ilovasi</h1>
+  <p>Telegram orqali tasdiqlang. @MyHarvardPath kanali a'zolariga Premium bepul beriladi.</p>
+  <div id="widget"></div>
+  <div id="msg"></div>
+</main>
+<script>
+  var code = new URLSearchParams(location.search).get('code') || '';
+  var msg = document.getElementById('msg');
+  function onTg(user) {
+    msg.textContent = 'Tekshirilmoqda...';
+    fetch('/api/app-login-complete', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ code: code, auth: user })
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (j.ok) { msg.className = 'ok'; msg.textContent = j.premium ? 'Tayyor! Premium faollashdi. Ilovaga qayting.' : 'Tayyor! Ilovaga qayting. (Premium uchun @MyHarvardPath kanaliga obuna bo\'ling.)'; }
+      else { msg.className = 'err'; msg.textContent = j.error || 'Xatolik'; }
+    }).catch(function () { msg.className = 'err'; msg.textContent = 'Internet xatosi'; });
+  }
+  window.onTg = onTg;
+  if (!/^[a-f0-9]{16,64}$/.test(code)) { msg.className = 'err'; msg.textContent = 'Havola noto\'g\'ri. Ilovadan qayta oching.'; }
+  else {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://telegram.org/js/telegram-widget.js?22';
+    s.setAttribute('data-telegram-login', 'GoingToHarvard_bot');
+    s.setAttribute('data-size', 'large');
+    s.setAttribute('data-radius', '12');
+    s.setAttribute('data-onauth', 'onTg(user)');
+    s.setAttribute('data-request-access', 'write');
+    document.getElementById('widget').appendChild(s);
+  }
+</script>
+</body>
+</html>
