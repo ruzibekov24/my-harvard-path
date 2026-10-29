@@ -48,20 +48,32 @@ export async function onRequestPost({ request, env }) {
   if (!contents.length || contents[contents.length - 1].role !== 'user') return json({ error: 'no message' }, 400);
 
   try {
+    // Asosiy model band bo'lsa yoki sekin javob bersa, tezroq zaxira modellarga o'tamiz (har biriga 12 soniya).
+    const models = [GEMINI_MODEL, 'gemini-2.5-flash', 'gemini-2.0-flash'];
     let res;
-    for (let attempt = 0; attempt < 3; attempt++) {
-      res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM + '\n\nTalaba ma\'lumoti: ' + JSON.stringify(facts) }] },
-        contents,
-        generationConfig: { temperature: 0.6, maxOutputTokens: 700 },
-      }),
-      });
-      if (res.status !== 503 && res.status !== 429) break;
-      await new Promise((r) => setTimeout(r, 700 * (attempt + 1)));
+    for (const model of models) {
+      const generationConfig = { temperature: 0.6, maxOutputTokens: 700 };
+      if (model.startsWith('gemini-2.5')) generationConfig.thinkingConfig = { thinkingBudget: 0 };
+      try {
+        res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
+          body: JSON.stringify({
+            systemInstruction: { parts: [{ text: SYSTEM + '
+
+Talaba ma'lumoti: ' + JSON.stringify(facts) }] },
+            contents,
+            generationConfig,
+          }),
+          signal: AbortSignal.timeout(12000),
+        });
+      } catch (e) {
+        res = null; // vaqt tugadi yoki tarmoq xatosi: keyingi model
+        continue;
+      }
+      if (res.ok) break;
     }
+    if (!res) return json({ error: 'upstream', detail: 'timeout' }, 502);
     if (!res.ok) {
       const detail = (await res.text().catch(() => '')).slice(0, 300);
       return json({ error: 'upstream', status: res.status, detail }, 502);
