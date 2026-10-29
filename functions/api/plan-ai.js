@@ -1,11 +1,9 @@
+import { askAI, aiConfigured } from '../_ai.js';
+
 // POST /api/plan-ai: "Mening rejam" sahifasi uchun qabul ehtimoli va AI tahlil.
-// Kalit saytda emas, faqat Cloudflare Pages muhitida saqlanadi:
-//   Settings -> Environment variables -> GEMINI_API_KEY (Secret)   [Google AI Studio kaliti]
-//   (zaxira sifatida ANTHROPIC_API_KEY ham ishlaydi)
+// Kalit va modellar bitta joyda: functions/_ai.js (qanday almashtirish: AI-KEYS.md).
 // Kalit yo'q bo'lsa 503 qaytadi va sahifa oddiy (lokal) hisobga o'tib ketadi.
 
-const GEMINI_MODEL = 'gemini-3.8-flash';
-const CLAUDE_MODEL = 'claude-sonnet-5-5';
 const DAILY_LIMIT = 8; // bir IP uchun kuniga
 
 const json = (data, status = 200) =>
@@ -21,35 +19,8 @@ const SYSTEM =
   '{"chance_pct":butun son 1-95,"verdict":"reach|match|safe","chance":"oraliq, masalan 5-10%","summary":"2-3 gap","strengths":["..."],"gaps":["..."],"actions":["aniq, bajariladigan 4-6 qadam, har biri muddat bilan"],"certificates":"qo\'shimcha sertifikat/yutuqlar bahosi, 1-2 gap"}. ' +
   "Har ro'yxat 3-6 band, har band 1 jumla.";
 
-async function askGemini(key, prompt) {
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
-    body: JSON.stringify({
-      systemInstruction: { parts: [{ text: SYSTEM }] },
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { responseMimeType: 'application/json', temperature: 0.4, maxOutputTokens: 4000 },
-    }),
-  });
-  if (!res.ok) throw new Error('gemini ' + res.status);
-  const data = await res.json();
-  const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
-  return parts.map((p) => p.text || '').join('');
-}
-
-async function askClaude(key, prompt) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 1400, system: SYSTEM, messages: [{ role: 'user', content: prompt }] }),
-  });
-  if (!res.ok) throw new Error('claude ' + res.status);
-  const data = await res.json();
-  return ((data.content || []).find((c) => c.type === 'text') || {}).text || '';
-}
-
 export async function onRequestPost({ request, env }) {
-  if (!env.GEMINI_API_KEY && !env.ANTHROPIC_API_KEY) return json({ error: 'ai_off' }, 503);
+  if (!aiConfigured(env)) return json({ error: 'ai_off' }, 503);
 
   // faqat o'z saytimizdan
   const origin = request.headers.get('origin') || '';
@@ -84,8 +55,8 @@ export async function onRequestPost({ request, env }) {
 
   let text;
   try {
-    text = env.GEMINI_API_KEY ? await askGemini(env.GEMINI_API_KEY, prompt) : await askClaude(env.ANTHROPIC_API_KEY, prompt);
-  } catch (e) { return json({ error: 'upstream' }, 502); }
+    ({ text } = await askAI(env, { system: SYSTEM, contents: [{ role: 'user', parts: [{ text: prompt }] }], temperature: 0.4, maxTokens: 4000, json: true, timeoutMs: 25000 }));
+  } catch (e) { return json({ error: 'upstream', detail: e.detail || '' }, 502); }
 
   const m = String(text).match(/\{[\s\S]*\}/);
   if (!m) return json({ error: 'parse' }, 502);

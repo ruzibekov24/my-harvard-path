@@ -1,9 +1,9 @@
+import { askAI, aiConfigured } from '../_ai.js';
+
 // POST /api/mentor: mobil ilovadagi "Yo'ldosh" AI maslahatchisi uchun chat.
-// Kalit saytda emas, faqat Cloudflare Pages muhitida saqlanadi (plan-ai.js bilan bir xil):
-//   GEMINI_API_KEY (Secret)
+// Kalit va modellar bitta joyda: functions/_ai.js (qanday almashtirish: AI-KEYS.md).
 // Kalit yo'q bo'lsa 503 qaytadi va ilova oddiy (lokal) javobga o'tib ketadi.
 
-const GEMINI_MODEL = 'gemini-3.8-flash';
 const DAILY_LIMIT = 20; // bir IP uchun kuniga (ilovaning o'zida 5 ta bepul so'rov limiti bor)
 
 const json = (data, status = 200) =>
@@ -19,7 +19,7 @@ const SYSTEM =
   "Mavzudan chetga chiqmang: ta'lim, qabul, test, insho, stipendiya va o'qish odatlari.";
 
 export async function onRequestPost({ request, env }) {
-  if (!env.GEMINI_API_KEY) return json({ error: 'ai_off' }, 503);
+  if (!aiConfigured(env)) return json({ error: 'ai_off' }, 503);
 
   let body;
   try { body = await request.json(); } catch (e) { return json({ error: 'bad json' }, 400); }
@@ -48,42 +48,9 @@ export async function onRequestPost({ request, env }) {
   if (!contents.length || contents[contents.length - 1].role !== 'user') return json({ error: 'no message' }, 400);
 
   try {
-    // Asosiy model band bo'lsa yoki sekin javob bersa, tezroq zaxira modellarga o'tamiz (har biriga 12 soniya).
-    const models = [GEMINI_MODEL, 'gemini-2.5-flash', 'gemini-2.0-flash'];
-    let res;
-    for (const model of models) {
-      const generationConfig = { temperature: 0.6, maxOutputTokens: 700 };
-      if (model.startsWith('gemini-2.5')) generationConfig.thinkingConfig = { thinkingBudget: 0 };
-      try {
-        res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-          body: JSON.stringify({
-            systemInstruction: { parts: [{ text: SYSTEM + '
-
-Talaba ma'lumoti: ' + JSON.stringify(facts) }] },
-            contents,
-            generationConfig,
-          }),
-          signal: AbortSignal.timeout(12000),
-        });
-      } catch (e) {
-        res = null; // vaqt tugadi yoki tarmoq xatosi: keyingi model
-        continue;
-      }
-      if (res.ok) break;
-    }
-    if (!res) return json({ error: 'upstream', detail: 'timeout' }, 502);
-    if (!res.ok) {
-      const detail = (await res.text().catch(() => '')).slice(0, 300);
-      return json({ error: 'upstream', status: res.status, detail }, 502);
-    }
-    const data = await res.json();
-    const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
-    const reply = parts.map((p) => p.text || '').join('').trim();
-    if (!reply) return json({ error: 'empty' }, 502);
-    return json({ reply: clip(reply, 3000) });
+    const { text } = await askAI(env, { system: SYSTEM + '\n\nTalaba ma\'lumoti: ' + JSON.stringify(facts), contents, temperature: 0.6, maxTokens: 700 });
+    return json({ reply: clip(text, 3000) });
   } catch (e) {
-    return json({ error: 'upstream' }, 502);
+    return json({ error: 'upstream', detail: e.detail || '' }, 502);
   }
 }
