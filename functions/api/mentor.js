@@ -48,7 +48,9 @@ export async function onRequestPost({ request, env }) {
   if (!contents.length || contents[contents.length - 1].role !== 'user') return json({ error: 'no message' }, 400);
 
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
+    let res;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
       body: JSON.stringify({
@@ -56,7 +58,10 @@ export async function onRequestPost({ request, env }) {
         contents,
         generationConfig: { temperature: 0.6, maxOutputTokens: 700 },
       }),
-    });
+      });
+      if (res.status !== 503 && res.status !== 429) break;
+      await new Promise((r) => setTimeout(r, 700 * (attempt + 1)));
+    }
     if (!res.ok) {
       const detail = (await res.text().catch(() => '')).slice(0, 300);
       return json({ error: 'upstream', status: res.status, detail }, 502);
